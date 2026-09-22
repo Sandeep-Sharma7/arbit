@@ -1,29 +1,36 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maruti Suzuki ARENA - Price List & On-Road Calculator 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --arena-blue: #003399;
-            --arena-orange: #ff6600;
-            --bg-light: #f4f6f9;
-            --text-dark: #222222;
+            --arena-blue: #002884;
+            --arena-blue-light: #0042cc;
+            --arena-orange: #ff5500;
+            --bg-light: #f0f4f9;
+            --text-dark: #1e293b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
             background-color: var(--bg-light);
             color: var(--text-dark);
             padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /* Login Modal Screen */
@@ -33,188 +40,265 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            animation: fadeIn 0.3s ease;
         }
 
         .login-box {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
+            border-top: 5px solid var(--arena-orange);
         }
 
         .login-box h2 {
             color: var(--arena-blue);
             margin-bottom: 8px;
-            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .login-box p {
-            font-size: 0.85rem;
-            color: #666666;
-            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 25px;
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #333333;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #475569;
         }
 
         .input-group input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cccccc;
-            border-radius: 6px;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
+            background: #f8fafc;
         }
 
         .input-group input:focus {
-            border-color: var(--arena-blue);
+            border-color: var(--arena-blue-light);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(0, 66, 204, 0.1);
         }
 
         .login-btn {
             width: 100%;
-            background: var(--arena-blue);
+            background: linear-gradient(135deg, var(--arena-blue), var(--arena-blue-light));
             color: #ffffff;
             border: none;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 10px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: transform 0.1s, box-shadow 0.2s;
             margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 40, 132, 0.25);
         }
 
         .login-btn:hover {
-            background: #002266;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 40, 132, 0.35);
         }
 
         /* Main App Container */
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 950px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            display: none; /* Login ke baad visible hoga */
+            display: none;
+            animation: slideUp 0.4s ease;
         }
 
         /* User Header Bar */
         .user-bar {
-            background: #eef2fa;
-            padding: 12px 20px;
+            background: #f8fafc;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #dcdcdc;
-            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.92rem;
+            color: #475569;
         }
 
         .user-bar span strong {
             color: var(--arena-blue);
-            font-size: 1.05rem;
+            font-weight: 700;
         }
 
         .logout-btn {
             background: transparent;
-            border: 1px solid #ff4d4d;
-            color: #ff4d4d;
-            padding: 5px 12px;
-            border-radius: 4px;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .logout-btn:hover {
-            background: #ff4d4d;
+            background: #ef4444;
             color: #ffffff;
         }
 
         .header {
-            background: linear-gradient(135deg, var(--arena-blue), #001a4d);
+            background: linear-gradient(135deg, var(--arena-blue), #001540);
             color: #ffffff;
-            padding: 25px 20px;
+            padding: 30px 24px;
             text-align: center;
             border-bottom: 4px solid var(--arena-orange);
         }
 
         .header h1 {
             font-size: 1.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.5px;
         }
 
         .header p {
             font-size: 0.9rem;
-            opacity: 0.85;
-            margin-top: 5px;
+            opacity: 0.8;
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         .form-section {
-            padding: 25px;
+            padding: 30px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #444444;
+        /* Interactive Grid Buttons */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #cccccc;
-            border-radius: 6px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-            background-color: #fff;
+        .model-btn {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            padding: 14px 10px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
         }
 
-        select:focus {
+        .model-btn:hover {
+            border-color: var(--arena-blue-light);
+            background: #eff6ff;
+            color: var(--arena-blue);
+        }
+
+        .model-btn.active {
+            background: var(--arena-blue);
             border-color: var(--arena-blue);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 40, 132, 0.2);
         }
 
+        .variant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .variant-btn {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .variant-btn .v-price {
+            font-size: 0.82rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .variant-btn:hover {
+            border-color: var(--arena-orange);
+            background: #fff7ed;
+        }
+
+        .variant-btn.active {
+            background: #fff7ed;
+            border-color: var(--arena-orange);
+            color: #c2410c;
+            box-shadow: 0 4px 12px rgba(255, 85, 0, 0.15);
+        }
+
+        .variant-btn.active .v-price {
+            color: #c2410c;
+            font-weight: 700;
+        }
+
+        /* Price Breakdown Card */
         .price-breakdown {
-            margin-top: 25px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 20px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #cccccc;
+            padding: 12px 0;
+            border-bottom: 1px dashed #cbd5e1;
             font-size: 0.98rem;
+            font-weight: 500;
         }
 
         .price-row:last-child {
@@ -223,25 +307,37 @@
 
         .price-row.total {
             border-top: 2px solid var(--arena-blue);
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 800;
+            font-size: 1.25rem;
             color: var(--arena-blue);
-            padding-top: 15px;
-            margin-top: 5px;
+            padding-top: 16px;
+            margin-top: 6px;
+        }
+
+        .placeholder-text {
+            color: #94a3b8;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .header h1 {
-                font-size: 1.4rem;
-            }
-            .user-bar {
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-            }
+            body { padding: 10px; }
+            .header h1 { font-size: 1.4rem; }
+            .user-bar { flex-direction: column; gap: 8px; text-align: center; }
+            .model-grid { grid-template-columns: repeat(2, 1fr); }
+            .variant-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -250,7 +346,7 @@
 <!-- Login Modal -->
 <div class="login-modal" id="loginModal">
     <div class="login-box">
-        <h2>ARENA CALCULATOR</h2>
+        <h2>ARENA KIOSK</h2>
         <p>Aage badhne ke liye apna Naam aur Mobile Number darj karein</p>
         <form onsubmit="handleLogin(event)">
             <div class="input-group">
@@ -276,31 +372,34 @@
 
     <div class="header">
         <h1>MARUTI SUZUKI ARENA</h1>
-        <p>Price List & On-Road Estimator (2026)</p>
+        <p>Price List & On-Road Estimator (2026 Edition)</p>
     </div>
 
     <div class="form-section">
+        <!-- Model Selection Buttons -->
         <div class="form-group">
-            <label for="carModel">Select Car Model</label>
-            <select id="carModel" onchange="updateVariants()">
-                <option value="">-- Choose Model --</option>
-                <option value="alto">Alto K10</option>
-                <option value="wagonr">Wagon R</option>
-                <option value="swift">Swift</option>
-                <option value="dzire">Dzire</option>
-                <option value="brezza">Brezza</option>
-                <option value="ertiga">Ertiga</option>
-            </select>
+            <div class="section-title">1. Select Car Model</div>
+            <div class="model-grid" id="modelGrid">
+                <button type="button" class="model-btn" onclick="selectModel('alto', this)">Alto K10</button>
+                <button type="button" class="model-btn" onclick="selectModel('wagonr', this)">Wagon R</button>
+                <button type="button" class="model-btn" onclick="selectModel('swift', this)">Swift</button>
+                <button type="button" class="model-btn" onclick="selectModel('dzire', this)">Dzire</button>
+                <button type="button" class="model-btn" onclick="selectModel('brezza', this)">Brezza</button>
+                <button type="button" class="model-btn" onclick="selectModel('ertiga', this)">Ertiga</button>
+            </div>
         </div>
 
+        <!-- Variant Selection Buttons -->
         <div class="form-group">
-            <label for="carVariant">Select Variant</label>
-            <select id="carVariant" onchange="calculatePrice()" disabled>
-                <option value="">-- Choose Model First --</option>
-            </select>
+            <div class="section-title">2. Select Variant</div>
+            <div id="variantContainer">
+                <div class="placeholder-text">Pehle upar se koi Car Model chunein</div>
+            </div>
         </div>
 
+        <!-- Price Breakdown -->
         <div class="price-breakdown">
+            <div class="section-title" style="margin-bottom: 10px;">Price Summary & Breakdown</div>
             <div class="price-row">
                 <span>Ex-Showroom Price</span>
                 <span id="exShowroom">₹0</span>
@@ -326,7 +425,7 @@
 </div>
 
 <script>
-    // Pehle se logged in hai toh direct display karega
+    // Session Check
     window.onload = function() {
         const savedName = localStorage.getItem("arena_user_name");
         const savedMobile = localStorage.getItem("arena_user_mobile");
@@ -419,33 +518,44 @@
         ]
     };
 
-    function updateVariants() {
-        const modelSelect = document.getElementById("carModel");
-        const variantSelect = document.getElementById("carVariant");
-        const selectedModel = modelSelect.value;
+    let selectedModelKey = "";
 
-        variantSelect.innerHTML = '<option value="">-- Select Variant --</option>';
+    function selectModel(modelKey, btnElement) {
+        selectedModelKey = modelKey;
+        
+        // Active class update model buttons par
+        document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
 
-        if (selectedModel && vehicleData[selectedModel]) {
-            vehicleData[selectedModel].forEach((variant, index) => {
-                const option = document.createElement("option");
-                option.value = index;
-                option.textContent = `${variant.name} - ₹${variant.price.toLocaleString('en-IN')}`;
-                variantSelect.appendChild(option);
+        const variantContainer = document.getElementById("variantContainer");
+        variantContainer.innerHTML = '';
+
+        if (vehicleData[modelKey]) {
+            const grid = document.createElement('div');
+            grid.className = 'variant-grid';
+
+            vehicleData[modelKey].forEach((variant, index) => {
+                const vBtn = document.createElement('button');
+                vBtn.type = 'button';
+                vBtn.className = 'variant-btn';
+                vBtn.innerHTML = `
+                    <span>${variant.name}</span>
+                    <span class="v-price">₹${variant.price.toLocaleString('en-IN')}</span>
+                `;
+                vBtn.onclick = () => selectVariant(index, vBtn);
+                grid.appendChild(vBtn);
             });
-            variantSelect.disabled = false;
-        } else {
-            variantSelect.disabled = true;
+            variantContainer.appendChild(grid);
         }
         resetPrices();
     }
 
-    function calculatePrice() {
-        const modelSelect = document.getElementById("carModel").value;
-        const variantIndex = document.getElementById("carVariant").value;
+    function selectVariant(variantIndex, btnElement) {
+        document.querySelectorAll('.variant-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
 
-        if (modelSelect && variantIndex !== "") {
-            const exShowroom = vehicleData[modelSelect][variantIndex].price;
+        if (selectedModelKey && variantIndex !== "") {
+            const exShowroom = vehicleData[selectedModelKey][variantIndex].price;
             const rto = Math.round(exShowroom * 0.10);
             const insurance = Math.round(exShowroom * 0.045);
             const other = 2500;
@@ -456,8 +566,6 @@
             document.getElementById("insurance").textContent = "₹" + insurance.toLocaleString('en-IN');
             document.getElementById("other").textContent = "₹" + other.toLocaleString('en-IN');
             document.getElementById("totalPrice").textContent = "₹" + total.toLocaleString('en-IN');
-        } else {
-            resetPrices();
         }
     }
 
