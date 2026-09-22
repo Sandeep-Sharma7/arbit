@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maruti Suzuki ARENA - Price List & On-Road Calculator 2026</title>
+    <title>NEXA Arbit Automobiles - Price Calculator 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --arena-blue: #002884;
-            --arena-blue-light: #0042cc;
-            --arena-orange: #ff5500;
-            --bg-light: #f0f4f9;
+            --nexa-dark: #040d1a;
+            --nexa-card-dark: #09182d;
+            --nexa-blue: #0b1d3a;
+            --nexa-accent: #d4af37; /* Premium NEXA Gold touch */
+            --bg-light: #f1f5f9;
             --text-dark: #1e293b;
             --card-bg: #ffffff;
-            --border-color: #e2e8f0;
+            --border-color: #cbd5e1;
         }
 
         * {
@@ -24,7 +25,7 @@
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: var(--nexa-dark);
             color: var(--text-dark);
             padding: 20px;
             min-height: 100vh;
@@ -33,38 +34,37 @@
             align-items: center;
         }
 
-        /* Login Modal Screen */
+        /* Login / Profile Modal */
         .login-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(4, 13, 26, 0.85);
             backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
         }
 
         .login-box {
             background: var(--card-bg);
             padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             width: 90%;
             max-width: 420px;
             text-align: center;
-            border-top: 5px solid var(--arena-orange);
+            border-top: 5px solid var(--nexa-dark);
         }
 
         .login-box h2 {
-            color: var(--arena-blue);
+            color: var(--nexa-dark);
             margin-bottom: 8px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
         }
 
         .login-box p {
@@ -90,7 +90,7 @@
             width: 100%;
             padding: 12px 16px;
             border: 2px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
             outline: none;
             transition: all 0.2s;
@@ -98,160 +98,208 @@
         }
 
         .input-group input:focus {
-            border-color: var(--arena-blue-light);
+            border-color: var(--nexa-dark);
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(0, 66, 204, 0.1);
         }
 
         .login-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--arena-blue), var(--arena-blue-light));
+            background: var(--nexa-dark);
             color: #ffffff;
             border: none;
             padding: 14px;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.2s;
+            transition: background 0.2s;
             margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(0, 40, 132, 0.25);
         }
 
         .login-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(0, 40, 132, 0.35);
+            background: #0d2347;
         }
 
-        /* Main App Container */
+        /* Main Container */
         .container {
             max-width: 950px;
             width: 100%;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: var(--nexa-dark);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             display: none;
-            animation: slideUp 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* User Header Bar */
-        .user-bar {
-            background: #f8fafc;
-            padding: 14px 24px;
+        /* Top NEXA Header matching screenshot */
+        .header {
+            background: var(--nexa-dark);
+            color: #ffffff;
+            padding: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #94a3b8;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .header-meta {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        /* Sales Executive Info Box matching screenshot */
+        .exec-card {
+            background: var(--nexa-card-dark);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.92rem;
-            color: #475569;
         }
 
-        .user-bar span strong {
-            color: var(--arena-blue);
+        .exec-info h3 {
+            font-size: 1rem;
+            color: #ffffff;
             font-weight: 700;
+            margin-bottom: 3px;
         }
 
-        .logout-btn {
+        .exec-info p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .edit-btn {
             background: transparent;
-            border: 1px solid #ef4444;
-            color: #ef4444;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
             padding: 6px 14px;
             border-radius: 6px;
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
 
-        .logout-btn:hover {
-            background: #ef4444;
-            color: #ffffff;
+        .edit-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
         }
 
-        .header {
-            background: linear-gradient(135deg, var(--arena-blue), #001540);
-            color: #ffffff;
-            padding: 30px 24px;
-            text-align: center;
-            border-bottom: 4px solid var(--arena-orange);
-        }
-
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-
-        .header p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 6px;
-            font-weight: 500;
-        }
-
-        .form-section {
+        /* Main White Content Card Container */
+        .content-card {
+            background: #ffffff;
+            border-radius: 0 0 16px 16px;
             padding: 30px;
         }
 
-        .section-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+        /* Step Headers with Number Badge */
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        /* Direct Car Model Buttons */
+        .step-badge {
+            background: var(--nexa-dark);
+            color: #ffffff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--nexa-dark);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Model Grid */
         .model-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .model-btn {
-            background: #f8fafc;
-            border: 2px solid var(--border-color);
-            padding: 16px 10px;
-            border-radius: 12px;
-            font-size: 1rem;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--text-dark);
             cursor: pointer;
             transition: all 0.2s ease;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .model-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: #475569;
+            flex-shrink: 0;
         }
 
         .model-btn:hover {
-            border-color: var(--arena-blue-light);
-            background: #eff6ff;
-            color: var(--arena-blue);
-            transform: translateY(-2px);
+            border-color: var(--nexa-dark);
+            background: #f8fafc;
         }
 
         .model-btn.active {
-            background: var(--arena-blue);
-            border-color: var(--arena-blue);
+            background: var(--nexa-dark);
+            border-color: var(--nexa-dark);
             color: #ffffff;
-            box-shadow: 0 6px 16px rgba(0, 40, 132, 0.3);
+            box-shadow: 0 4px 12px rgba(4, 13, 26, 0.25);
         }
 
-        /* Variant Buttons */
+        .model-btn.active svg {
+            fill: #ffffff;
+        }
+
+        /* Variant Grid */
         .variant-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 12px;
             margin-bottom: 30px;
-            animation: fadeIn 0.3s ease;
         }
 
         .variant-btn {
             background: #f8fafc;
-            border: 2px solid var(--border-color);
+            border: 2px solid #e2e8f0;
             padding: 14px 16px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-dark);
@@ -270,29 +318,28 @@
         }
 
         .variant-btn:hover {
-            border-color: var(--arena-orange);
-            background: #fff7ed;
+            border-color: var(--nexa-dark);
+            background: #f1f5f9;
         }
 
         .variant-btn.active {
-            background: #fff7ed;
-            border-color: var(--arena-orange);
-            color: #c2410c;
-            box-shadow: 0 4px 12px rgba(255, 85, 0, 0.15);
+            background: #e2e8f0;
+            border-color: var(--nexa-dark);
+            color: var(--nexa-dark);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
 
         .variant-btn.active .v-price {
-            color: #c2410c;
+            color: var(--nexa-dark);
             font-weight: 700;
         }
 
         /* Price Breakdown Card */
         .price-breakdown {
             background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             padding: 24px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .price-row {
@@ -300,8 +347,9 @@
             justify-content: space-between;
             padding: 12px 0;
             border-bottom: 1px dashed #cbd5e1;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 500;
+            color: #334155;
         }
 
         .price-row:last-child {
@@ -309,10 +357,10 @@
         }
 
         .price-row.total {
-            border-top: 2px solid var(--arena-blue);
+            border-top: 2px solid var(--nexa-dark);
             font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--arena-blue);
+            font-size: 1.2rem;
+            color: var(--nexa-dark);
             padding-top: 16px;
             margin-top: 6px;
         }
@@ -321,91 +369,119 @@
             color: #94a3b8;
             font-style: italic;
             text-align: center;
-            padding: 20px;
-            font-size: 0.95rem;
+            padding: 25px;
+            font-size: 0.92rem;
             background: #f8fafc;
-            border-radius: 12px;
-            border: 2px dashed var(--border-color);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            border-radius: 10px;
+            border: 2px dashed #cbd5e1;
         }
 
         @media (max-width: 600px) {
             body { padding: 10px; }
-            .header h1 { font-size: 1.4rem; }
-            .user-bar { flex-direction: column; gap: 8px; text-align: center; }
-            .model-grid { grid-template-columns: repeat(2, 1fr); }
-            .variant-grid { grid-template-columns: 1fr; }
+            .model-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.6rem; }
+            .exec-card { flex-direction: column; gap: 12px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<!-- Login Modal -->
+<!-- Login / Executive Modal -->
 <div class="login-modal" id="loginModal">
     <div class="login-box">
-        <h2>ARENA KIOSK</h2>
-        <p>Aage badhne ke liye apna Naam aur Mobile Number darj karein</p>
+        <h2>NEXA PORTAL</h2>
+        <p>Sales Executive details darj karein</p>
         <form onsubmit="handleLogin(event)">
             <div class="input-group">
-                <label for="userName">Full Name (Aapka Naam)</label>
-                <input type="text" id="userName" placeholder="e.g. Rahul Sharma" required>
+                <label for="execName">Executive Name</label>
+                <input type="text" id="execName" placeholder="e.g. Rahul Sharma" required>
             </div>
             <div class="input-group">
-                <label for="userMobile">Mobile Number</label>
-                <input type="tel" id="userMobile" placeholder="10-digit Mobile Number" pattern="[0-9]{10}" maxlength="10" required>
+                <label for="execMobile">Mobile Number</label>
+                <input type="tel" id="execMobile" placeholder="10-digit Mobile Number" pattern="[0-9]{10}" maxlength="10" required>
             </div>
-            <button type="submit" class="login-btn">Login & View Rates</button>
+            <button type="submit" class="login-btn">Continue to Calculator</button>
         </form>
     </div>
 </div>
 
 <!-- Main App Container -->
 <div class="container" id="mainContainer">
-    <!-- User Welcome Header Bar -->
-    <div class="user-bar">
-        <span>Welcome, <strong id="displayName">User</strong> (<span id="displayMobile">--</span>)</span>
-        <button class="logout-btn" onclick="handleLogout()">Change User / Logout</button>
-    </div>
-
+    <!-- Header Section matching screenshot -->
     <div class="header">
-        <h1>MARUTI SUZUKI ARENA</h1>
-        <p>Direct Model Click & On-Road Estimator (2026 Edition)</p>
+        <div class="brand-subtitle">N E X A  •  ARBIT AUTOMOBILES</div>
+        <h1>Price Calculator</h1>
+        <div class="header-meta">NEXA Price List • Gorakhpur • September 2026</div>
+
+        <div class="exec-card">
+            <div class="exec-info">
+                <h3 id="displayExecName">Rahul Sharma</h3>
+                <p>Sales Executive &bull; Mob: <span id="displayExecMobile">45534553</span></p>
+            </div>
+            <button class="edit-btn" onclick="handleEditProfile()">Edit</button>
+        </div>
     </div>
 
-    <div class="form-section">
-        <!-- Direct Model Click Buttons -->
-        <div class="form-group">
-            <div class="section-title">1. Select Car Model (Click any car for direct details)</div>
-            <div class="model-grid" id="modelGrid">
-                <button type="button" class="model-btn" onclick="selectModel('alto', this)">Alto K10</button>
-                <button type="button" class="model-btn" onclick="selectModel('wagonr', this)">Wagon R</button>
-                <button type="button" class="model-btn" onclick="selectModel('swift', this)">Swift</button>
-                <button type="button" class="model-btn" onclick="selectModel('dzire', this)">Dzire</button>
-                <button type="button" class="model-btn" onclick="selectModel('brezza', this)">Brezza</button>
-                <button type="button" class="model-btn" onclick="selectModel('ertiga', this)">Ertiga</button>
-            </div>
+    <!-- White Content Section -->
+    <div class="content-card">
+        <!-- Step 1: Select Model -->
+        <div class="step-header">
+            <div class="step-badge">1</div>
+            <div class="step-title">Select Model</div>
         </div>
 
-        <!-- Variant Selection Buttons -->
-        <div class="form-group">
-            <div class="section-title">2. Select Variant</div>
-            <div id="variantContainer">
-                <div class="placeholder-text">👉 Kisi bhi Car Model par click karein (Jaise <strong>Dzire</strong>) taaki saare variants dikh sakein!</div>
-            </div>
+        <div class="model-grid" id="modelGrid">
+            <!-- Car Icon SVG template -->
+            <button type="button" class="model-btn" onclick="selectModel('grand_vitara', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                Grand Vitara
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('e_vitara', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                e Vitara (Electric)
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('xl6', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                XL6
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('baleno_new', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                Baleno (New)
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('fronx', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                Fronx
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('baleno_old', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                Baleno (Old)
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('jimny', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                Jimny
+            </button>
+            <button type="button" class="model-btn" onclick="selectModel('invicto', this)">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                Invicto
+            </button>
         </div>
 
-        <!-- Price Breakdown -->
-        <div class="price-breakdown">
-            <div class="section-title" style="margin-bottom: 10px;">Price Summary & Breakdown</div>
+        <!-- Step 2: Select Variant -->
+        <div class="step-header">
+            <div class="step-badge">2</div>
+            <div class="step-title">Select Variant</div>
+        </div>
+
+        <div id="variantContainer">
+            <div class="placeholder-text">👉 Upar kisi bhi NEXA Model par click karein taaki variants aur prices dikh sakein!</div>
+        </div>
+
+        <!-- Price Breakdown Card -->
+        <div class="price-breakdown" style="margin-top: 30px;">
+            <div class="step-header" style="margin-bottom: 12px;">
+                <div class="step-badge" style="background:#0b1d3a;">₹</div>
+                <div class="step-title">Price Summary & Breakdown</div>
+            </div>
             <div class="price-row">
                 <span>Ex-Showroom Price</span>
                 <span id="exShowroom">₹0</span>
@@ -420,7 +496,7 @@
             </div>
             <div class="price-row">
                 <span>Fastag & Mandatory Accessories</span>
-                <span id="other">₹2,500</span>
+                <span id="other">₹3,500</span>
             </div>
             <div class="price-row total">
                 <span>Estimated On-Road Price</span>
@@ -433,8 +509,8 @@
 <script>
     // Session Check
     window.onload = function() {
-        const savedName = localStorage.getItem("arena_user_name");
-        const savedMobile = localStorage.getItem("arena_user_mobile");
+        const savedName = localStorage.getItem("nexa_exec_name");
+        const savedMobile = localStorage.getItem("nexa_exec_mobile");
 
         if (savedName && savedMobile) {
             showCalculator(savedName, savedMobile);
@@ -443,84 +519,79 @@
 
     function handleLogin(event) {
         event.preventDefault();
-        const name = document.getElementById("userName").value.trim();
-        const mobile = document.getElementById("userMobile").value.trim();
+        const name = document.getElementById("execName").value.trim();
+        const mobile = document.getElementById("execMobile").value.trim();
 
         if (name && mobile.length === 10) {
-            localStorage.setItem("arena_user_name", name);
-            localStorage.setItem("arena_user_mobile", mobile);
+            localStorage.setItem("nexa_exec_name", name);
+            localStorage.setItem("nexa_exec_mobile", mobile);
             showCalculator(name, mobile);
         } else {
-            alert("Kripya sahi Naam aur 10-digit Mobile Number dalein.");
+            alert("Kripya sahi naam aur 10-digit mobile number darj karein.");
         }
     }
 
     function showCalculator(name, mobile) {
         document.getElementById("loginModal").style.display = "none";
         document.getElementById("mainContainer").style.display = "block";
-        document.getElementById("displayName").textContent = name;
-        document.getElementById("displayMobile").textContent = mobile;
+        document.getElementById("displayExecName").textContent = name;
+        document.getElementById("displayExecMobile").textContent = mobile;
     }
 
-    function handleLogout() {
-        localStorage.removeItem("arena_user_name");
-        localStorage.removeItem("arena_user_mobile");
+    function handleEditProfile() {
         document.getElementById("loginModal").style.display = "flex";
         document.getElementById("mainContainer").style.display = "none";
-        document.getElementById("userName").value = "";
-        document.getElementById("userMobile").value = "";
+        document.getElementById("execName").value = localStorage.getItem("nexa_exec_name") || "";
+        document.getElementById("execMobile").value = localStorage.getItem("nexa_exec_mobile") || "";
     }
 
+    // NEXA Vehicle Data (2026 Prices)
     const vehicleData = {
-        alto: [
-            { name: "Std (Petrol)", price: 399000 },
-            { name: "LXi (Petrol)", price: 483000 },
-            { name: "VXi (Petrol)", price: 506000 },
-            { name: "VXi+ (Petrol)", price: 535000 },
-            { name: "LXi (CNG)", price: 573000 },
-            { name: "VXi (CNG)", price: 596000 }
+        grand_vitara: [
+            { name: "Sigma Smart Hybrid", price: 1099000 },
+            { name: "Delta Smart Hybrid", price: 1219000 },
+            { name: "Zeta Smart Hybrid", price: 1391000 },
+            { name: "Alpha Smart Hybrid", price: 1551000 },
+            { name: "Zeta+ Strong Hybrid", price: 1843000 },
+            { name: "Alpha+ Strong Hybrid", price: 1993000 }
         ],
-        wagonr: [
-            { name: "LXi 1.0L (Petrol)", price: 554000 },
-            { name: "VXi 1.0L (Petrol)", price: 599000 },
-            { name: "ZXi 1.2L (Petrol)", price: 628000 },
-            { name: "ZXi+ 1.2L (Petrol)", price: 675000 },
-            { name: "LXi 1.0L (CNG)", price: 644000 },
-            { name: "VXi 1.0L (CNG)", price: 689000 }
+        e_vitara: [
+            { name: "Standard Range (FWD)", price: 1749000 },
+            { name: "Long Range (FWD)", price: 1999000 },
+            { name: "Long Range (AWD)", price: 2199000 }
         ],
-        swift: [
-            { name: "LXi (Petrol)", price: 649000 },
-            { name: "VXi (Petrol)", price: 729000 },
-            { name: "VXi (O) (Petrol)", price: 756000 },
-            { name: "ZXi (Petrol)", price: 829000 },
-            { name: "ZXi+ (Petrol)", price: 899000 },
-            { name: "VXi (CNG)", price: 819000 },
-            { name: "ZXi (CNG)", price: 919000 }
+        xl6: [
+            { name: "Zeta Petrol", price: 1161000 },
+            { name: "Alpha Petrol", price: 1251000 },
+            { name: "Alpha+ Petrol", price: 1311000 },
+            { name: "Zeta CNG", price: 1256000 }
         ],
-        dzire: [
-            { name: "LXi (Petrol)", price: 679000 },
-            { name: "VXi (Petrol)", price: 779000 },
-            { name: "ZXi (Petrol)", price: 889000 },
-            { name: "ZXi+ (Petrol)", price: 939000 },
-            { name: "VXi (CNG)", price: 874000 },
-            { name: "ZXi (CNG)", price: 984000 }
+        baleno_new: [
+            { name: "Sigma", price: 666000 },
+            { name: "Delta", price: 750000 },
+            { name: "Zeta", price: 838000 },
+            { name: "Alpha", price: 933000 },
+            { name: "Delta (CNG)", price: 840000 }
         ],
-        brezza: [
-            { name: "LXi (Petrol)", price: 834000 },
-            { name: "VXi (Petrol)", price: 969000 },
-            { name: "ZXi (Petrol)", price: 1114000 },
-            { name: "ZXi+ (Petrol)", price: 1258000 },
-            { name: "LXi (CNG)", price: 929000 },
-            { name: "VXi (CNG)", price: 1064000 },
-            { name: "ZXi (CNG)", price: 1209000 }
+        fronx: [
+            { name: "Sigma 1.2L", price: 751000 },
+            { name: "Delta 1.2L", price: 832000 },
+            { name: "Zeta 1.0L Turbo", price: 972000 },
+            { name: "Alpha 1.0L Turbo", price: 1072000 },
+            { name: "Delta (CNG)", price: 932000 }
         ],
-        ertiga: [
-            { name: "LXi (Petrol)", price: 869000 },
-            { name: "VXi (Petrol)", price: 983000 },
-            { name: "ZXi (Petrol)", price: 1093000 },
-            { name: "ZXi+ (Petrol)", price: 1203000 },
-            { name: "VXi (CNG)", price: 1078000 },
-            { name: "ZXi (CNG)", price: 1188000 }
+        baleno_old: [
+            { name: "Base Classic", price: 635000 },
+            { name: "Comfort Trim", price: 715000 }
+        ],
+        jimny: [
+            { name: "Zeta (MT)", price: 1274000 },
+            { name: "Alpha (MT)", price: 1369000 },
+            { name: "Alpha Dual Tone (AT)", price: 1489000 }
+        ],
+        invicto: [
+            { name: "Zeta+ (7-Seater)", price: 2521000 },
+            { name: "Alpha+ (7-Seater)", price: 2842000 }
         ]
     };
 
@@ -553,7 +624,7 @@
             });
             variantContainer.appendChild(grid);
 
-            // Auto-select the first variant by default for lightning-fast user experience
+            // Auto-select first variant instantly for smooth UX
             grid.children[0].click();
         }
     }
@@ -566,7 +637,7 @@
             const exShowroom = vehicleData[selectedModelKey][variantIndex].price;
             const rto = Math.round(exShowroom * 0.10);
             const insurance = Math.round(exShowroom * 0.045);
-            const other = 2500;
+            const other = 3500;
             const total = exShowroom + rto + insurance + other;
 
             document.getElementById("exShowroom").textContent = "₹" + exShowroom.toLocaleString('en-IN');
