@@ -203,7 +203,7 @@
             margin-bottom: 12px;
         }
 
-        /* Interactive Grid Buttons */
+        /* Direct Car Model Buttons */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -214,9 +214,9 @@
         .model-btn {
             background: #f8fafc;
             border: 2px solid var(--border-color);
-            padding: 14px 10px;
+            padding: 16px 10px;
             border-radius: 12px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-dark);
             cursor: pointer;
@@ -228,20 +228,23 @@
             border-color: var(--arena-blue-light);
             background: #eff6ff;
             color: var(--arena-blue);
+            transform: translateY(-2px);
         }
 
         .model-btn.active {
             background: var(--arena-blue);
             border-color: var(--arena-blue);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 40, 132, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 40, 132, 0.3);
         }
 
+        /* Variant Buttons */
         .variant-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 12px;
             margin-bottom: 30px;
+            animation: fadeIn 0.3s ease;
         }
 
         .variant-btn {
@@ -320,11 +323,14 @@
             text-align: center;
             padding: 20px;
             font-size: 0.95rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px dashed var(--border-color);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideUp {
@@ -372,13 +378,13 @@
 
     <div class="header">
         <h1>MARUTI SUZUKI ARENA</h1>
-        <p>Price List & On-Road Estimator (2026 Edition)</p>
+        <p>Direct Model Click & On-Road Estimator (2026 Edition)</p>
     </div>
 
     <div class="form-section">
-        <!-- Model Selection Buttons -->
+        <!-- Direct Model Click Buttons -->
         <div class="form-group">
-            <div class="section-title">1. Select Car Model</div>
+            <div class="section-title">1. Select Car Model (Click any car for direct details)</div>
             <div class="model-grid" id="modelGrid">
                 <button type="button" class="model-btn" onclick="selectModel('alto', this)">Alto K10</button>
                 <button type="button" class="model-btn" onclick="selectModel('wagonr', this)">Wagon R</button>
@@ -393,7 +399,7 @@
         <div class="form-group">
             <div class="section-title">2. Select Variant</div>
             <div id="variantContainer">
-                <div class="placeholder-text">Pehle upar se koi Car Model chunein</div>
+                <div class="placeholder-text">👉 Kisi bhi Car Model par click karein (Jaise <strong>Dzire</strong>) taaki saare variants dikh sakein!</div>
             </div>
         </div>
 
@@ -523,7 +529,7 @@
     function selectModel(modelKey, btnElement) {
         selectedModelKey = modelKey;
         
-        // Active class update model buttons par
+        // Highlight active model button
         document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
 
@@ -546,8 +552,10 @@
                 grid.appendChild(vBtn);
             });
             variantContainer.appendChild(grid);
+
+            // Auto-select the first variant by default for lightning-fast user experience
+            grid.children[0].click();
         }
-        resetPrices();
     }
 
     function selectVariant(variantIndex, btnElement) {
@@ -567,14 +575,6 @@
             document.getElementById("other").textContent = "₹" + other.toLocaleString('en-IN');
             document.getElementById("totalPrice").textContent = "₹" + total.toLocaleString('en-IN');
         }
-    }
-
-    function resetPrices() {
-        document.getElementById("exShowroom").textContent = "₹0";
-        document.getElementById("rto").textContent = "₹0";
-        document.getElementById("insurance").textContent = "₹0";
-        document.getElementById("other").textContent = "₹2,500";
-        document.getElementById("totalPrice").textContent = "₹0";
     }
 </script>
 
