@@ -10,7 +10,6 @@
             --nexa-dark: #040d1a;
             --nexa-card-dark: #09182d;
             --nexa-blue: #0b1d3a;
-            --nexa-accent: #d4af37; /* Premium NEXA Gold touch */
             --bg-light: #f1f5f9;
             --text-dark: #1e293b;
             --card-bg: #ffffff;
@@ -93,7 +92,6 @@
             border-radius: 8px;
             font-size: 1rem;
             outline: none;
-            transition: all 0.2s;
             background: #f8fafc;
         }
 
@@ -112,7 +110,6 @@
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
             margin-top: 10px;
         }
 
@@ -132,7 +129,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Top NEXA Header matching screenshot */
         .header {
             background: var(--nexa-dark);
             color: #ffffff;
@@ -152,7 +148,6 @@
         .header h1 {
             font-size: 2rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
             color: #ffffff;
             margin-bottom: 6px;
         }
@@ -164,7 +159,6 @@
             margin-bottom: 20px;
         }
 
-        /* Sales Executive Info Box matching screenshot */
         .exec-card {
             background: var(--nexa-card-dark);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -196,7 +190,6 @@
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
         .edit-btn:hover {
@@ -204,14 +197,12 @@
             border-color: #ffffff;
         }
 
-        /* Main White Content Card Container */
         .content-card {
             background: #ffffff;
             border-radius: 0 0 16px 16px;
             padding: 30px;
         }
 
-        /* Step Headers with Number Badge */
         .step-header {
             display: flex;
             align-items: center;
@@ -240,35 +231,40 @@
             text-transform: uppercase;
         }
 
-        /* Model Grid */
+        /* Model Grid with Real Vehicle Images */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 15px;
             margin-bottom: 30px;
         }
 
         .model-btn {
             background: #ffffff;
             border: 2px solid #e2e8f0;
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-dark);
+            padding: 12px 16px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             text-align: left;
         }
 
-        .model-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: #475569;
-            flex-shrink: 0;
+        .model-btn img {
+            width: 85px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #f8fafc;
+            padding: 2px;
+        }
+
+        .model-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
         }
 
         .model-btn:hover {
@@ -279,18 +275,21 @@
         .model-btn.active {
             background: var(--nexa-dark);
             border-color: var(--nexa-dark);
+            box-shadow: 0 6px 16px rgba(4, 13, 26, 0.25);
+        }
+
+        .model-btn.active .model-name {
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(4, 13, 26, 0.25);
         }
 
-        .model-btn.active svg {
-            fill: #ffffff;
+        .model-btn.active img {
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Variant Grid */
+        /* Clean Variant Buttons (No Amount / Price shown) */
         .variant-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 12px;
             margin-bottom: 30px;
         }
@@ -298,23 +297,14 @@
         .variant-btn {
             background: #f8fafc;
             border: 2px solid #e2e8f0;
-            padding: 14px 16px;
+            padding: 16px;
             border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
             color: var(--text-dark);
             cursor: pointer;
             transition: all 0.2s ease;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .variant-btn .v-price {
-            font-size: 0.82rem;
-            color: #64748b;
-            font-weight: 500;
+            text-align: center;
         }
 
         .variant-btn:hover {
@@ -323,15 +313,10 @@
         }
 
         .variant-btn.active {
-            background: #e2e8f0;
+            background: var(--nexa-dark);
             border-color: var(--nexa-dark);
-            color: var(--nexa-dark);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .variant-btn.active .v-price {
-            color: var(--nexa-dark);
-            font-weight: 700;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(4, 13, 26, 0.2);
         }
 
         /* Price Breakdown Card */
@@ -407,7 +392,6 @@
 
 <!-- Main App Container -->
 <div class="container" id="mainContainer">
-    <!-- Header Section matching screenshot -->
     <div class="header">
         <div class="brand-subtitle">N E X A  •  ARBIT AUTOMOBILES</div>
         <h1>Price Calculator</h1>
@@ -424,56 +408,51 @@
 
     <!-- White Content Section -->
     <div class="content-card">
-        <!-- Step 1: Select Model -->
+        <!-- Step 1: Select Model with Real Vehicle Images -->
         <div class="step-header">
             <div class="step-badge">1</div>
             <div class="step-title">Select Model</div>
         </div>
 
         <div class="model-grid" id="modelGrid">
-            <!-- Car Icon SVG template -->
             <button type="button" class="model-btn" onclick="selectModel('grand_vitara', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                Grand Vitara
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/123271/grand-vitara-exterior-right-front-three-quarter-4.jpeg" alt="Grand Vitara">
+                <span class="model-name">Grand Vitara</span>
             </button>
             <button type="button" class="model-btn" onclick="selectModel('e_vitara', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                e Vitara (Electric)
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/141115/evx-exterior-right-front-three-quarter-2.jpeg" alt="e Vitara">
+                <span class="model-name">e Vitara (Electric)</span>
             </button>
             <button type="button" class="model-btn" onclick="selectModel('xl6', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                XL6
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/110133/xl6-exterior-right-front-three-quarter-3.jpeg" alt="XL6">
+                <span class="model-name">XL6</span>
             </button>
             <button type="button" class="model-btn" onclick="selectModel('baleno_new', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                Baleno (New)
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/106815/baleno-exterior-right-front-three-quarter-6.jpeg" alt="Baleno">
+                <span class="model-name">Baleno (New)</span>
             </button>
             <button type="button" class="model-btn" onclick="selectModel('fronx', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                Fronx
-            </button>
-            <button type="button" class="model-btn" onclick="selectModel('baleno_old', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                Baleno (Old)
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/133049/fronx-exterior-right-front-three-quarter-11.jpeg" alt="Fronx">
+                <span class="model-name">Fronx</span>
             </button>
             <button type="button" class="model-btn" onclick="selectModel('jimny', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                Jimny
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/121543/jimny-exterior-right-front-three-quarter-6.jpeg" alt="Jimny">
+                <span class="model-name">Jimny</span>
             </button>
             <button type="button" class="model-btn" onclick="selectModel('invicto', this)">
-                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                Invicto
+                <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/146053/invicto-exterior-right-front-three-quarter-3.jpeg" alt="Invicto">
+                <span class="model-name">Invicto</span>
             </button>
         </div>
 
-        <!-- Step 2: Select Variant -->
+        <!-- Step 2: Select Variant (No amounts displayed) -->
         <div class="step-header">
             <div class="step-badge">2</div>
             <div class="step-title">Select Variant</div>
         </div>
 
         <div id="variantContainer">
-            <div class="placeholder-text">👉 Upar kisi bhi NEXA Model par click karein taaki variants aur prices dikh sakein!</div>
+            <div class="placeholder-text">👉 Upar kisi bhi car par click karein taaki variants dikh sakein!</div>
         </div>
 
         <!-- Price Breakdown Card -->
@@ -507,7 +486,6 @@
 </div>
 
 <script>
-    // Session Check
     window.onload = function() {
         const savedName = localStorage.getItem("nexa_exec_name");
         const savedMobile = localStorage.getItem("nexa_exec_mobile");
@@ -545,7 +523,6 @@
         document.getElementById("execMobile").value = localStorage.getItem("nexa_exec_mobile") || "";
     }
 
-    // NEXA Vehicle Data (2026 Prices)
     const vehicleData = {
         grand_vitara: [
             { name: "Sigma Smart Hybrid", price: 1099000 },
@@ -580,10 +557,6 @@
             { name: "Alpha 1.0L Turbo", price: 1072000 },
             { name: "Delta (CNG)", price: 932000 }
         ],
-        baleno_old: [
-            { name: "Base Classic", price: 635000 },
-            { name: "Comfort Trim", price: 715000 }
-        ],
         jimny: [
             { name: "Zeta (MT)", price: 1274000 },
             { name: "Alpha (MT)", price: 1369000 },
@@ -600,7 +573,6 @@
     function selectModel(modelKey, btnElement) {
         selectedModelKey = modelKey;
         
-        // Highlight active model button
         document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
 
@@ -615,16 +587,14 @@
                 const vBtn = document.createElement('button');
                 vBtn.type = 'button';
                 vBtn.className = 'variant-btn';
-                vBtn.innerHTML = `
-                    <span>${variant.name}</span>
-                    <span class="v-price">₹${variant.price.toLocaleString('en-IN')}</span>
-                `;
+                // Only variant name shown without price
+                vBtn.textContent = variant.name;
                 vBtn.onclick = () => selectVariant(index, vBtn);
                 grid.appendChild(vBtn);
             });
             variantContainer.appendChild(grid);
 
-            // Auto-select first variant instantly for smooth UX
+            // Auto-select first variant instantly
             grid.children[0].click();
         }
     }
