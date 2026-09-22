@@ -6,11 +6,15 @@
   <title>MARUTI SUZUKI ARENA - PRICE LIST & QUOTATION</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- html2canvas library to generate image from quotation div -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
     :root {
       --primary: #0A2540;
       --secondary: #1A365D;
-      --accent: #D32F2F;
+      --accent: #25D366; /* WhatsApp Green */
       --bg: #F4F6F8;
       --card-bg: #FFFFFF;
       --border: #CFD8DC;
@@ -46,7 +50,7 @@
     }
 
     .btn {
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
@@ -60,10 +64,11 @@
 
     .btn-primary { background: var(--primary); color: white; }
     .btn-primary:hover { background: #07192d; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-whatsapp:hover { background: #1eb957; }
     .btn-secondary { background: #ECEFF1; color: var(--text); }
     .btn-secondary:hover { background: #CFD8DC; }
 
-    /* A4 Quotation Sheet Container */
     .quotation-card {
       width: 210mm;
       min-height: 297mm;
@@ -74,10 +79,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
     }
 
-    /* Header Styling */
     .brand-header {
       display: flex;
       justify-content: space-between;
@@ -102,16 +105,13 @@
       margin-top: 4px;
     }
 
-    .arena-badge {
-      text-align: right;
-    }
-
     .arena-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 22px;
       letter-spacing: 4px;
       color: #000;
+      text-align: right;
     }
 
     .sub-date {
@@ -119,9 +119,9 @@
       color: #666;
       text-transform: uppercase;
       letter-spacing: 1px;
+      text-align: right;
     }
 
-    /* Car Selector Section */
     .model-hero-sec {
       display: flex;
       justify-content: space-between;
@@ -130,9 +130,7 @@
       gap: 20px;
     }
 
-    .car-info-selects {
-      flex: 1;
-    }
+    .car-info-selects { flex: 1; }
 
     .car-info-selects select {
       width: 100%;
@@ -147,14 +145,14 @@
 
     .model-title-display {
       font-family: 'Montserrat', sans-serif;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 800;
       color: #000;
       line-height: 1.1;
     }
 
     .variant-subtitle-display {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       color: #555;
       margin-top: 4px;
@@ -166,7 +164,6 @@
       object-fit: contain;
     }
 
-    /* Highlight Banner */
     .feature-highlights {
       display: flex;
       justify-content: space-between;
@@ -181,18 +178,13 @@
       font-weight: 700;
       text-transform: uppercase;
       color: #333;
-      display: flex;
-      align-items: center;
-      gap: 4px;
     }
 
     .feature-item::before {
-      content: '◇';
+      content: '◇ ';
       color: var(--primary);
-      font-size: 10px;
     }
 
-    /* Price Table */
     .price-table {
       width: 100%;
       border-collapse: collapse;
@@ -205,24 +197,19 @@
       padding: 8px 12px;
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .price-table td {
       padding: 8px 12px;
       border-bottom: 1px solid #e0e0e0;
       font-size: 13px;
-      vertical-align: middle;
     }
-
-    .price-table tr:nth-child(even) { background-color: #fcfcfc; }
 
     .td-sno { width: 40px; text-align: center; color: #777; font-weight: 600; }
     .td-amount { text-align: right; font-weight: 700; font-size: 14px; width: 140px; }
     .item-desc { font-weight: 700; color: #111; }
-    .item-subtext { font-size: 10px; color: #777; font-weight: 400; margin-top: 1px; }
+    .item-subtext { font-size: 10px; color: #777; font-weight: 400; }
 
-    /* Custom Checkbox / Radio buttons inline */
     .toggle-group {
       display: inline-flex;
       gap: 6px;
@@ -254,7 +241,6 @@
       font-weight: 700;
     }
 
-    /* Total Rows */
     .discount-row td {
       background-color: #E8F5E9 !important;
       color: #2E7D32;
@@ -276,7 +262,6 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 16px;
       font-weight: 800;
-      letter-spacing: 1px;
     }
 
     .grand-total-amount {
@@ -285,7 +270,6 @@
       font-weight: 800;
     }
 
-    /* Footer Info */
     .footer-section {
       margin-top: 15px;
       display: flex;
@@ -294,17 +278,6 @@
       border-top: 1px solid #ccc;
       padding-top: 12px;
     }
-
-    .executive-info, .dealer-info {
-      font-size: 11px;
-    }
-
-    .exec-name { font-weight: 700; font-size: 13px; color: #000; }
-    .exec-title { color: #666; margin-bottom: 2px; }
-    .exec-mob { color: #333; font-weight: 600; }
-
-    .dealer-name { font-weight: 800; text-transform: uppercase; font-size: 12px; }
-    .dealer-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 2px; font-size: 14px; text-align: right; color: var(--primary); }
 
     .bottom-tagline {
       text-align: center;
@@ -328,7 +301,7 @@
 </head>
 <body>
 
-  <!-- Controls for customization (Hidden during Print) -->
+  <!-- Controls -->
   <div class="no-print-controls">
     <div>
       <strong style="color: var(--primary);">Maruti Suzuki Arena Price Calculator</strong>
@@ -336,47 +309,41 @@
     </div>
     <div style="display: flex; gap: 10px;">
       <button class="btn btn-secondary" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+      <button class="btn btn-whatsapp" onclick="sendWhatsAppImage()"><i class="fa-brands fa-whatsapp"></i> Share Image</button>
       <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Quotation</button>
     </div>
   </div>
 
   <!-- A4 Quotation Sheet -->
-  <div class="quotation-card">
+  <div class="quotation-card" id="quotationCard">
     <div>
-      <!-- Header -->
       <div class="brand-header">
         <div>
           <div class="logo-text">MARUTI SUZUKI</div>
           <div class="tagline">ARENA - WAY OF LIFE</div>
         </div>
-        <div class="arena-badge">
+        <div>
           <div class="arena-title">ARENA</div>
           <div class="sub-date">PRICE LIST - SEP 2026</div>
         </div>
       </div>
 
-      <!-- Car & Model Selector -->
       <div class="model-hero-sec">
         <div class="car-info-selects">
           <label style="font-size: 10px; font-weight: 700; color: #777;">SELECT MODEL CATEGORY:</label>
-          <select id="categorySelect" onchange="onCategoryChange()">
-            <!-- Dynamic Options -->
-          </select>
+          <select id="categorySelect" onchange="onCategoryChange()"></select>
 
           <label style="font-size: 10px; font-weight: 700; color: #777; margin-top: 4px; display: block;">SELECT VARIANT:</label>
-          <select id="variantSelect" onchange="calculatePrices()">
-            <!-- Dynamic Options -->
-          </select>
+          <select id="variantSelect" onchange="calculatePrices()"></select>
 
           <div class="model-title-display" id="displayModelName">BREZZA</div>
           <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
         </div>
         <div>
-          <img id="carImage" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img">
+          <img id="carImage" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
         </div>
       </div>
 
-      <!-- Highlights Banner -->
       <div class="feature-highlights">
         <div class="feature-item">K-SERIES ENGINE</div>
         <div class="feature-item">SPACIOUS CABIN</div>
@@ -384,7 +351,6 @@
         <div class="feature-item">S-CNG TECHNOLOGY</div>
       </div>
 
-      <!-- Price Breakup Table -->
       <table class="price-table">
         <thead>
           <tr>
@@ -394,7 +360,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 1. Ex-Showroom -->
           <tr>
             <td class="td-sno">1</td>
             <td>
@@ -403,22 +368,14 @@
             </td>
             <td class="td-amount" id="exShowroomVal">₹0</td>
           </tr>
-
-          <!-- 2. Insurance -->
           <tr>
             <td class="td-sno">2</td>
             <td>
-              <div class="item-desc">
-                <input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance
-              </div>
-              <div class="item-subtext">1+3 Year Comprehensive Insurance Cover</div>
+              <div class="item-desc"><input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance</div>
+              <div class="item-subtext">1+3 Year Cover</div>
             </td>
-            <td class="td-amount">
-              ₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()">
-            </td>
+            <td class="td-amount">₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()"></td>
           </tr>
-
-          <!-- 3. Registration Charges -->
           <tr>
             <td class="td-sno">3</td>
             <td>
@@ -428,51 +385,29 @@
                 <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other District</button>
               </div>
             </td>
-            <td class="td-amount">
-              ₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()">
-            </td>
+            <td class="td-amount">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></td>
           </tr>
-
-          <!-- 4. GNA Basic Kit -->
           <tr>
             <td class="td-sno">4</td>
             <td>
-              <div class="item-desc">
-                <input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> GNA Basic Accessories Kit
-              </div>
+              <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> GNA Basic Accessories Kit</div>
             </td>
-            <td class="td-amount">
-              ₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()">
-            </td>
+            <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
           </tr>
-
-          <!-- 5. FASTag Card -->
           <tr>
             <td class="td-sno">5</td>
             <td>
-              <div class="item-desc">
-                <input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag Card
-              </div>
+              <div class="item-desc"><input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag Card</div>
             </td>
-            <td class="td-amount">
-              ₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()">
-            </td>
+            <td class="td-amount">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></td>
           </tr>
-
-          <!-- 6. Maruti Suzuki Rewards -->
           <tr>
             <td class="td-sno">6</td>
             <td>
-              <div class="item-desc">
-                <input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Reward (MSR)
-              </div>
+              <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Reward (MSR)</div>
             </td>
-            <td class="td-amount">
-              ₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()">
-            </td>
+            <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
           </tr>
-
-          <!-- 7. Extended Warranty (MSP) -->
           <tr>
             <td class="td-sno">7</td>
             <td>
@@ -486,8 +421,6 @@
             </td>
             <td class="td-amount" id="warrantyVal">₹0</td>
           </tr>
-
-          <!-- 8. TCS @ 1% -->
           <tr>
             <td class="td-sno">8</td>
             <td>
@@ -496,39 +429,31 @@
             </td>
             <td class="td-amount" id="tcsVal">₹0</td>
           </tr>
-
-          <!-- Offer / Discount -->
           <tr class="discount-row">
             <td class="td-sno">-</td>
-            <td>
-              <div class="item-desc" style="color: #2E7D32;">CONSUMER OFFER / DISCOUNT</div>
-            </td>
-            <td class="td-amount" style="color: #2E7D32;">
-              - ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()">
-            </td>
+            <td><div class="item-desc" style="color: #2E7D32;">OFFER / DISCOUNT</div></td>
+            <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
           </tr>
         </tbody>
       </table>
 
-      <!-- Grand Total -->
       <div class="grand-total-box">
         <div class="grand-total-label">TOTAL ON-ROAD PRICE</div>
         <div class="grand-total-amount" id="grandTotalVal">₹0</div>
       </div>
     </div>
 
-    <!-- Footer Dealer & Executive Section -->
     <div>
       <div class="footer-section">
-        <div class="executive-info">
-          <div class="exec-name" contenteditable="true">Sales Executive Name</div>
-          <div class="exec-title">Relationship Manager</div>
-          <div class="exec-mob" contenteditable="true">Mob: +91 98765 43210</div>
+        <div>
+          <div style="font-weight: 700; font-size: 13px;" contenteditable="true">Sales Executive Name</div>
+          <div style="color: #666; font-size: 11px;">Relationship Manager</div>
+          <div style="color: #333; font-weight: 600; font-size: 11px;" contenteditable="true">Mob: +91 98765 43210</div>
         </div>
-        <div class="dealer-info">
-          <div class="dealer-name" contenteditable="true">AUTHORIZED ARENA DEALERSHIP</div>
-          <div class="dealer-brand">MARUTI SUZUKI ARENA</div>
-          <div style="font-size: 10px; color: #777; text-align: right;" contenteditable="true">Gorakhpur / Uttar Pradesh</div>
+        <div style="text-align: right;">
+          <div style="font-weight: 800; font-size: 12px;" contenteditable="true">AUTHORIZED ARENA DEALERSHIP</div>
+          <div style="font-family: 'Montserrat'; font-weight: 800; letter-spacing: 2px; font-size: 14px; color: var(--primary);">MARUTI SUZUKI ARENA</div>
+          <div style="font-size: 10px; color: #777;" contenteditable="true">Gorakhpur / Uttar Pradesh</div>
         </div>
       </div>
       <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
@@ -536,7 +461,6 @@
   </div>
 
   <script>
-    // Car Image Mapping
     const carImages = {
       'NEW ALTO K10': 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80',
       'NEW CELERIO': 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=600&q=80',
@@ -550,60 +474,32 @@
       'EECO NEW': 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=600&q=80'
     };
 
-    // Variant Data Parsed from price 22.xlsx
     const dataset = [
       { category: "NEW ALTO K10", name: "MARUTI ALTO K10 STD 1L 5MT", ex: 370029.88, msp4: 4424.82, msp5: 7610.82, msp6: 8318.82 },
       { category: "NEW ALTO K10", name: "MARUTI ALTO K10 LXI 1L 5MT", ex: 400029.02, msp4: 4778.82, msp5: 8082.82, msp6: 8908.82 },
       { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI 1L 5MT", ex: 452529.58, msp4: 5250.82, msp5: 9144.82, msp6: 10088.82 },
       { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI+ 1L 5MT", ex: 500029.30, msp4: 5722.82, msp5: 9970.82, msp6: 11032.82 },
-      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI 1L AGS", ex: 497530.06, msp4: 5722.82, msp5: 9970.82, msp6: 11032.82 },
-      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI+ 1L AGS", ex: 545029.78, msp4: 6194.82, msp5: 10796.82, msp6: 11976.82 },
-      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 LXI CNG 1L 5MT", ex: 484530.00, msp4: 5604.82, msp5: 9734.82, msp6: 10678.82 },
-      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI CNG 1L 5MT", ex: 534528.96, msp4: 6076.82, msp5: 10560.82, msp6: 11740.82 },
-
       { category: "NEW CELERIO", name: "MARUTI CELERIO LXI 1L ISS 5MT", ex: 470058.90, msp4: 5486.82, msp5: 9380.82, msp6: 10442.82 },
       { category: "NEW CELERIO", name: "MARUTI CELERIO VXI 1L ISS 5MT", ex: 518559.26, msp4: 5958.82, msp5: 10324.82, msp6: 11386.82 },
-      { category: "NEW CELERIO", name: "MARUTI CELERIO VXI CNG 1L 5MT", ex: 598059.40, msp4: 6784.82, msp5: 11740.82, msp6: 13038.82 },
-      { category: "NEW CELERIO", name: "MARUTI CELERIO ZXI 1L ISS 5MT", ex: 573559.06, msp4: 6548.82, msp5: 11386.82, msp6: 12566.82 },
-      { category: "NEW CELERIO", name: "MARUTI CELERIO ZXI+ 1L ISS 5MT", ex: 630558.96, msp4: 7138.82, msp5: 12330.82, msp6: 13746.82 },
-
       { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT LXI 1.2L 5MT", ex: 649000.00, msp4: 7374.82, msp5: 12802.82, msp6: 14218.82 },
       { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT VXI 1.2L 5MT", ex: 729500.00, msp4: 8200.82, msp5: 14336.82, msp6: 15988.82 },
-      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT ZXI 1.2L 5MT", ex: 829500.00, msp4: 9262.82, msp5: 16224.82, msp6: 18112.82 },
-      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT ZXI+ 1.2L 5MT", ex: 899500.00, msp4: 10088.82, msp5: 17640.82, msp6: 19646.82 },
-      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT VXI CNG 1.2L 5MT", ex: 819500.00, msp4: 9144.82, msp5: 16008.82, msp6: 17876.82 },
-
       { category: "Dazzling New Dzire", name: "MARUTI DZIRE LXI 1.2L 5MT", ex: 656500.00, msp4: 7492.82, msp5: 12920.82, msp6: 14454.82 },
       { category: "Dazzling New Dzire", name: "MARUTI DZIRE VXI 1.2L 5MT", ex: 749000.00, msp4: 8436.82, msp5: 14690.82, msp6: 16342.82 },
-      { category: "Dazzling New Dzire", name: "MARUTI DZIRE ZXI 1.2L 5MT", ex: 814000.00, msp4: 9144.82, msp5: 15950.82, msp6: 17758.82 },
-      { category: "Dazzling New Dzire", name: "MARUTI DZIRE VXI CNG 1.2L 5MT", ex: 844000.00, msp4: 9498.82, msp5: 16534.82, msp6: 18466.82 },
-
       { category: "NEW BREZZA (July)", name: "MARUTI BREZZA LXI 1.5L 5MT", ex: 834000.00, msp4: 13923.82, msp5: 17227.82, msp6: 19233.82 },
       { category: "NEW BREZZA (July)", name: "MARUTI BREZZA VXI 1.5L 5MT", ex: 969500.00, msp4: 16165.82, msp5: 20059.82, msp6: 22419.82 },
       { category: "NEW BREZZA (July)", name: "MARUTI BREZZA ZXI 1.5L 5MT", ex: 1114500.00, msp4: 18525.82, msp5: 22891.82, msp6: 25723.82 },
-      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA ZXI+ 1.5L 5MT", ex: 1258000.00, msp4: 20885.82, msp5: 25959.82, msp6: 29027.82 },
-      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA ZXI 1.5L 6AT", ex: 1254500.00, msp4: 20885.82, msp5: 25959.82, msp6: 29027.82 },
-      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA LXI CNG 1.5L 5MT", ex: 929000.00, msp4: 15457.82, msp5: 19115.82, msp6: 21357.82 },
-
       { category: "VICTORIS", name: "MARUTI VICTORIS LXI 1.5L 5MT", ex: 1099124.00, msp4: 18289.82, msp5: 22655.82, msp6: 25369.82 },
       { category: "VICTORIS", name: "MARUTI VICTORIS VXI 1.5L 5MT", ex: 1234124.00, msp4: 20531.82, msp5: 25487.82, msp6: 28437.82 },
-      { category: "VICTORIS", name: "MARUTI VICTORIS ZXI 1.5L 5MT", ex: 1411124.00, msp4: 23363.82, msp5: 29027.82, msp6: 32567.82 },
-      { category: "VICTORIS", name: "MARUTI VICTORIS ZXI 1.5L 6AT", ex: 1551124.00, msp4: 25605.82, msp5: 31859.82, msp6: 35753.82 },
-      { category: "VICTORIS", name: "MARUTI VICTORIS ZXI CNG 1.5L 5MT", ex: 1467123.00, msp4: 24484.82, msp5: 30384.82, msp6: 34160.82 },
-
       { category: "NEW ERTIGA", name: "MARUTI ERTIGA LXI 1.5L 5MT", ex: 869000.00, msp4: 14513.82, msp5: 17935.82, msp6: 20059.82 },
-      { category: "NEW ERTIGA", name: "MARUTI ERTIGA VXI 1.5L 5MT", ex: 983000.00, msp4: 16401.82, msp5: 20295.82, msp6: 22655.82 },
-      { category: "NEW ERTIGA", name: "MARUTI ERTIGA ZXI 1.5L 5MT", ex: 1093000.00, msp4: 18171.82, msp5: 22537.82, msp6: 25251.82 },
       { category: "NEW ERTIGA", name: "MARUTI ERTIGA VXI CNG 1.5L 5MT", ex: 1078000.00, msp4: 17935.82, msp5: 22183.82, msp6: 24897.82 }
     ];
 
-    let currentSelectedVariant = dataset[22]; // Default Brezza LXI
+    let currentSelectedVariant = dataset[10];
     let currentWarrantyYears = '6';
 
     function init() {
       const catSelect = document.getElementById('categorySelect');
       const categories = [...new Set(dataset.map(item => item.category))];
-      
       catSelect.innerHTML = categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
       catSelect.value = 'NEW BREZZA (July)';
       onCategoryChange();
@@ -614,17 +510,9 @@
       const variantSelect = document.getElementById('variantSelect');
       const filtered = dataset.filter(d => d.category === selectedCat);
 
-      variantSelect.innerHTML = filtered.map((v, index) => 
-        `<option value="${v.name}">${v.name.replace(selectedCat, '').replace('MARUTI', '').trim()}</option>`
-      ).join('');
-
+      variantSelect.innerHTML = filtered.map(v => `<option value="${v.name}">${v.name}</option>`).join('');
       currentSelectedVariant = filtered[0];
-      
-      // Set image
-      if (carImages[selectedCat]) {
-        document.getElementById('carImage').src = carImages[selectedCat];
-      }
-
+      if (carImages[selectedCat]) document.getElementById('carImage').src = carImages[selectedCat];
       calculatePrices();
     }
 
@@ -640,11 +528,7 @@
     function setRto(type) {
       document.getElementById('btnRtoUP').classList.toggle('active', type === 'UP53');
       document.getElementById('btnRtoOther').classList.toggle('active', type === 'OTHER');
-      if (type === 'OTHER') {
-        document.getElementById('registrationVal').value = Math.round(currentSelectedVariant.ex * 0.08);
-      } else {
-        document.getElementById('registrationVal').value = Math.round(currentSelectedVariant.ex * 0.10);
-      }
+      document.getElementById('registrationVal').value = type === 'OTHER' ? Math.round(currentSelectedVariant.ex * 0.08) : Math.round(currentSelectedVariant.ex * 0.10);
       calculatePrices();
     }
 
@@ -654,32 +538,16 @@
       if (found) currentSelectedVariant = found;
 
       const ex = currentSelectedVariant.ex;
-
-      // Update Labels
       document.getElementById('displayModelName').innerText = currentSelectedVariant.category;
       document.getElementById('displayVariantName').innerText = currentSelectedVariant.name;
       document.getElementById('exShowroomVal').innerText = '₹' + ex.toLocaleString('en-IN', { maximumFractionDigits: 2 });
 
-      // Insurance
-      const insChecked = document.getElementById('chkInsurance').checked;
-      const insVal = insChecked ? parseFloat(document.getElementById('insuranceVal').value) || 0 : 0;
-
-      // RTO
+      const insVal = document.getElementById('chkInsurance').checked ? parseFloat(document.getElementById('insuranceVal').value) || 0 : 0;
       const regVal = parseFloat(document.getElementById('registrationVal').value) || 0;
+      const kitVal = document.getElementById('chkKit').checked ? parseFloat(document.getElementById('kitVal').value) || 0 : 0;
+      const fastagVal = document.getElementById('chkFastag').checked ? parseFloat(document.getElementById('fastagVal').value) || 0 : 0;
+      const rewardsVal = document.getElementById('chkRewards').checked ? parseFloat(document.getElementById('rewardsVal').value) || 0 : 0;
 
-      // Accessories
-      const kitChecked = document.getElementById('chkKit').checked;
-      const kitVal = kitChecked ? parseFloat(document.getElementById('kitVal').value) || 0 : 0;
-
-      // FASTag
-      const fastagChecked = document.getElementById('chkFastag').checked;
-      const fastagVal = fastagChecked ? parseFloat(document.getElementById('fastagVal').value) || 0 : 0;
-
-      // Rewards
-      const rewardsChecked = document.getElementById('chkRewards').checked;
-      const rewardsVal = rewardsChecked ? parseFloat(document.getElementById('rewardsVal').value) || 0 : 0;
-
-      // Warranty MSP
       let mspVal = 0;
       if (currentWarrantyYears === '4') mspVal = currentSelectedVariant.msp4;
       if (currentWarrantyYears === '5') mspVal = currentSelectedVariant.msp5;
@@ -687,14 +555,10 @@
 
       document.getElementById('warrantyVal').innerText = '₹' + mspVal.toLocaleString('en-IN', { maximumFractionDigits: 2 });
 
-      // TCS (1% if Ex-showroom > 10,000,00)
       const tcs = ex > 1000000 ? Math.round(ex * 0.01) : 0;
       document.getElementById('tcsVal').innerText = '₹' + tcs.toLocaleString('en-IN');
 
-      // Discount
       const discount = parseFloat(document.getElementById('discountVal').value) || 0;
-
-      // Total On Road Calculation
       const grandTotal = ex + insVal + regVal + kitVal + fastagVal + rewardsVal + mspVal + tcs - discount;
       document.getElementById('grandTotalVal').innerText = '₹' + Math.round(grandTotal).toLocaleString('en-IN');
     }
@@ -703,6 +567,48 @@
       document.getElementById('discountVal').value = "0";
       setWarranty('6');
       init();
+    }
+
+    // Function to convert Quotation Card to Image and Share via WhatsApp
+    async function sendWhatsAppImage() {
+      const element = document.getElementById('quotationCard');
+      
+      try {
+        // Render quotation element as HTML Canvas image
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+          logging: false
+        });
+
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], `${currentSelectedVariant.name}_Quotation.png`, { type: 'image/png' });
+
+          // Web Share API (Supported on Mobile / Chrome / Edge)
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: 'Maruti Suzuki Quotation',
+                text: `Quotation for ${currentSelectedVariant.name}`
+              });
+            } catch (err) {
+              console.log('Sharing canceled', err);
+            }
+          } else {
+            // Fallback: Download the image file and open WhatsApp Web
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${currentSelectedVariant.name}_Quotation.png`;
+            link.click();
+
+            const text = encodeURIComponent(`Here is the quotation for *${currentSelectedVariant.name}*. Total On-Road Price: *${document.getElementById('grandTotalVal').innerText}*`);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+          }
+        }, 'image/png');
+      } catch (e) {
+        alert("Error generating quotation image. Please try again.");
+      }
     }
 
     window.onload = init;
