@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>MARUTI SUZUKI ARENA - PRICE LIST & QUOTATION</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- html2canvas library to generate image from quotation div -->
+  <!-- html2canvas library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     :root {
       --primary: #0A2540;
       --secondary: #1A365D;
-      --accent: #25D366; /* WhatsApp Green */
-      --bg: #F4F6F8;
+      --accent: #25D366;
+      --bg: #EAEFF2;
       --card-bg: #FFFFFF;
       --border: #CFD8DC;
       --text: #263238;
@@ -31,60 +31,82 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      padding: 10px;
     }
 
     .no-print-controls {
       background: #ffffff;
-      padding: 16px 24px;
+      padding: 14px 18px;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      margin-bottom: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 16px;
       width: 100%;
-      max-width: 820px;
+      max-width: 800px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
+    .no-print-controls h2 {
+      font-size: 16px;
+      color: var(--primary);
+    }
+
+    .no-print-controls p {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    @media(min-width: 600px) {
+      .btn-group { width: auto; }
+    }
+
     .btn {
-      padding: 10px 18px;
+      flex: 1;
+      padding: 10px 14px;
       border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
       border: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 14px;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
       transition: all 0.2s;
     }
 
     .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { background: #07192d; }
     .btn-whatsapp { background: #25D366; color: white; }
-    .btn-whatsapp:hover { background: #1eb957; }
     .btn-secondary { background: #ECEFF1; color: var(--text); }
-    .btn-secondary:hover { background: #CFD8DC; }
 
+    /* Quotation Card Responsive Design */
     .quotation-card {
-      width: 210mm;
-      min-height: 297mm;
+      width: 100%;
+      max-width: 800px;
       background: #ffffff;
-      padding: 12mm 15mm;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      border-radius: 4px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      overflow: hidden;
     }
 
     .brand-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       border-bottom: 2px solid #000;
       padding-bottom: 8px;
     }
@@ -92,76 +114,82 @@
     .logo-text {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 22px;
-      letter-spacing: 2px;
+      font-size: 18px;
+      letter-spacing: 1px;
       color: #000;
     }
 
     .tagline {
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 2.5px;
+      letter-spacing: 1.5px;
       color: #555;
-      margin-top: 4px;
     }
 
     .arena-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 22px;
-      letter-spacing: 4px;
+      font-size: 18px;
+      letter-spacing: 2px;
       color: #000;
       text-align: right;
     }
 
     .sub-date {
-      font-size: 10px;
+      font-size: 9px;
       color: #666;
-      text-transform: uppercase;
-      letter-spacing: 1px;
       text-align: right;
     }
 
     .model-hero-sec {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column-reverse;
+      gap: 12px;
       margin: 15px 0 10px;
-      gap: 20px;
+    }
+
+    @media(min-width: 550px) {
+      .model-hero-sec {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
 
     .car-info-selects { flex: 1; }
 
     .car-info-selects select {
       width: 100%;
-      padding: 6px 10px;
-      margin-bottom: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 6px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
+      font-size: 13px;
       color: var(--primary);
+      background: #f9f9f9;
     }
 
     .model-title-display {
       font-family: 'Montserrat', sans-serif;
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 800;
       color: #000;
-      line-height: 1.1;
     }
 
     .variant-subtitle-display {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       color: #555;
-      margin-top: 4px;
     }
 
     .car-preview-img {
-      width: 220px;
-      height: 110px;
+      width: 100%;
+      max-width: 200px;
+      height: 90px;
       object-fit: contain;
+      align-self: center;
     }
 
     .feature-highlights {
@@ -171,10 +199,12 @@
       border-bottom: 2px solid var(--primary);
       padding: 6px 0;
       margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 5px;
     }
 
     .feature-item {
-      font-size: 9px;
+      font-size: 8px;
       font-weight: 700;
       text-transform: uppercase;
       color: #333;
@@ -194,31 +224,32 @@
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 8px 12px;
-      font-size: 12px;
+      padding: 8px;
+      font-size: 11px;
       text-transform: uppercase;
     }
 
     .price-table td {
-      padding: 8px 12px;
+      padding: 8px 4px;
       border-bottom: 1px solid #e0e0e0;
-      font-size: 13px;
+      font-size: 12px;
     }
 
-    .td-sno { width: 40px; text-align: center; color: #777; font-weight: 600; }
-    .td-amount { text-align: right; font-weight: 700; font-size: 14px; width: 140px; }
-    .item-desc { font-weight: 700; color: #111; }
-    .item-subtext { font-size: 10px; color: #777; font-weight: 400; }
+    .td-sno { width: 25px; text-align: center; color: #777; font-weight: 600; }
+    .td-amount { text-align: right; font-weight: 700; font-size: 13px; width: 100px; }
+    .item-desc { font-weight: 700; color: #111; font-size: 12px; }
+    .item-subtext { font-size: 9px; color: #777; font-weight: 400; }
 
     .toggle-group {
-      display: inline-flex;
-      gap: 6px;
+      display: flex;
+      gap: 4px;
       margin-top: 4px;
+      flex-wrap: wrap;
     }
 
     .toggle-btn {
-      padding: 2px 8px;
-      font-size: 10px;
+      padding: 3px 6px;
+      font-size: 9px;
       font-weight: 700;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -234,11 +265,12 @@
 
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 2px 6px;
-      font-size: 13px;
-      width: 100px;
+      padding: 3px 4px;
+      font-size: 12px;
+      width: 85px;
       text-align: right;
       font-weight: 700;
+      border-radius: 4px;
     }
 
     .discount-row td {
@@ -250,23 +282,23 @@
     .grand-total-box {
       background: var(--primary);
       color: white;
-      padding: 12px 16px;
+      padding: 10px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-radius: 4px;
+      border-radius: 6px;
       margin-top: 12px;
     }
 
     .grand-total-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 800;
     }
 
     .grand-total-amount {
       font-family: 'Montserrat', sans-serif;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 800;
     }
 
@@ -276,45 +308,46 @@
       justify-content: space-between;
       align-items: flex-end;
       border-top: 1px solid #ccc;
-      padding-top: 12px;
+      padding-top: 10px;
+      gap: 10px;
     }
 
     .bottom-tagline {
       text-align: center;
-      font-size: 9px;
-      letter-spacing: 4px;
+      font-size: 8px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: #888;
-      margin-top: 12px;
-      padding-top: 8px;
+      margin-top: 10px;
+      padding-top: 6px;
       border-top: 1px solid #eee;
     }
 
     @media print {
       body { background: white; padding: 0; }
       .no-print-controls { display: none !important; }
-      .quotation-card { box-shadow: none; border: none; padding: 0; width: 100%; height: auto; }
+      .quotation-card { box-shadow: none; border: none; padding: 0; width: 100%; max-width: 100%; }
       .input-edit { border: none; }
-      select { border: none; appearance: none; -webkit-appearance: none; font-weight: 700; }
+      select { border: none; appearance: none; font-weight: 700; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Controls -->
+  <!-- Top Controls -->
   <div class="no-print-controls">
     <div>
-      <strong style="color: var(--primary);">Maruti Suzuki Arena Price Calculator</strong>
-      <p style="font-size: 12px; color: #666;">Data synchronized from price 22.xlsx</p>
+      <h2>Maruti Suzuki Calculator</h2>
+      <p>Data synchronized from price list</p>
     </div>
-    <div style="display: flex; gap: 10px;">
+    <div class="btn-group">
       <button class="btn btn-secondary" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
       <button class="btn btn-whatsapp" onclick="sendWhatsAppImage()"><i class="fa-brands fa-whatsapp"></i> Share Image</button>
-      <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Quotation</button>
+      <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
     </div>
   </div>
 
-  <!-- A4 Quotation Sheet -->
+  <!-- Quotation Card -->
   <div class="quotation-card" id="quotationCard">
     <div>
       <div class="brand-header">
@@ -330,31 +363,29 @@
 
       <div class="model-hero-sec">
         <div class="car-info-selects">
-          <label style="font-size: 10px; font-weight: 700; color: #777;">SELECT MODEL CATEGORY:</label>
+          <label style="font-size: 9px; font-weight: 700; color: #777;">SELECT MODEL CATEGORY:</label>
           <select id="categorySelect" onchange="onCategoryChange()"></select>
 
-          <label style="font-size: 10px; font-weight: 700; color: #777; margin-top: 4px; display: block;">SELECT VARIANT:</label>
+          <label style="font-size: 9px; font-weight: 700; color: #777; margin-top: 4px; display: block;">SELECT VARIANT:</label>
           <select id="variantSelect" onchange="calculatePrices()"></select>
 
           <div class="model-title-display" id="displayModelName">BREZZA</div>
           <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
         </div>
-        <div>
-          <img id="carImage" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
-        </div>
+        <img id="carImage" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
       </div>
 
       <div class="feature-highlights">
         <div class="feature-item">K-SERIES ENGINE</div>
         <div class="feature-item">SPACIOUS CABIN</div>
         <div class="feature-item">ADVANCED SAFETY</div>
-        <div class="feature-item">S-CNG TECHNOLOGY</div>
+        <div class="feature-item">S-CNG TECH</div>
       </div>
 
       <table class="price-table">
         <thead>
           <tr>
-            <th class="td-sno">S.No.</th>
+            <th class="td-sno">#</th>
             <th style="text-align: left;">Particulars</th>
             <th style="text-align: right;">Amount (₹)</th>
           </tr>
@@ -364,7 +395,7 @@
             <td class="td-sno">1</td>
             <td>
               <div class="item-desc">Ex-Showroom Price</div>
-              <div class="item-subtext">Base car price (As per price list 2026)</div>
+              <div class="item-subtext">Base Price (2026)</div>
             </td>
             <td class="td-amount" id="exShowroomVal">₹0</td>
           </tr>
@@ -381,8 +412,8 @@
             <td>
               <div class="item-desc">Registration Charges</div>
               <div class="toggle-group">
-                <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">Gorakhpur (UP53)</button>
-                <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other District</button>
+                <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">UP53</button>
+                <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other</button>
               </div>
             </td>
             <td class="td-amount">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></td>
@@ -390,7 +421,7 @@
           <tr>
             <td class="td-sno">4</td>
             <td>
-              <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> GNA Basic Accessories Kit</div>
+              <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic Accessories Kit</div>
             </td>
             <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
           </tr>
@@ -404,7 +435,7 @@
           <tr>
             <td class="td-sno">6</td>
             <td>
-              <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Reward (MSR)</div>
+              <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Reward (MSR)</div>
             </td>
             <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
           </tr>
@@ -413,10 +444,10 @@
             <td>
               <div class="item-desc">Extended Warranty (MSP)</div>
               <div class="toggle-group">
-                <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6 Year</button>
-                <button class="toggle-btn" id="btnW5" onclick="setWarranty('5')">5 Year</button>
-                <button class="toggle-btn" id="btnW4" onclick="setWarranty('4')">4 Year</button>
-                <button class="toggle-btn" id="btnW0" onclick="setWarranty('0')">None</button>
+                <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6Y</button>
+                <button class="toggle-btn" id="btnW5" onclick="setWarranty('5')">5Y</button>
+                <button class="toggle-btn" id="btnW4" onclick="setWarranty('4')">4Y</button>
+                <button class="toggle-btn" id="btnW0" onclick="setWarranty('0')">0Y</button>
               </div>
             </td>
             <td class="td-amount" id="warrantyVal">₹0</td>
@@ -425,7 +456,7 @@
             <td class="td-sno">8</td>
             <td>
               <div class="item-desc">TCS @ 1%</div>
-              <div class="item-subtext">Applicable on Ex-Showroom > ₹10 Lakhs</div>
+              <div class="item-subtext">If Ex-Showroom > 10L</div>
             </td>
             <td class="td-amount" id="tcsVal">₹0</td>
           </tr>
@@ -446,14 +477,14 @@
     <div>
       <div class="footer-section">
         <div>
-          <div style="font-weight: 700; font-size: 13px;" contenteditable="true">Sales Executive Name</div>
-          <div style="color: #666; font-size: 11px;">Relationship Manager</div>
-          <div style="color: #333; font-weight: 600; font-size: 11px;" contenteditable="true">Mob: +91 98765 43210</div>
+          <div style="font-weight: 700; font-size: 11px;" contenteditable="true">Sales Executive</div>
+          <div style="color: #666; font-size: 9px;">Relationship Manager</div>
+          <div style="color: #333; font-weight: 600; font-size: 9px;" contenteditable="true">Mob: +91 98765 43210</div>
         </div>
         <div style="text-align: right;">
-          <div style="font-weight: 800; font-size: 12px;" contenteditable="true">AUTHORIZED ARENA DEALERSHIP</div>
-          <div style="font-family: 'Montserrat'; font-weight: 800; letter-spacing: 2px; font-size: 14px; color: var(--primary);">MARUTI SUZUKI ARENA</div>
-          <div style="font-size: 10px; color: #777;" contenteditable="true">Gorakhpur / Uttar Pradesh</div>
+          <div style="font-weight: 800; font-size: 10px;" contenteditable="true">AUTHORIZED DEALERSHIP</div>
+          <div style="font-family: 'Montserrat'; font-weight: 800; letter-spacing: 1px; font-size: 12px; color: var(--primary);">MARUTI SUZUKI ARENA</div>
+          <div style="font-size: 9px; color: #777;" contenteditable="true">Gorakhpur / UP</div>
         </div>
       </div>
       <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
@@ -569,12 +600,10 @@
       init();
     }
 
-    // Function to convert Quotation Card to Image and Share via WhatsApp
     async function sendWhatsAppImage() {
       const element = document.getElementById('quotationCard');
       
       try {
-        // Render quotation element as HTML Canvas image
         const canvas = await html2canvas(element, {
           scale: 2,
           useCORS: true,
@@ -584,7 +613,6 @@
         canvas.toBlob(async (blob) => {
           const file = new File([blob], `${currentSelectedVariant.name}_Quotation.png`, { type: 'image/png' });
 
-          // Web Share API (Supported on Mobile / Chrome / Edge)
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             try {
               await navigator.share({
@@ -596,7 +624,6 @@
               console.log('Sharing canceled', err);
             }
           } else {
-            // Fallback: Download the image file and open WhatsApp Web
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `${currentSelectedVariant.name}_Quotation.png`;
@@ -607,7 +634,7 @@
           }
         }, 'image/png');
       } catch (e) {
-        alert("Error generating quotation image. Please try again.");
+        alert("Error generating quotation image.");
       }
     }
 
