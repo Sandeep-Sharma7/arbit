@@ -22,36 +22,54 @@
       --text-muted: #607D8B;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text);
+    }
 
     body {
-      font-family: 'Open Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 10px;
     }
 
+    /* Top Action Bar */
     .no-print-controls {
       background: #ffffff;
-      padding: 14px 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      margin-bottom: 16px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 12px;
       width: 100%;
-      max-width: 800px;
+      max-width: 750px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .no-print-controls {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
 
     .no-print-controls h2 {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--primary);
+      font-weight: 700;
     }
 
     .no-print-controls p {
@@ -61,18 +79,17 @@
 
     .btn-group {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       width: 100%;
-      justify-content: flex-end;
     }
 
-    @media(min-width: 600px) {
+    @media (min-width: 600px) {
       .btn-group { width: auto; }
     }
 
     .btn {
       flex: 1;
-      padding: 10px 14px;
+      padding: 9px 10px;
       border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
@@ -80,75 +97,84 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font-size: 13px;
-      transition: all 0.2s;
+      gap: 5px;
+      font-size: 12px;
+      white-space: nowrap;
     }
 
     .btn-primary { background: var(--primary); color: white; }
     .btn-whatsapp { background: #25D366; color: white; }
     .btn-secondary { background: #ECEFF1; color: var(--text); }
 
-    /* Responsive Quotation Card */
+    /* Container Box */
+    .quotation-wrapper {
+      width: 100%;
+      max-width: 750px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Main Quotation Sheet */
     .quotation-card {
       width: 100%;
-      max-width: 800px;
       background: #ffffff;
-      padding: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       border-radius: 8px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      overflow: hidden;
     }
 
+    /* Header */
     .brand-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       border-bottom: 2px solid #000;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }
 
     .logo-text {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 18px;
-      letter-spacing: 1px;
+      font-size: 16px;
+      letter-spacing: 0.5px;
       color: #000;
+      line-height: 1.1;
     }
 
     .tagline {
-      font-size: 9px;
+      font-size: 8px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       color: #555;
     }
 
     .arena-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 18px;
-      letter-spacing: 2px;
+      font-size: 16px;
+      letter-spacing: 1px;
       color: #000;
       text-align: right;
     }
 
     .sub-date {
-      font-size: 9px;
+      font-size: 8px;
       color: #666;
       text-align: right;
     }
 
+    /* Model & Preview */
     .model-hero-sec {
       display: flex;
       flex-direction: column-reverse;
-      gap: 12px;
-      margin: 15px 0 10px;
+      gap: 10px;
+      margin: 12px 0 8px;
     }
 
-    @media(min-width: 550px) {
+    @media(min-width: 500px) {
       .model-hero-sec {
         flex-direction: row;
         justify-content: space-between;
@@ -158,56 +184,67 @@
 
     .car-info-selects { flex: 1; }
 
+    .car-info-selects label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #666;
+      display: block;
+      margin-bottom: 2px;
+    }
+
     .car-info-selects select {
       width: 100%;
-      padding: 8px 10px;
-      margin-bottom: 8px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 4px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--primary);
-      background: #f9f9f9;
+      background: #fdfdfd;
     }
 
     .model-title-display {
       font-family: 'Montserrat', sans-serif;
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 800;
       color: #000;
+      line-height: 1.1;
+      margin-top: 4px;
     }
 
     .variant-subtitle-display {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: #555;
     }
 
     .car-preview-img {
       width: 100%;
-      max-width: 200px;
-      height: 90px;
+      max-width: 160px;
+      height: 75px;
       object-fit: contain;
       align-self: center;
     }
 
+    /* Feature Highlights Bar */
     .feature-highlights {
       display: flex;
       justify-content: space-between;
       border-top: 1px solid #e0e0e0;
       border-bottom: 2px solid var(--primary);
-      padding: 6px 0;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      gap: 5px;
+      padding: 5px 0;
+      margin-bottom: 10px;
+      gap: 4px;
     }
 
     .feature-item {
-      font-size: 8px;
+      font-size: 7.5px;
       font-weight: 700;
       text-transform: uppercase;
       color: #333;
+      white-space: nowrap;
     }
 
     .feature-item::before {
@@ -215,41 +252,45 @@
       color: var(--primary);
     }
 
+    /* Table Styles */
     .price-table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
     }
 
     .price-table th {
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 8px;
-      font-size: 11px;
+      padding: 6px 4px;
+      font-size: 10px;
       text-transform: uppercase;
     }
 
     .price-table td {
-      padding: 8px 4px;
+      padding: 6px 3px;
       border-bottom: 1px solid #e0e0e0;
-      font-size: 12px;
+      font-size: 11px;
+      vertical-align: middle;
+      word-wrap: break-word;
     }
 
-    .td-sno { width: 25px; text-align: center; color: #777; font-weight: 600; }
-    .td-amount { text-align: right; font-weight: 700; font-size: 13px; width: 100px; }
-    .item-desc { font-weight: 700; color: #111; font-size: 12px; }
-    .item-subtext { font-size: 9px; color: #777; font-weight: 400; }
+    .td-sno { width: 20px; text-align: center; color: #777; font-weight: 600; font-size: 10px; }
+    .td-amount { text-align: right; font-weight: 700; font-size: 11px; width: 85px; }
+    .item-desc { font-weight: 700; color: #111; font-size: 11px; line-height: 1.2; }
+    .item-subtext { font-size: 8.5px; color: #777; font-weight: 400; }
 
     .toggle-group {
-      display: flex;
-      gap: 4px;
-      margin-top: 4px;
+      display: inline-flex;
+      gap: 3px;
+      margin-top: 3px;
       flex-wrap: wrap;
     }
 
     .toggle-btn {
-      padding: 3px 6px;
-      font-size: 9px;
+      padding: 2px 5px;
+      font-size: 8.5px;
       font-weight: 700;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -265,12 +306,12 @@
 
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 3px 4px;
-      font-size: 12px;
-      width: 85px;
+      padding: 2px 3px;
+      font-size: 11px;
+      width: 70px;
       text-align: right;
       font-weight: 700;
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
     .discount-row td {
@@ -279,54 +320,57 @@
       font-weight: 700;
     }
 
+    /* Total Box */
     .grand-total-box {
       background: var(--primary);
       color: white;
-      padding: 10px 14px;
+      padding: 8px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-radius: 6px;
-      margin-top: 12px;
+      border-radius: 5px;
+      margin-top: 10px;
     }
 
     .grand-total-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 800;
     }
 
     .grand-total-amount {
       font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
     }
 
+    /* Footer */
     .footer-section {
-      margin-top: 15px;
+      margin-top: 12px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       border-top: 1px solid #ccc;
-      padding-top: 10px;
-      gap: 10px;
+      padding-top: 8px;
+      gap: 5px;
     }
 
     .bottom-tagline {
       text-align: center;
-      font-size: 8px;
-      letter-spacing: 2px;
+      font-size: 7.5px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: #888;
-      margin-top: 10px;
-      padding-top: 6px;
+      margin-top: 8px;
+      padding-top: 4px;
       border-top: 1px solid #eee;
     }
 
     @media print {
       body { background: white; padding: 0; }
       .no-print-controls { display: none !important; }
-      .quotation-card { box-shadow: none; border: none; padding: 0; width: 100%; max-width: 100%; }
+      .quotation-wrapper { max-width: 100%; }
+      .quotation-card { box-shadow: none; border: none; padding: 0; }
       .input-edit { border: none; }
       select { border: none; appearance: none; font-weight: 700; }
     }
@@ -337,7 +381,7 @@
   <!-- Controls -->
   <div class="no-print-controls">
     <div>
-      <h2>Maruti Suzuki Calculator</h2>
+      <h2>Maruti Suzuki Arena Calculator</h2>
       <p>Data synchronized from price list</p>
     </div>
     <div class="btn-group">
@@ -347,147 +391,149 @@
     </div>
   </div>
 
-  <!-- Quotation Card -->
-  <div class="quotation-card" id="quotationCard">
-    <div>
-      <div class="brand-header">
-        <div>
-          <div class="logo-text">MARUTI SUZUKI</div>
-          <div class="tagline">ARENA - WAY OF LIFE</div>
+  <!-- Quotation Card Container -->
+  <div class="quotation-wrapper">
+    <div class="quotation-card" id="quotationCard">
+      <div>
+        <div class="brand-header">
+          <div>
+            <div class="logo-text">MARUTI SUZUKI</div>
+            <div class="tagline">ARENA - WAY OF LIFE</div>
+          </div>
+          <div>
+            <div class="arena-title">ARENA</div>
+            <div class="sub-date">PRICE LIST - SEP 2026</div>
+          </div>
         </div>
-        <div>
-          <div class="arena-title">ARENA</div>
-          <div class="sub-date">PRICE LIST - SEP 2026</div>
+
+        <div class="model-hero-sec">
+          <div class="car-info-selects">
+            <label>MODEL CATEGORY:</label>
+            <select id="categorySelect" onchange="onCategoryChange()"></select>
+
+            <label>VARIANT:</label>
+            <select id="variantSelect" onchange="calculatePrices()"></select>
+
+            <div class="model-title-display" id="displayModelName">BREZZA</div>
+            <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
+          </div>
+          <img id="carImage" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
         </div>
-      </div>
 
-      <div class="model-hero-sec">
-        <div class="car-info-selects">
-          <label style="font-size: 9px; font-weight: 700; color: #777;">SELECT MODEL CATEGORY:</label>
-          <select id="categorySelect" onchange="onCategoryChange()"></select>
-
-          <label style="font-size: 9px; font-weight: 700; color: #777; margin-top: 4px; display: block;">SELECT VARIANT:</label>
-          <select id="variantSelect" onchange="calculatePrices()"></select>
-
-          <div class="model-title-display" id="displayModelName">BREZZA</div>
-          <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
+        <div class="feature-highlights">
+          <div class="feature-item">K-ENGINE</div>
+          <div class="feature-item">SPACIOUS</div>
+          <div class="feature-item">SAFETY</div>
+          <div class="feature-item">S-CNG</div>
         </div>
-        <img id="carImage" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
-      </div>
 
-      <div class="feature-highlights">
-        <div class="feature-item">K-SERIES ENGINE</div>
-        <div class="feature-item">SPACIOUS CABIN</div>
-        <div class="feature-item">ADVANCED SAFETY</div>
-        <div class="feature-item">S-CNG TECH</div>
-      </div>
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th class="td-sno">#</th>
+              <th style="text-align: left;">Particulars</th>
+              <th style="text-align: right;">Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-sno">1</td>
+              <td>
+                <div class="item-desc">Ex-Showroom Price</div>
+                <div class="item-subtext">Base Price (2026)</div>
+              </td>
+              <td class="td-amount" id="exShowroomVal">₹0</td>
+            </tr>
+            <tr>
+              <td class="td-sno">2</td>
+              <td>
+                <div class="item-desc"><input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance</div>
+                <div class="item-subtext">1+3 Year Cover</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">3</td>
+              <td>
+                <div class="item-desc">Registration Charges</div>
+                <div class="toggle-group">
+                  <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">UP53</button>
+                  <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other</button>
+                </div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">4</td>
+              <td>
+                <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic Kit</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">5</td>
+              <td>
+                <div class="item-desc"><input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">6</td>
+              <td>
+                <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Reward</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">7</td>
+              <td>
+                <div class="item-desc">Extended Warranty</div>
+                <div class="toggle-group">
+                  <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6Y</button>
+                  <button class="toggle-btn" id="btnW5" onclick="setWarranty('5')">5Y</button>
+                  <button class="toggle-btn" id="btnW4" onclick="setWarranty('4')">4Y</button>
+                  <button class="toggle-btn" id="btnW0" onclick="setWarranty('0')">0Y</button>
+                </div>
+              </td>
+              <td class="td-amount" id="warrantyVal">₹0</td>
+            </tr>
+            <tr>
+              <td class="td-sno">8</td>
+              <td>
+                <div class="item-desc">TCS @ 1%</div>
+                <div class="item-subtext">If > 10 Lakhs</div>
+              </td>
+              <td class="td-amount" id="tcsVal">₹0</td>
+            </tr>
+            <tr class="discount-row">
+              <td class="td-sno">-</td>
+              <td><div class="item-desc" style="color: #2E7D32;">DISCOUNT</div></td>
+              <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
+            </tr>
+          </tbody>
+        </table>
 
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th class="td-sno">#</th>
-            <th style="text-align: left;">Particulars</th>
-            <th style="text-align: right;">Amount (₹)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="td-sno">1</td>
-            <td>
-              <div class="item-desc">Ex-Showroom Price</div>
-              <div class="item-subtext">Base Price (2026)</div>
-            </td>
-            <td class="td-amount" id="exShowroomVal">₹0</td>
-          </tr>
-          <tr>
-            <td class="td-sno">2</td>
-            <td>
-              <div class="item-desc"><input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance</div>
-              <div class="item-subtext">1+3 Year Cover</div>
-            </td>
-            <td class="td-amount">₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()"></td>
-          </tr>
-          <tr>
-            <td class="td-sno">3</td>
-            <td>
-              <div class="item-desc">Registration Charges</div>
-              <div class="toggle-group">
-                <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">UP53</button>
-                <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other</button>
-              </div>
-            </td>
-            <td class="td-amount">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></td>
-          </tr>
-          <tr>
-            <td class="td-sno">4</td>
-            <td>
-              <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic Accessories Kit</div>
-            </td>
-            <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
-          </tr>
-          <tr>
-            <td class="td-sno">5</td>
-            <td>
-              <div class="item-desc"><input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag Card</div>
-            </td>
-            <td class="td-amount">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></td>
-          </tr>
-          <tr>
-            <td class="td-sno">6</td>
-            <td>
-              <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Reward (MSR)</div>
-            </td>
-            <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
-          </tr>
-          <tr>
-            <td class="td-sno">7</td>
-            <td>
-              <div class="item-desc">Extended Warranty (MSP)</div>
-              <div class="toggle-group">
-                <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6Y</button>
-                <button class="toggle-btn" id="btnW5" onclick="setWarranty('5')">5Y</button>
-                <button class="toggle-btn" id="btnW4" onclick="setWarranty('4')">4Y</button>
-                <button class="toggle-btn" id="btnW0" onclick="setWarranty('0')">0Y</button>
-              </div>
-            </td>
-            <td class="td-amount" id="warrantyVal">₹0</td>
-          </tr>
-          <tr>
-            <td class="td-sno">8</td>
-            <td>
-              <div class="item-desc">TCS @ 1%</div>
-              <div class="item-subtext">If Ex-Showroom > 10L</div>
-            </td>
-            <td class="td-amount" id="tcsVal">₹0</td>
-          </tr>
-          <tr class="discount-row">
-            <td class="td-sno">-</td>
-            <td><div class="item-desc" style="color: #2E7D32;">OFFER / DISCOUNT</div></td>
-            <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="grand-total-box">
-        <div class="grand-total-label">TOTAL ON-ROAD PRICE</div>
-        <div class="grand-total-amount" id="grandTotalVal">₹0</div>
-      </div>
-    </div>
-
-    <div>
-      <div class="footer-section">
-        <div>
-          <div style="font-weight: 700; font-size: 11px;" contenteditable="true">Sales Executive</div>
-          <div style="color: #666; font-size: 9px;">Relationship Manager</div>
-          <div style="color: #333; font-weight: 600; font-size: 9px;" contenteditable="true">Mob: +91 98765 43210</div>
-        </div>
-        <div style="text-align: right;">
-          <div style="font-weight: 800; font-size: 10px;" contenteditable="true">AUTHORIZED DEALERSHIP</div>
-          <div style="font-family: 'Montserrat'; font-weight: 800; letter-spacing: 1px; font-size: 12px; color: var(--primary);">MARUTI SUZUKI ARENA</div>
-          <div style="font-size: 9px; color: #777;" contenteditable="true">Gorakhpur / UP</div>
+        <div class="grand-total-box">
+          <div class="grand-total-label">TOTAL ON-ROAD PRICE</div>
+          <div class="grand-total-amount" id="grandTotalVal">₹0</div>
         </div>
       </div>
-      <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
+
+      <div>
+        <div class="footer-section">
+          <div>
+            <div style="font-weight: 700; font-size: 10px;" contenteditable="true">Sales Executive</div>
+            <div style="color: #666; font-size: 8.5px;">Relationship Manager</div>
+            <div style="color: #333; font-weight: 600; font-size: 8.5px;" contenteditable="true">Mob: +91 98765 43210</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: 800; font-size: 9.5px;" contenteditable="true">AUTHORIZED DEALERSHIP</div>
+            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 11px; color: var(--primary);">MARUTI SUZUKI ARENA</div>
+            <div style="font-size: 8.5px; color: #777;" contenteditable="true">Gorakhpur / UP</div>
+          </div>
+        </div>
+        <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
+      </div>
     </div>
   </div>
 
