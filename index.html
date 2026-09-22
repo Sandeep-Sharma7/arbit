@@ -1,283 +1,711 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Maruti Suzuki Arena Models</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card img { max-width: 100%; height: auto; border-radius: 5px; }
-        .card h3 { margin: 10px 0 5px 0; color: #333; }
-        .no-img { padding: 40px 10px; background: #e0e0e0; border-radius: 5px; color: #666; font-style: italic; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARUTI SUZUKI ARENA - PRICE LIST & QUOTATION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0A2540;
+      --secondary: #1A365D;
+      --accent: #D32F2F;
+      --bg: #F4F6F8;
+      --card-bg: #FFFFFF;
+      --border: #CFD8DC;
+      --text: #263238;
+      --text-muted: #607D8B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .no-print-controls {
+      background: #ffffff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 820px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #07192d; }
+    .btn-secondary { background: #ECEFF1; color: var(--text); }
+    .btn-secondary:hover { background: #CFD8DC; }
+
+    /* A4 Quotation Sheet Container */
+    .quotation-card {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      padding: 12mm 15mm;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* Header Styling */
+    .brand-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #000;
+      padding-bottom: 8px;
+    }
+
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #000;
+    }
+
+    .tagline {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .arena-badge {
+      text-align: right;
+    }
+
+    .arena-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: #000;
+    }
+
+    .sub-date {
+      font-size: 10px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Car Selector Section */
+    .model-hero-sec {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0 10px;
+      gap: 20px;
+    }
+
+    .car-info-selects {
+      flex: 1;
+    }
+
+    .car-info-selects select {
+      width: 100%;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .model-title-display {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #000;
+      line-height: 1.1;
+    }
+
+    .variant-subtitle-display {
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .car-preview-img {
+      width: 220px;
+      height: 110px;
+      object-fit: contain;
+    }
+
+    /* Highlight Banner */
+    .feature-highlights {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 2px solid var(--primary);
+      padding: 6px 0;
+      margin-bottom: 12px;
+    }
+
+    .feature-item {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .feature-item::before {
+      content: '◇';
+      color: var(--primary);
+      font-size: 10px;
+    }
+
+    /* Price Table */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .price-table th {
+      background: var(--primary);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      padding: 8px 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .price-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .price-table tr:nth-child(even) { background-color: #fcfcfc; }
+
+    .td-sno { width: 40px; text-align: center; color: #777; font-weight: 600; }
+    .td-amount { text-align: right; font-weight: 700; font-size: 14px; width: 140px; }
+    .item-desc { font-weight: 700; color: #111; }
+    .item-subtext { font-size: 10px; color: #777; font-weight: 400; margin-top: 1px; }
+
+    /* Custom Checkbox / Radio buttons inline */
+    .toggle-group {
+      display: inline-flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .toggle-btn {
+      padding: 2px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+      background: #f5f5f5;
+    }
+
+    .toggle-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .input-edit {
+      border: 1px dashed #bbb;
+      padding: 2px 6px;
+      font-size: 13px;
+      width: 100px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    /* Total Rows */
+    .discount-row td {
+      background-color: #E8F5E9 !important;
+      color: #2E7D32;
+      font-weight: 700;
+    }
+
+    .grand-total-box {
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+
+    .grand-total-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .grand-total-amount {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    /* Footer Info */
+    .footer-section {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid #ccc;
+      padding-top: 12px;
+    }
+
+    .executive-info, .dealer-info {
+      font-size: 11px;
+    }
+
+    .exec-name { font-weight: 700; font-size: 13px; color: #000; }
+    .exec-title { color: #666; margin-bottom: 2px; }
+    .exec-mob { color: #333; font-weight: 600; }
+
+    .dealer-name { font-weight: 800; text-transform: uppercase; font-size: 12px; }
+    .dealer-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 2px; font-size: 14px; text-align: right; color: var(--primary); }
+
+    .bottom-tagline {
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid #eee;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .no-print-controls { display: none !important; }
+      .quotation-card { box-shadow: none; border: none; padding: 0; width: 100%; height: auto; }
+      .input-edit { border: none; }
+      select { border: none; appearance: none; -webkit-appearance: none; font-weight: 700; }
+    }
+  </style>
 </head>
 <body>
 
-    <h2>Maruti Suzuki Arena Models List</h2>
+  <!-- Controls for customization (Hidden during Print) -->
+  <div class="no-print-controls">
+    <div>
+      <strong style="color: var(--primary);">Maruti Suzuki Arena Price Calculator</strong>
+      <p style="font-size: 12px; color: #666;">Data synchronized from price 22.xlsx</p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn btn-secondary" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+      <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Quotation</button>
+    </div>
+  </div>
 
-    <div class="grid-container">
-        <!-- Passenger Cars with Images -->
-        <div class="card">
-            <img src="brezza.jpeg" alt="Maruti Suzuki Brezza">
-            <h3>Maruti Suzuki Brezza[cite: 1]</h3>
+  <!-- A4 Quotation Sheet -->
+  <div class="quotation-card">
+    <div>
+      <!-- Header -->
+      <div class="brand-header">
+        <div>
+          <div class="logo-text">MARUTI SUZUKI</div>
+          <div class="tagline">ARENA - WAY OF LIFE</div>
         </div>
+        <div class="arena-badge">
+          <div class="arena-title">ARENA</div>
+          <div class="sub-date">PRICE LIST - SEP 2026</div>
+        </div>
+      </div>
 
-        <div class="card">
-            <img src="ertiga.jpeg" alt="Maruti Suzuki Ertiga">
-            <h3>Maruti Suzuki Ertiga[cite: 2]</h3>
-        </div>
+      <!-- Car & Model Selector -->
+      <div class="model-hero-sec">
+        <div class="car-info-selects">
+          <label style="font-size: 10px; font-weight: 700; color: #777;">SELECT MODEL CATEGORY:</label>
+          <select id="categorySelect" onchange="onCategoryChange()">
+            <!-- Dynamic Options -->
+          </select>
 
-        <div class="card">
-            <img src="celerio.jpeg" alt="Maruti Suzuki Celerio">
-            <h3>Maruti Suzuki Celerio[cite: 3]</h3>
-        </div>
+          <label style="font-size: 10px; font-weight: 700; color: #777; margin-top: 4px; display: block;">SELECT VARIANT:</label>
+          <select id="variantSelect" onchange="calculatePrices()">
+            <!-- Dynamic Options -->
+          </select>
 
-        <div class="card">
-            <img src="swift.jpeg" alt="Maruti Suzuki Swift">
-            <h3>Maruti Suzuki Swift[cite: 4]</h3>
+          <div class="model-title-display" id="displayModelName">BREZZA</div>
+          <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
         </div>
+        <div>
+          <img id="carImage" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img">
+        </div>
+      </div>
 
-        <div class="card">
-            <img src="k10.jpeg" alt="Maruti Suzuki Alto K10">
-            <h3>Maruti Suzuki Alto K10[cite: 5]</h3>
-        </div>
+      <!-- Highlights Banner -->
+      <div class="feature-highlights">
+        <div class="feature-item">K-SERIES ENGINE</div>
+        <div class="feature-item">SPACIOUS CABIN</div>
+        <div class="feature-item">ADVANCED SAFETY</div>
+        <div class="feature-item">S-CNG TECHNOLOGY</div>
+      </div>
 
-        <div class="card">
-            <img src="dzire.jpeg" alt="Maruti Suzuki Dzire">
-            <h3>Maruti Suzuki Dzire[cite: 7]</h3>
-        </div>
+      <!-- Price Breakup Table -->
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th class="td-sno">S.No.</th>
+            <th style="text-align: left;">Particulars</th>
+            <th style="text-align: right;">Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1. Ex-Showroom -->
+          <tr>
+            <td class="td-sno">1</td>
+            <td>
+              <div class="item-desc">Ex-Showroom Price</div>
+              <div class="item-subtext">Base car price (As per price list 2026)</div>
+            </td>
+            <td class="td-amount" id="exShowroomVal">₹0</td>
+          </tr>
 
-        <!-- Passenger & Tour Cars without Images -->
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Maruti Suzuki S-Presso</h3>
-        </div>
+          <!-- 2. Insurance -->
+          <tr>
+            <td class="td-sno">2</td>
+            <td>
+              <div class="item-desc">
+                <input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance
+              </div>
+              <div class="item-subtext">1+3 Year Comprehensive Insurance Cover</div>
+            </td>
+            <td class="td-amount">
+              ₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()">
+            </td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Maruti Suzuki WagonR</h3>
-        </div>
+          <!-- 3. Registration Charges -->
+          <tr>
+            <td class="td-sno">3</td>
+            <td>
+              <div class="item-desc">Registration Charges</div>
+              <div class="toggle-group">
+                <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">Gorakhpur (UP53)</button>
+                <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other District</button>
+              </div>
+            </td>
+            <td class="td-amount">
+              ₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()">
+            </td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Maruti Suzuki Eeco</h3>
-        </div>
+          <!-- 4. GNA Basic Kit -->
+          <tr>
+            <td class="td-sno">4</td>
+            <td>
+              <div class="item-desc">
+                <input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> GNA Basic Accessories Kit
+              </div>
+            </td>
+            <td class="td-amount">
+              ₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()">
+            </td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>WagonR Tour H3</h3>
-        </div>
+          <!-- 5. FASTag Card -->
+          <tr>
+            <td class="td-sno">5</td>
+            <td>
+              <div class="item-desc">
+                <input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag Card
+              </div>
+            </td>
+            <td class="td-amount">
+              ₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()">
+            </td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Alto K10 Tour H1</h3>
-        </div>
+          <!-- 6. Maruti Suzuki Rewards -->
+          <tr>
+            <td class="td-sno">6</td>
+            <td>
+              <div class="item-desc">
+                <input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Reward (MSR)
+              </div>
+            </td>
+            <td class="td-amount">
+              ₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()">
+            </td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Dzire Tour S</h3>
-        </div>
+          <!-- 7. Extended Warranty (MSP) -->
+          <tr>
+            <td class="td-sno">7</td>
+            <td>
+              <div class="item-desc">Extended Warranty (MSP)</div>
+              <div class="toggle-group">
+                <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6 Year</button>
+                <button class="toggle-btn" id="btnW5" onclick="setWarranty('5')">5 Year</button>
+                <button class="toggle-btn" id="btnW4" onclick="setWarranty('4')">4 Year</button>
+                <button class="toggle-btn" id="btnW0" onclick="setWarranty('0')">None</button>
+              </div>
+            </td>
+            <td class="td-amount" id="warrantyVal">₹0</td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Eeco Tour V</h3>
-        </div>
+          <!-- 8. TCS @ 1% -->
+          <tr>
+            <td class="td-sno">8</td>
+            <td>
+              <div class="item-desc">TCS @ 1%</div>
+              <div class="item-subtext">Applicable on Ex-Showroom > ₹10 Lakhs</div>
+            </td>
+            <td class="td-amount" id="tcsVal">₹0</td>
+          </tr>
 
-        <div class="card">
-            <div class="no-img">Image Nathi</div>
-            <h3>Ertiga Tour M</h3>
-        </div>
+          <!-- Offer / Discount -->
+          <tr class="discount-row">
+            <td class="td-sno">-</td>
+            <td>
+              <div class="item-desc" style="color: #2E7D32;">CONSUMER OFFER / DISCOUNT</div>
+            </td>
+            <td class="td-amount" style="color: #2E7D32;">
+              - ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Grand Total -->
+      <div class="grand-total-box">
+        <div class="grand-total-label">TOTAL ON-ROAD PRICE</div>
+        <div class="grand-total-amount" id="grandTotalVal">₹0</div>
+      </div>
     </div>
 
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maruti Suzuki Arena Models</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 160px; object-fit: contain; border-radius: 5px; }
-        .card h3 { margin: 10px 0 5px 0; color: #333; font-size: 18px; }
-        .no-img { height: 160px; display: flex; align-items: center; justify-content: center; background: #e0e0e0; border-radius: 5px; color: #666; font-style: italic; }
-    </style>
-</head>
-<body>
-
-    <h2>Maruti Suzuki Arena Models List</h2>
-
-    <div class="grid-container">
-        <!-- Passenger Cars with Images -->
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/130591/brezza-exterior-right-front-three-quarter-109.jpeg" alt="Maruti Suzuki Brezza">
-            <h3>Maruti Suzuki Brezza</h3>
+    <!-- Footer Dealer & Executive Section -->
+    <div>
+      <div class="footer-section">
+        <div class="executive-info">
+          <div class="exec-name" contenteditable="true">Sales Executive Name</div>
+          <div class="exec-title">Relationship Manager</div>
+          <div class="exec-mob" contenteditable="true">Mob: +91 98765 43210</div>
         </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/115783/ertiga-exterior-right-front-three-quarter-3.jpeg" alt="Maruti Suzuki Ertiga">
-            <h3>Maruti Suzuki Ertiga</h3>
+        <div class="dealer-info">
+          <div class="dealer-name" contenteditable="true">AUTHORIZED ARENA DEALERSHIP</div>
+          <div class="dealer-brand">MARUTI SUZUKI ARENA</div>
+          <div style="font-size: 10px; color: #777; text-align: right;" contenteditable="true">Gorakhpur / Uttar Pradesh</div>
         </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/41160/celerio-exterior-right-front-three-quarter-3.jpeg" alt="Maruti Suzuki Celerio">
-            <h3>Maruti Suzuki Celerio</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/159099/swift-exterior-right-front-three-quarter.jpeg" alt="Maruti Suzuki Swift">
-            <h3>Maruti Suzuki Swift</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/127537/alto-k10-exterior-right-front-three-quarter.jpeg" alt="Maruti Suzuki Alto K10">
-            <h3>Maruti Suzuki Alto K10</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/170173/dzire-exterior-right-front-three-quarter.jpeg" alt="Maruti Suzuki Dzire">
-            <h3>Maruti Suzuki Dzire</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/40081/s-presso-exterior-right-front-three-quarter-4.jpeg" alt="Maruti Suzuki S-Presso">
-            <h3>Maruti Suzuki S-Presso</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/131131/wagon-r-exterior-right-front-three-quarter-3.jpeg" alt="Maruti Suzuki WagonR">
-            <h3>Maruti Suzuki WagonR</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/136217/eeco-exterior-right-front-three-quarter-3.jpeg" alt="Maruti Suzuki Eeco">
-            <h3>Maruti Suzuki Eeco</h3>
-        </div>
-
-        <!-- Tour Models -->
-        <div class="card">
-            <div class="no-img">Tour H3 Image</div>
-            <h3>WagonR Tour H3</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour H1 Image</div>
-            <h3>Alto K10 Tour H1</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour S Image</div>
-            <h3>Dzire Tour S</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour V Image</div>
-            <h3>Eeco Tour V</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour M Image</div>
-            <h3>Ertiga Tour M</h3>
-        </div>
-
-    <!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maruti Suzuki Arena Models</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 160px; object-fit: contain; border-radius: 5px; }
-        .card h3 { margin: 10px 0 5px 0; color: #333; font-size: 18px; }
-        .no-img { height: 160px; display: flex; align-items: center; justify-content: center; background: #e0e0e0; border-radius: 5px; color: #666; font-style: italic; }
-    </style>
-</head>
-<body>
-
-    <h2>Maruti Suzuki Arena Models List</h2>
-
-    <div class="grid-container">
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/130591/brezza-exterior-right-front-three-quarter-109.jpeg" alt="Brezza">
-            <h3>Maruti Suzuki Brezza</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/115783/ertiga-exterior-right-front-three-quarter-3.jpeg" alt="Ertiga">
-            <h3>Maruti Suzuki Ertiga</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/41160/celerio-exterior-right-front-three-quarter-3.jpeg" alt="Celerio">
-            <h3>Maruti Suzuki Celerio</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/159099/swift-exterior-right-front-three-quarter.jpeg" alt="Swift">
-            <h3>Maruti Suzuki Swift</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/127537/alto-k10-exterior-right-front-three-quarter.jpeg" alt="Alto K10">
-            <h3>Maruti Suzuki Alto K10</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/170173/dzire-exterior-right-front-three-quarter.jpeg" alt="Dzire">
-            <h3>Maruti Suzuki Dzire</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/40081/s-presso-exterior-right-front-three-quarter-4.jpeg" alt="S-Presso">
-            <h3>Maruti Suzuki S-Presso</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/131131/wagon-r-exterior-right-front-three-quarter-3.jpeg" alt="WagonR">
-            <h3>Maruti Suzuki WagonR</h3>
-        </div>
-
-        <div class="card">
-            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/136217/eeco-exterior-right-front-three-quarter-3.jpeg" alt="Eeco">
-            <h3>Maruti Suzuki Eeco</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour H3 Image</div>
-            <h3>WagonR Tour H3</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour H1 Image</div>
-            <h3>Alto K10 Tour H1</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour S Image</div>
-            <h3>Dzire Tour S</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour V Image</div>
-            <h3>Eeco Tour V</h3>
-        </div>
-
-        <div class="card">
-            <div class="no-img">Tour M Image</div>
-            <h3>Ertiga Tour M</h3>
-        </div>
+      </div>
+      <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
     </div>
+  </div>
 
-</body>
-</html></div>
+  <script>
+    // Car Image Mapping
+    const carImages = {
+      'NEW ALTO K10': 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80',
+      'NEW CELERIO': 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=600&q=80',
+      'S-PRESSO': 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80',
+      'WAGON -R': 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80',
+      'EPIC NEW SWIFT': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80',
+      'Dazzling New Dzire': 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80',
+      'NEW BREZZA (July)': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80',
+      'VICTORIS': 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=600&q=80',
+      'NEW ERTIGA': 'https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=600&q=80',
+      'EECO NEW': 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=600&q=80'
+    };
 
+    // Variant Data Parsed from price 22.xlsx
+    const dataset = [
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 STD 1L 5MT", ex: 370029.88, msp4: 4424.82, msp5: 7610.82, msp6: 8318.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 LXI 1L 5MT", ex: 400029.02, msp4: 4778.82, msp5: 8082.82, msp6: 8908.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI 1L 5MT", ex: 452529.58, msp4: 5250.82, msp5: 9144.82, msp6: 10088.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI+ 1L 5MT", ex: 500029.30, msp4: 5722.82, msp5: 9970.82, msp6: 11032.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI 1L AGS", ex: 497530.06, msp4: 5722.82, msp5: 9970.82, msp6: 11032.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI+ 1L AGS", ex: 545029.78, msp4: 6194.82, msp5: 10796.82, msp6: 11976.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 LXI CNG 1L 5MT", ex: 484530.00, msp4: 5604.82, msp5: 9734.82, msp6: 10678.82 },
+      { category: "NEW ALTO K10", name: "MARUTI ALTO K10 VXI CNG 1L 5MT", ex: 534528.96, msp4: 6076.82, msp5: 10560.82, msp6: 11740.82 },
+
+      { category: "NEW CELERIO", name: "MARUTI CELERIO LXI 1L ISS 5MT", ex: 470058.90, msp4: 5486.82, msp5: 9380.82, msp6: 10442.82 },
+      { category: "NEW CELERIO", name: "MARUTI CELERIO VXI 1L ISS 5MT", ex: 518559.26, msp4: 5958.82, msp5: 10324.82, msp6: 11386.82 },
+      { category: "NEW CELERIO", name: "MARUTI CELERIO VXI CNG 1L 5MT", ex: 598059.40, msp4: 6784.82, msp5: 11740.82, msp6: 13038.82 },
+      { category: "NEW CELERIO", name: "MARUTI CELERIO ZXI 1L ISS 5MT", ex: 573559.06, msp4: 6548.82, msp5: 11386.82, msp6: 12566.82 },
+      { category: "NEW CELERIO", name: "MARUTI CELERIO ZXI+ 1L ISS 5MT", ex: 630558.96, msp4: 7138.82, msp5: 12330.82, msp6: 13746.82 },
+
+      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT LXI 1.2L 5MT", ex: 649000.00, msp4: 7374.82, msp5: 12802.82, msp6: 14218.82 },
+      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT VXI 1.2L 5MT", ex: 729500.00, msp4: 8200.82, msp5: 14336.82, msp6: 15988.82 },
+      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT ZXI 1.2L 5MT", ex: 829500.00, msp4: 9262.82, msp5: 16224.82, msp6: 18112.82 },
+      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT ZXI+ 1.2L 5MT", ex: 899500.00, msp4: 10088.82, msp5: 17640.82, msp6: 19646.82 },
+      { category: "EPIC NEW SWIFT", name: "MARUTI SWIFT VXI CNG 1.2L 5MT", ex: 819500.00, msp4: 9144.82, msp5: 16008.82, msp6: 17876.82 },
+
+      { category: "Dazzling New Dzire", name: "MARUTI DZIRE LXI 1.2L 5MT", ex: 656500.00, msp4: 7492.82, msp5: 12920.82, msp6: 14454.82 },
+      { category: "Dazzling New Dzire", name: "MARUTI DZIRE VXI 1.2L 5MT", ex: 749000.00, msp4: 8436.82, msp5: 14690.82, msp6: 16342.82 },
+      { category: "Dazzling New Dzire", name: "MARUTI DZIRE ZXI 1.2L 5MT", ex: 814000.00, msp4: 9144.82, msp5: 15950.82, msp6: 17758.82 },
+      { category: "Dazzling New Dzire", name: "MARUTI DZIRE VXI CNG 1.2L 5MT", ex: 844000.00, msp4: 9498.82, msp5: 16534.82, msp6: 18466.82 },
+
+      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA LXI 1.5L 5MT", ex: 834000.00, msp4: 13923.82, msp5: 17227.82, msp6: 19233.82 },
+      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA VXI 1.5L 5MT", ex: 969500.00, msp4: 16165.82, msp5: 20059.82, msp6: 22419.82 },
+      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA ZXI 1.5L 5MT", ex: 1114500.00, msp4: 18525.82, msp5: 22891.82, msp6: 25723.82 },
+      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA ZXI+ 1.5L 5MT", ex: 1258000.00, msp4: 20885.82, msp5: 25959.82, msp6: 29027.82 },
+      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA ZXI 1.5L 6AT", ex: 1254500.00, msp4: 20885.82, msp5: 25959.82, msp6: 29027.82 },
+      { category: "NEW BREZZA (July)", name: "MARUTI BREZZA LXI CNG 1.5L 5MT", ex: 929000.00, msp4: 15457.82, msp5: 19115.82, msp6: 21357.82 },
+
+      { category: "VICTORIS", name: "MARUTI VICTORIS LXI 1.5L 5MT", ex: 1099124.00, msp4: 18289.82, msp5: 22655.82, msp6: 25369.82 },
+      { category: "VICTORIS", name: "MARUTI VICTORIS VXI 1.5L 5MT", ex: 1234124.00, msp4: 20531.82, msp5: 25487.82, msp6: 28437.82 },
+      { category: "VICTORIS", name: "MARUTI VICTORIS ZXI 1.5L 5MT", ex: 1411124.00, msp4: 23363.82, msp5: 29027.82, msp6: 32567.82 },
+      { category: "VICTORIS", name: "MARUTI VICTORIS ZXI 1.5L 6AT", ex: 1551124.00, msp4: 25605.82, msp5: 31859.82, msp6: 35753.82 },
+      { category: "VICTORIS", name: "MARUTI VICTORIS ZXI CNG 1.5L 5MT", ex: 1467123.00, msp4: 24484.82, msp5: 30384.82, msp6: 34160.82 },
+
+      { category: "NEW ERTIGA", name: "MARUTI ERTIGA LXI 1.5L 5MT", ex: 869000.00, msp4: 14513.82, msp5: 17935.82, msp6: 20059.82 },
+      { category: "NEW ERTIGA", name: "MARUTI ERTIGA VXI 1.5L 5MT", ex: 983000.00, msp4: 16401.82, msp5: 20295.82, msp6: 22655.82 },
+      { category: "NEW ERTIGA", name: "MARUTI ERTIGA ZXI 1.5L 5MT", ex: 1093000.00, msp4: 18171.82, msp5: 22537.82, msp6: 25251.82 },
+      { category: "NEW ERTIGA", name: "MARUTI ERTIGA VXI CNG 1.5L 5MT", ex: 1078000.00, msp4: 17935.82, msp5: 22183.82, msp6: 24897.82 }
+    ];
+
+    let currentSelectedVariant = dataset[22]; // Default Brezza LXI
+    let currentWarrantyYears = '6';
+
+    function init() {
+      const catSelect = document.getElementById('categorySelect');
+      const categories = [...new Set(dataset.map(item => item.category))];
+      
+      catSelect.innerHTML = categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+      catSelect.value = 'NEW BREZZA (July)';
+      onCategoryChange();
+    }
+
+    function onCategoryChange() {
+      const selectedCat = document.getElementById('categorySelect').value;
+      const variantSelect = document.getElementById('variantSelect');
+      const filtered = dataset.filter(d => d.category === selectedCat);
+
+      variantSelect.innerHTML = filtered.map((v, index) => 
+        `<option value="${v.name}">${v.name.replace(selectedCat, '').replace('MARUTI', '').trim()}</option>`
+      ).join('');
+
+      currentSelectedVariant = filtered[0];
+      
+      // Set image
+      if (carImages[selectedCat]) {
+        document.getElementById('carImage').src = carImages[selectedCat];
+      }
+
+      calculatePrices();
+    }
+
+    function setWarranty(years) {
+      currentWarrantyYears = years;
+      ['0', '4', '5', '6'].forEach(y => {
+        const btn = document.getElementById('btnW' + y);
+        if (btn) btn.classList.toggle('active', y === years);
+      });
+      calculatePrices();
+    }
+
+    function setRto(type) {
+      document.getElementById('btnRtoUP').classList.toggle('active', type === 'UP53');
+      document.getElementById('btnRtoOther').classList.toggle('active', type === 'OTHER');
+      if (type === 'OTHER') {
+        document.getElementById('registrationVal').value = Math.round(currentSelectedVariant.ex * 0.08);
+      } else {
+        document.getElementById('registrationVal').value = Math.round(currentSelectedVariant.ex * 0.10);
+      }
+      calculatePrices();
+    }
+
+    function calculatePrices() {
+      const varName = document.getElementById('variantSelect').value;
+      const found = dataset.find(d => d.name === varName);
+      if (found) currentSelectedVariant = found;
+
+      const ex = currentSelectedVariant.ex;
+
+      // Update Labels
+      document.getElementById('displayModelName').innerText = currentSelectedVariant.category;
+      document.getElementById('displayVariantName').innerText = currentSelectedVariant.name;
+      document.getElementById('exShowroomVal').innerText = '₹' + ex.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+
+      // Insurance
+      const insChecked = document.getElementById('chkInsurance').checked;
+      const insVal = insChecked ? parseFloat(document.getElementById('insuranceVal').value) || 0 : 0;
+
+      // RTO
+      const regVal = parseFloat(document.getElementById('registrationVal').value) || 0;
+
+      // Accessories
+      const kitChecked = document.getElementById('chkKit').checked;
+      const kitVal = kitChecked ? parseFloat(document.getElementById('kitVal').value) || 0 : 0;
+
+      // FASTag
+      const fastagChecked = document.getElementById('chkFastag').checked;
+      const fastagVal = fastagChecked ? parseFloat(document.getElementById('fastagVal').value) || 0 : 0;
+
+      // Rewards
+      const rewardsChecked = document.getElementById('chkRewards').checked;
+      const rewardsVal = rewardsChecked ? parseFloat(document.getElementById('rewardsVal').value) || 0 : 0;
+
+      // Warranty MSP
+      let mspVal = 0;
+      if (currentWarrantyYears === '4') mspVal = currentSelectedVariant.msp4;
+      if (currentWarrantyYears === '5') mspVal = currentSelectedVariant.msp5;
+      if (currentWarrantyYears === '6') mspVal = currentSelectedVariant.msp6;
+
+      document.getElementById('warrantyVal').innerText = '₹' + mspVal.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+
+      // TCS (1% if Ex-showroom > 10,000,00)
+      const tcs = ex > 1000000 ? Math.round(ex * 0.01) : 0;
+      document.getElementById('tcsVal').innerText = '₹' + tcs.toLocaleString('en-IN');
+
+      // Discount
+      const discount = parseFloat(document.getElementById('discountVal').value) || 0;
+
+      // Total On Road Calculation
+      const grandTotal = ex + insVal + regVal + kitVal + fastagVal + rewardsVal + mspVal + tcs - discount;
+      document.getElementById('grandTotalVal').innerText = '₹' + Math.round(grandTotal).toLocaleString('en-IN');
+    }
+
+    function resetForm() {
+      document.getElementById('discountVal').value = "0";
+      setWarranty('6');
+      init();
+    }
+
+    window.onload = init;
+  </script>
 </body>
 </html>
