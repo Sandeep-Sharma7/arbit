@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maruti Suzuki ARENA - Price Calculator 2026</title>
+
+    <title>Maruti Suzuki ARENA - Price Calculator & Quotation 2026</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
@@ -18,6 +20,7 @@
             --card-bg: #ffffff;
             --border-color: #cbd5e1;
             --green: #15803d;
+            --red: #dc2626;
         }
 
         * {
@@ -37,11 +40,12 @@
             align-items: center;
         }
 
-        /* Login */
+        /* ================= LOGIN ================= */
+
         .login-modal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 24, 82, 0.9);
+            background: rgba(0, 24, 82, 0.92);
             backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
@@ -95,6 +99,10 @@
             background: #f8fafc;
         }
 
+        .input-group input:focus {
+            border-color: var(--arena-blue-light);
+        }
+
         .login-btn {
             width: 100%;
             background: linear-gradient(
@@ -112,7 +120,8 @@
             margin-top: 10px;
         }
 
-        /* Main */
+        /* ================= MAIN ================= */
+
         .container {
             max-width: 950px;
             width: 100%;
@@ -182,6 +191,8 @@
             cursor: pointer;
         }
 
+        /* ================= CONTENT ================= */
+
         .content-card {
             background: white;
             border-radius: 0 0 16px 16px;
@@ -206,6 +217,7 @@
             align-items: center;
             font-size: .85rem;
             font-weight: 800;
+            flex-shrink: 0;
         }
 
         .step-title {
@@ -216,7 +228,45 @@
             text-transform: uppercase;
         }
 
-        /* Models */
+        /* ================= CUSTOMER ================= */
+
+        .customer-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .customer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .customer-field label {
+            display: block;
+            font-size: .8rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        .customer-field input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            outline: none;
+            font-size: .95rem;
+        }
+
+        .customer-field input:focus {
+            border-color: var(--arena-blue-light);
+        }
+
+        /* ================= MODELS ================= */
+
         .model-grid {
             display: grid;
             grid-template-columns: repeat(2,1fr);
@@ -257,18 +307,8 @@
             align-items: center;
         }
 
-        .model-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--arena-blue);
-        }
-
         .model-btn.active .model-icon {
             background: rgba(255,255,255,.15);
-        }
-
-        .model-btn.active .model-icon svg {
-            fill: white;
         }
 
         .model-name {
@@ -280,7 +320,8 @@
             color: white;
         }
 
-        /* Variants */
+        /* ================= VARIANTS ================= */
+
         .variant-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
@@ -309,7 +350,8 @@
             color: #c2410c;
         }
 
-        /* Extended Warranty */
+        /* ================= WARRANTY ================= */
+
         .warranty-section {
             background: #f0fdf4;
             border: 1px solid #bbf7d0;
@@ -386,7 +428,79 @@
             box-shadow: 0 4px 12px rgba(21,128,61,.15);
         }
 
-        /* Price */
+        /* ================= SCHEME ================= */
+
+        .scheme-section {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .scheme-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .scheme-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--arena-orange);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+        }
+
+        .scheme-title {
+            color: #9a3412;
+            font-weight: 800;
+            font-size: .95rem;
+            text-transform: uppercase;
+        }
+
+        .scheme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .scheme-field label {
+            display: block;
+            font-size: .8rem;
+            font-weight: 700;
+            color: #7c2d12;
+            margin-bottom: 6px;
+        }
+
+        .scheme-field input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #fed7aa;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .scheme-field input:focus {
+            border-color: var(--arena-orange);
+        }
+
+        .scheme-note {
+            margin-top: 10px;
+            font-size: .75rem;
+            color: #9a3412;
+        }
+
+        /* ================= PRICE ================= */
+
         .price-breakdown {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -397,6 +511,7 @@
         .price-row {
             display: flex;
             justify-content: space-between;
+            gap: 20px;
             padding: 12px 0;
             border-bottom: 1px dashed #cbd5e1;
             font-size: .95rem;
@@ -405,6 +520,11 @@
 
         .price-row:last-child {
             border-bottom: none;
+        }
+
+        .price-row.discount {
+            color: var(--red);
+            font-weight: 700;
         }
 
         .price-row.total {
@@ -421,6 +541,11 @@
             font-weight: 700;
         }
 
+        .scheme-price {
+            color: var(--red);
+            font-weight: 800;
+        }
+
         .placeholder-text {
             color: #94a3b8;
             font-style: italic;
@@ -431,15 +556,115 @@
             border: 2px dashed #cbd5e1;
         }
 
+        /* ================= QUOTATION HEADER ================= */
+
+        .quotation-header {
+            display: none;
+            background: var(--arena-blue);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .quotation-header-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .quotation-header h2 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .quotation-header p {
+            font-size: .78rem;
+            color: #dbeafe;
+        }
+
+        /* ================= WHATSAPP ================= */
+
+        .whatsapp-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #25D366;
+            color: white;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: .2s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe5d;
+            transform: translateY(-1px);
+        }
+
+        .reset-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: white;
+            color: #475569;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ================= MOBILE ================= */
+
         @media(max-width:600px) {
-            body { padding: 10px; }
-            .model-grid { grid-template-columns: 1fr; }
-            .warranty-options { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.6rem; }
+
+            body {
+                padding: 10px;
+            }
+
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .warranty-options {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
             .exec-card {
                 flex-direction: column;
                 gap: 12px;
                 text-align: center;
+            }
+
+            .customer-grid,
+            .scheme-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quotation-header-row {
+                flex-direction: column;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .price-row {
+                font-size: .85rem;
+            }
+
+            .price-row.total {
+                font-size: 1rem;
             }
         }
     </style>
@@ -447,25 +672,43 @@
 
 <body>
 
+<!-- ========================================================= -->
 <!-- LOGIN -->
+<!-- ========================================================= -->
+
 <div class="login-modal" id="loginModal">
+
     <div class="login-box">
+
         <h2>ARENA PORTAL</h2>
-        <p>Sales Executive details darj karein</p>
+
+        <p>
+            Sales Executive details darj karein
+        </p>
 
         <form onsubmit="handleLogin(event)">
+
             <div class="input-group">
-                <label for="execName">Executive Name</label>
+
+                <label for="execName">
+                    Executive Name
+                </label>
+
                 <input
                     type="text"
                     id="execName"
                     placeholder="e.g. Rahul Sharma"
                     required
                 >
+
             </div>
 
             <div class="input-group">
-                <label for="execMobile">Mobile Number</label>
+
+                <label for="execMobile">
+                    Mobile Number
+                </label>
+
                 <input
                     type="tel"
                     id="execMobile"
@@ -474,116 +717,317 @@
                     maxlength="10"
                     required
                 >
+
             </div>
 
-            <button type="submit" class="login-btn">
+            <button
+                type="submit"
+                class="login-btn"
+            >
                 Continue to Calculator
             </button>
+
         </form>
+
     </div>
+
 </div>
 
+
+<!-- ========================================================= -->
 <!-- MAIN -->
+<!-- ========================================================= -->
+
 <div class="container" id="mainContainer">
 
+    <!-- HEADER -->
+
     <div class="header">
+
         <div class="brand-subtitle">
             M A R U T I   S U Z U K I   •   A R E N A
         </div>
 
-        <h1>Price Calculator</h1>
+        <h1>
+            Price Calculator & Quotation
+        </h1>
 
         <div class="header-meta">
             ARENA Price List • Gorakhpur • September 2026
         </div>
 
         <div class="exec-card">
+
             <div class="exec-info">
-                <h3 id="displayExecName">Rahul Sharma</h3>
+
+                <h3 id="displayExecName">
+                    Rahul Sharma
+                </h3>
+
                 <p>
                     Sales Executive • Mob:
                     <span id="displayExecMobile"></span>
                 </p>
+
             </div>
 
-            <button class="edit-btn" onclick="handleEditProfile()">
+            <button
+                class="edit-btn"
+                onclick="handleEditProfile()"
+            >
                 Edit
             </button>
+
         </div>
+
     </div>
+
+
+    <!-- CONTENT -->
 
     <div class="content-card">
 
-        <!-- STEP 1 -->
+
+        <!-- ================================================= -->
+        <!-- CUSTOMER DETAILS -->
+        <!-- ================================================= -->
+
         <div class="step-header">
-            <div class="step-badge">1</div>
-            <div class="step-title">Select Model</div>
+
+            <div class="step-badge">
+                1
+            </div>
+
+            <div class="step-title">
+                Customer Details
+            </div>
+
         </div>
+
+
+        <div class="customer-section">
+
+            <div class="customer-grid">
+
+                <div class="customer-field">
+
+                    <label>
+                        Customer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter customer name"
+                        oninput="calculatePrice()"
+                    >
+
+                </div>
+
+
+                <div class="customer-field">
+
+                    <label>
+                        Customer WhatsApp Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerMobile"
+                        placeholder="10-digit WhatsApp number"
+                        maxlength="10"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- MODEL -->
+        <!-- ================================================= -->
+
+        <div class="step-header">
+
+            <div class="step-badge">
+                2
+            </div>
+
+            <div class="step-title">
+                Select Model
+            </div>
+
+        </div>
+
 
         <div class="model-grid">
 
-            <button class="model-btn" onclick="selectModel('alto',this)">
-                <div class="model-icon">🚗</div>
-                <span class="model-name">Alto K10</span>
+            <button
+                class="model-btn"
+                onclick="selectModel('alto',this)"
+            >
+
+                <div class="model-icon">
+                    🚗
+                </div>
+
+                <span class="model-name">
+                    Alto K10
+                </span>
+
             </button>
 
-            <button class="model-btn" onclick="selectModel('wagonr',this)">
-                <div class="model-icon">🚗</div>
-                <span class="model-name">Wagon R</span>
+
+            <button
+                class="model-btn"
+                onclick="selectModel('wagonr',this)"
+            >
+
+                <div class="model-icon">
+                    🚗
+                </div>
+
+                <span class="model-name">
+                    Wagon R
+                </span>
+
             </button>
 
-            <button class="model-btn" onclick="selectModel('swift',this)">
-                <div class="model-icon">🚗</div>
-                <span class="model-name">Swift</span>
+
+            <button
+                class="model-btn"
+                onclick="selectModel('swift',this)"
+            >
+
+                <div class="model-icon">
+                    🚗
+                </div>
+
+                <span class="model-name">
+                    Swift
+                </span>
+
             </button>
 
-            <button class="model-btn" onclick="selectModel('dzire',this)">
-                <div class="model-icon">🚗</div>
-                <span class="model-name">Dzire</span>
+
+            <button
+                class="model-btn"
+                onclick="selectModel('dzire',this)"
+            >
+
+                <div class="model-icon">
+                    🚗
+                </div>
+
+                <span class="model-name">
+                    Dzire
+                </span>
+
             </button>
 
-            <button class="model-btn" onclick="selectModel('brezza',this)">
-                <div class="model-icon">🚙</div>
-                <span class="model-name">Brezza</span>
+
+            <button
+                class="model-btn"
+                onclick="selectModel('brezza',this)"
+            >
+
+                <div class="model-icon">
+                    🚙
+                </div>
+
+                <span class="model-name">
+                    Brezza
+                </span>
+
             </button>
 
-            <button class="model-btn" onclick="selectModel('ertiga',this)">
-                <div class="model-icon">🚐</div>
-                <span class="model-name">Ertiga</span>
+
+            <button
+                class="model-btn"
+                onclick="selectModel('ertiga',this)"
+            >
+
+                <div class="model-icon">
+                    🚐
+                </div>
+
+                <span class="model-name">
+                    Ertiga
+                </span>
+
             </button>
 
         </div>
 
-        <!-- STEP 2 -->
+
+        <!-- ================================================= -->
+        <!-- VARIANT -->
+        <!-- ================================================= -->
+
         <div class="step-header">
-            <div class="step-badge">2</div>
-            <div class="step-title">Select Variant</div>
+
+            <div class="step-badge">
+                3
+            </div>
+
+            <div class="step-title">
+                Select Variant
+            </div>
+
         </div>
+
 
         <div id="variantContainer">
+
             <div class="placeholder-text">
-                👉 Upar kisi bhi ARENA model par click karein taaki variants dikh sakein!
+
+                👉 Upar kisi bhi ARENA model par click karein
+                taaki variants dikh sakein!
+
             </div>
+
         </div>
 
-        <!-- STEP 3 EXTENDED WARRANTY -->
+
+        <!-- ================================================= -->
+        <!-- WARRANTY -->
+        <!-- ================================================= -->
+
         <div class="step-header">
-            <div class="step-badge">3</div>
-            <div class="step-title">Extended Warranty</div>
+
+            <div class="step-badge">
+                4
+            </div>
+
+            <div class="step-title">
+                Extended Warranty
+            </div>
+
         </div>
+
 
         <div class="warranty-section">
 
             <div class="warranty-heading">
-                <div class="warranty-icon">✓</div>
+
+                <div class="warranty-icon">
+                    ✓
+                </div>
+
                 <div class="warranty-title">
                     Extended Warranty Facility
                 </div>
+
             </div>
+
 
             <div class="warranty-options">
 
+
                 <div class="warranty-option">
+
                     <input
                         type="radio"
                         id="warrantyNone"
@@ -592,13 +1036,22 @@
                         checked
                         onchange="updateWarranty()"
                     >
+
                     <label for="warrantyNone">
+
                         No Warranty
-                        <span>₹0</span>
+
+                        <span>
+                            ₹0
+                        </span>
+
                     </label>
+
                 </div>
 
+
                 <div class="warranty-option">
+
                     <input
                         type="radio"
                         id="warranty2"
@@ -606,13 +1059,22 @@
                         value="6500"
                         onchange="updateWarranty()"
                     >
+
                     <label for="warranty2">
+
                         2 Year
-                        <span>₹6,500</span>
+
+                        <span>
+                            ₹6,500
+                        </span>
+
                     </label>
+
                 </div>
 
+
                 <div class="warranty-option">
+
                     <input
                         type="radio"
                         id="warranty3"
@@ -620,63 +1082,303 @@
                         value="9500"
                         onchange="updateWarranty()"
                     >
+
                     <label for="warranty3">
+
                         3 Year
-                        <span>₹9,500</span>
+
+                        <span>
+                            ₹9,500
+                        </span>
+
                     </label>
+
                 </div>
 
             </div>
+
         </div>
 
+
+        <!-- ================================================= -->
+        <!-- MSIL / RIPS SCHEME -->
+        <!-- ================================================= -->
+
+        <div class="step-header">
+
+            <div class="step-badge">
+                5
+            </div>
+
+            <div class="step-title">
+                Scheme / Discount
+            </div>
+
+        </div>
+
+
+        <div class="scheme-section">
+
+            <div class="scheme-heading">
+
+                <div class="scheme-icon">
+                    ₹
+                </div>
+
+                <div class="scheme-title">
+                    MSIL / RIPS Scheme
+                </div>
+
+            </div>
+
+
+            <div class="scheme-grid">
+
+                <div class="scheme-field">
+
+                    <label>
+                        Scheme Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="schemeName"
+                        value="MSIL / RIPS Scheme"
+                        placeholder="e.g. MSIL RIPS Scheme"
+                        oninput="calculatePrice()"
+                    >
+
+                </div>
+
+
+                <div class="scheme-field">
+
+                    <label>
+                        Discount Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="schemeAmount"
+                        value="0"
+                        min="0"
+                        step="500"
+                        placeholder="₹0"
+                        oninput="calculatePrice()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="scheme-note">
+
+                * Scheme/discount amount will be deducted from
+                the estimated on-road price.
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
         <!-- PRICE BREAKDOWN -->
+        <!-- ================================================= -->
+
         <div class="price-breakdown">
 
-            <div class="step-header" style="margin-bottom:12px;">
-                <div class="step-badge">₹</div>
+            <div
+                class="step-header"
+                style="margin-bottom:12px;"
+            >
+
+                <div class="step-badge">
+                    ₹
+                </div>
+
                 <div class="step-title">
                     Price Summary & Breakdown
                 </div>
+
             </div>
 
-            <div class="price-row">
-                <span>Ex-Showroom Price</span>
-                <span id="exShowroom">₹0</span>
-            </div>
 
             <div class="price-row">
-                <span>RTO / Registration (Est. 10%)</span>
-                <span id="rto">₹0</span>
-            </div>
 
-            <div class="price-row">
-                <span>Insurance (Comprehensive)</span>
-                <span id="insurance">₹0</span>
-            </div>
+                <span>
+                    Ex-Showroom Price
+                </span>
 
-            <div class="price-row">
-                <span>Fastag & Mandatory Accessories</span>
-                <span id="other">₹2,500</span>
-            </div>
-
-            <div class="price-row">
-                <span>Extended Warranty</span>
-                <span id="warrantyDisplay" class="warranty-price">
+                <span id="exShowroom">
                     ₹0
                 </span>
+
             </div>
 
+
+            <div class="price-row">
+
+                <span>
+                    RTO / Registration (Est. 10%)
+                </span>
+
+                <span id="rto">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="price-row">
+
+                <span>
+                    Insurance (Comprehensive)
+                </span>
+
+                <span id="insurance">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="price-row">
+
+                <span>
+                    Fastag & Mandatory Accessories
+                </span>
+
+                <span id="other">
+                    ₹2,500
+                </span>
+
+            </div>
+
+
+            <div class="price-row">
+
+                <span>
+                    Extended Warranty
+                </span>
+
+                <span
+                    id="warrantyDisplay"
+                    class="warranty-price"
+                >
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="price-row discount">
+
+                <span id="schemeDisplayName">
+                    MSIL / RIPS Scheme
+                </span>
+
+                <span
+                    id="schemeDisplay"
+                    class="scheme-price"
+                >
+                    - ₹0
+                </span>
+
+            </div>
+
+
             <div class="price-row total">
-                <span>Estimated On-Road Price</span>
-                <span id="totalPrice">₹0</span>
+
+                <span>
+                    Estimated On-Road Price
+                </span>
+
+                <span id="totalPrice">
+                    ₹0
+                </span>
+
             </div>
 
         </div>
 
+
+        <!-- ================================================= -->
+        <!-- QUOTATION INFO -->
+        <!-- ================================================= -->
+
+        <div
+            class="quotation-header"
+            id="quotationHeader"
+        >
+
+            <div class="quotation-header-row">
+
+                <div>
+
+                    <h2>
+                        CUSTOMER QUOTATION
+                    </h2>
+
+                    <p id="quotationDate">
+                        Date: --
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p id="quotationNumber">
+                        Quotation No: --
+                    </p>
+
+                    <p>
+                        Maruti Suzuki ARENA
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- WHATSAPP -->
+        <!-- ================================================= -->
+
+        <button
+            class="whatsapp-btn"
+            onclick="shareQuotationWhatsApp()"
+        >
+
+            <span style="font-size:1.3rem;">
+                ☎
+            </span>
+
+            Share Quotation on WhatsApp
+
+        </button>
+
+
+        <button
+            class="reset-btn"
+            onclick="resetQuotation()"
+        >
+            Reset Quotation
+        </button>
+
     </div>
+
 </div>
 
+
 <script>
+
+/* =========================================================
+   LOGIN
+========================================================= */
 
 window.onload = function() {
 
@@ -687,21 +1389,38 @@ window.onload = function() {
         localStorage.getItem("arena_exec_mobile");
 
     if (savedName && savedMobile) {
-        showCalculator(savedName, savedMobile);
+
+        showCalculator(
+            savedName,
+            savedMobile
+        );
+
     }
+
 };
+
 
 function handleLogin(event) {
 
     event.preventDefault();
 
     const name =
-        document.getElementById("execName").value.trim();
+        document
+        .getElementById("execName")
+        .value
+        .trim();
 
     const mobile =
-        document.getElementById("execMobile").value.trim();
+        document
+        .getElementById("execMobile")
+        .value
+        .trim();
 
-    if (name && mobile.length === 10) {
+
+    if (
+        name &&
+        /^[0-9]{10}$/.test(mobile)
+    ) {
 
         localStorage.setItem(
             "arena_exec_name",
@@ -713,48 +1432,73 @@ function handleLogin(event) {
             mobile
         );
 
-        showCalculator(name,mobile);
+        showCalculator(
+            name,
+            mobile
+        );
 
     } else {
 
         alert(
             "Kripya sahi naam aur 10-digit mobile number darj karein."
         );
+
     }
+
 }
+
 
 function showCalculator(name,mobile) {
 
-    document.getElementById("loginModal")
+    document
+        .getElementById("loginModal")
         .style.display = "none";
 
-    document.getElementById("mainContainer")
+    document
+        .getElementById("mainContainer")
         .style.display = "block";
 
-    document.getElementById("displayExecName")
+    document
+        .getElementById("displayExecName")
         .textContent = name;
 
-    document.getElementById("displayExecMobile")
+    document
+        .getElementById("displayExecMobile")
         .textContent = mobile;
+
 }
+
 
 function handleEditProfile() {
 
-    document.getElementById("loginModal")
+    document
+        .getElementById("loginModal")
         .style.display = "flex";
 
-    document.getElementById("mainContainer")
+    document
+        .getElementById("mainContainer")
         .style.display = "none";
 
-    document.getElementById("execName").value =
-        localStorage.getItem("arena_exec_name") || "";
+    document
+        .getElementById("execName")
+        .value =
+        localStorage.getItem(
+            "arena_exec_name"
+        ) || "";
 
-    document.getElementById("execMobile").value =
-        localStorage.getItem("arena_exec_mobile") || "";
+    document
+        .getElementById("execMobile")
+        .value =
+        localStorage.getItem(
+            "arena_exec_mobile"
+        ) || "";
+
 }
 
 
-/* VEHICLE DATA */
+/* =========================================================
+   VEHICLE DATA
+========================================================= */
 
 const vehicleData = {
 
@@ -813,15 +1557,37 @@ const vehicleData = {
         {name:"VXi (CNG)",price:1078000},
         {name:"ZXi (CNG)",price:1188000}
     ]
+
 };
 
+
+const modelNames = {
+
+    alto: "Alto K10",
+    wagonr: "Wagon R",
+    swift: "Swift",
+    dzire: "Dzire",
+    brezza: "Brezza",
+    ertiga: "Ertiga"
+
+};
+
+
 let selectedModelKey = "";
+
 let selectedExShowroom = 0;
 
+let selectedVariantName = "";
 
-/* SELECT MODEL */
 
-function selectModel(modelKey,btnElement) {
+/* =========================================================
+   SELECT MODEL
+========================================================= */
+
+function selectModel(
+    modelKey,
+    btnElement
+) {
 
     selectedModelKey = modelKey;
 
@@ -833,41 +1599,63 @@ function selectModel(modelKey,btnElement) {
 
     btnElement.classList.add("active");
 
+
     const variantContainer =
-        document.getElementById("variantContainer");
+        document.getElementById(
+            "variantContainer"
+        );
 
     variantContainer.innerHTML = "";
+
 
     const grid =
         document.createElement("div");
 
-    grid.className = "variant-grid";
+    grid.className =
+        "variant-grid";
+
 
     vehicleData[modelKey].forEach(
         (variant,index) => {
 
             const vBtn =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
             vBtn.type = "button";
-            vBtn.className = "variant-btn";
-            vBtn.textContent = variant.name;
+
+            vBtn.className =
+                "variant-btn";
+
+            vBtn.textContent =
+                variant.name;
 
             vBtn.onclick = () =>
-                selectVariant(index,vBtn);
+                selectVariant(
+                    index,
+                    vBtn
+                );
 
             grid.appendChild(vBtn);
+
         }
     );
 
+
     variantContainer.appendChild(grid);
 
-    /* Auto select first variant */
+
+    /* Automatically select first variant */
+
     grid.children[0].click();
+
 }
 
 
-/* SELECT VARIANT */
+/* =========================================================
+   SELECT VARIANT
+========================================================= */
 
 function selectVariant(
     variantIndex,
@@ -882,40 +1670,80 @@ function selectVariant(
 
     btnElement.classList.add("active");
 
-    selectedExShowroom =
+
+    const selectedVariant =
         vehicleData[selectedModelKey]
-        [variantIndex].price;
+        [variantIndex];
+
+
+    selectedExShowroom =
+        selectedVariant.price;
+
+
+    selectedVariantName =
+        selectedVariant.name;
+
 
     calculatePrice();
+
 }
 
 
-/* WARRANTY */
+/* =========================================================
+   WARRANTY
+========================================================= */
 
 function updateWarranty() {
 
     calculatePrice();
+
 }
 
 
-/* CALCULATE TOTAL */
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+function formatINR(amount) {
+
+    return "₹" +
+        Math.round(amount)
+        .toLocaleString("en-IN");
+
+}
+
+
+/* =========================================================
+   CALCULATE PRICE
+========================================================= */
 
 function calculatePrice() {
 
     if (!selectedExShowroom) {
+
         return;
+
     }
+
 
     const exShowroom =
         selectedExShowroom;
 
+
     const rto =
-        Math.round(exShowroom * 0.10);
+        Math.round(
+            exShowroom * 0.10
+        );
+
 
     const insurance =
-        Math.round(exShowroom * 0.045);
+        Math.round(
+            exShowroom * 0.045
+        );
+
 
     const other = 2500;
+
 
     const warranty =
         Number(
@@ -924,43 +1752,626 @@ function calculatePrice() {
             ).value
         );
 
-    const total =
+
+    let schemeAmount =
+        Number(
+            document.getElementById(
+                "schemeAmount"
+            ).value
+        ) || 0;
+
+
+    if (schemeAmount < 0) {
+
+        schemeAmount = 0;
+
+    }
+
+
+    const subtotal =
         exShowroom +
         rto +
         insurance +
         other +
         warranty;
 
+
+    let total =
+        subtotal -
+        schemeAmount;
+
+
+    /* Prevent negative quotation */
+
+    if (total < 0) {
+
+        total = 0;
+
+    }
+
+
+    /* DISPLAY */
+
     document.getElementById(
         "exShowroom"
     ).textContent =
-        "₹" + exShowroom.toLocaleString("en-IN");
+        formatINR(exShowroom);
+
 
     document.getElementById(
         "rto"
     ).textContent =
-        "₹" + rto.toLocaleString("en-IN");
+        formatINR(rto);
+
 
     document.getElementById(
         "insurance"
     ).textContent =
-        "₹" + insurance.toLocaleString("en-IN");
+        formatINR(insurance);
+
 
     document.getElementById(
         "other"
     ).textContent =
-        "₹" + other.toLocaleString("en-IN");
+        formatINR(other);
+
 
     document.getElementById(
         "warrantyDisplay"
     ).textContent =
-        "₹" + warranty.toLocaleString("en-IN");
+        formatINR(warranty);
+
+
+    document.getElementById(
+        "schemeDisplay"
+    ).textContent =
+        "- " + formatINR(schemeAmount);
+
+
+    const schemeName =
+        document.getElementById(
+            "schemeName"
+        ).value.trim();
+
+
+    document.getElementById(
+        "schemeDisplayName"
+    ).textContent =
+        schemeName ||
+        "MSIL / RIPS Scheme";
+
 
     document.getElementById(
         "totalPrice"
     ).textContent =
-        "₹" + total.toLocaleString("en-IN");
+        formatINR(total);
+
+
+    /* SHOW QUOTATION HEADER */
+
+    document.getElementById(
+        "quotationHeader"
+    ).style.display = "block";
+
+
+    generateQuotationDetails();
+
 }
+
+
+/* =========================================================
+   QUOTATION NUMBER
+========================================================= */
+
+function generateQuotationNumber() {
+
+    const now = new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2,"0");
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2,"0");
+
+    const random =
+        Math.floor(
+            1000 +
+            Math.random() * 9000
+        );
+
+
+    return (
+        "ARENA-" +
+        year +
+        month +
+        day +
+        "-" +
+        random
+    );
+
+}
+
+
+/* =========================================================
+   QUOTATION DETAILS
+========================================================= */
+
+let quotationNumber =
+    generateQuotationNumber();
+
+
+function generateQuotationDetails() {
+
+    const now = new Date();
+
+
+    const date =
+        now.toLocaleDateString(
+            "en-IN",
+            {
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
+            }
+        );
+
+
+    document.getElementById(
+        "quotationDate"
+    ).textContent =
+        "Date: " + date;
+
+
+    document.getElementById(
+        "quotationNumber"
+    ).textContent =
+        "Quotation No: " +
+        quotationNumber;
+
+}
+
+
+/* =========================================================
+   WHATSAPP QUOTATION
+========================================================= */
+
+function shareQuotationWhatsApp() {
+
+    if (!selectedExShowroom) {
+
+        alert(
+            "Please select model and variant first."
+        );
+
+        return;
+
+    }
+
+
+    const customerName =
+        document
+        .getElementById(
+            "customerName"
+        )
+        .value
+        .trim();
+
+
+    const customerMobile =
+        document
+        .getElementById(
+            "customerMobile"
+        )
+        .value
+        .trim();
+
+
+    if (!customerName) {
+
+        alert(
+            "Please enter customer name."
+        );
+
+        document
+        .getElementById(
+            "customerName"
+        )
+        .focus();
+
+        return;
+
+    }
+
+
+    if (
+        customerMobile &&
+        !/^[0-9]{10}$/.test(
+            customerMobile
+        )
+    ) {
+
+        alert(
+            "Please enter a valid 10-digit WhatsApp number."
+        );
+
+        return;
+
+    }
+
+
+    const exShowroom =
+        selectedExShowroom;
+
+
+    const rto =
+        Math.round(
+            exShowroom * 0.10
+        );
+
+
+    const insurance =
+        Math.round(
+            exShowroom * 0.045
+        );
+
+
+    const other =
+        2500;
+
+
+    const warranty =
+        Number(
+            document.querySelector(
+                'input[name="warranty"]:checked'
+            ).value
+        );
+
+
+    const warrantyText =
+        warranty === 0
+        ? "No Warranty"
+        : warranty === 6500
+        ? "2 Year - ₹6,500"
+        : "3 Year - ₹9,500";
+
+
+    const schemeAmount =
+        Number(
+            document.getElementById(
+                "schemeAmount"
+            ).value
+        ) || 0;
+
+
+    const schemeName =
+        document
+        .getElementById(
+            "schemeName"
+        )
+        .value
+        .trim() ||
+        "MSIL / RIPS Scheme";
+
+
+    const subtotal =
+        exShowroom +
+        rto +
+        insurance +
+        other +
+        warranty;
+
+
+    const total =
+        Math.max(
+            0,
+            subtotal - schemeAmount
+        );
+
+
+    const execName =
+        localStorage.getItem(
+            "arena_exec_name"
+        ) || "";
+
+
+    const execMobile =
+        localStorage.getItem(
+            "arena_exec_mobile"
+        ) || "";
+
+
+    const date =
+        new Date()
+        .toLocaleDateString(
+            "en-IN",
+            {
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
+            }
+        );
+
+
+    /*
+       WhatsApp quotation message
+    */
+
+    const message =
+`*MARUTI SUZUKI ARENA*
+*CUSTOMER QUOTATION*
+
+━━━━━━━━━━━━━━━━━━━━
+
+*Quotation No:* ${quotationNumber}
+*Date:* ${date}
+
+*Customer:* ${customerName}
+
+━━━━━━━━━━━━━━━━━━━━
+
+🚗 *VEHICLE DETAILS*
+
+*Model:* ${modelNames[selectedModelKey]}
+*Variant:* ${selectedVariantName}
+
+━━━━━━━━━━━━━━━━━━━━
+
+💰 *PRICE BREAKUP*
+
+Ex-Showroom: ${formatINR(exShowroom)}
+
+RTO / Registration:
+${formatINR(rto)}
+
+Insurance:
+${formatINR(insurance)}
+
+Fastag & Mandatory Accessories:
+${formatINR(other)}
+
+Extended Warranty:
+${formatINR(warranty)}
+${warrantyText}
+
+*${schemeName}:*
+- ${formatINR(schemeAmount)}
+
+━━━━━━━━━━━━━━━━━━━━
+
+*ESTIMATED ON-ROAD PRICE*
+*${formatINR(total)}*
+
+━━━━━━━━━━━━━━━━━━━━
+
+*Sales Executive*
+${execName}
+Mob: ${execMobile}
+
+📍 Maruti Suzuki ARENA
+Gorakhpur
+
+━━━━━━━━━━━━━━━━━━━━
+
+_Note: This is an estimated quotation. Final price, taxes, registration, insurance, schemes and offers may vary at the time of billing._`;
+
+
+    /*
+       If customer WhatsApp number is entered,
+       open direct WhatsApp chat.
+       
+       Otherwise open WhatsApp share screen.
+    */
+
+    let whatsappURL;
+
+
+    if (
+        /^[0-9]{10}$/.test(
+            customerMobile
+        )
+    ) {
+
+        whatsappURL =
+            "https://wa.me/91" +
+            customerMobile +
+            "?text=" +
+            encodeURIComponent(
+                message
+            );
+
+    } else {
+
+        whatsappURL =
+            "https://wa.me/?text=" +
+            encodeURIComponent(
+                message
+            );
+
+    }
+
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   RESET QUOTATION
+========================================================= */
+
+function resetQuotation() {
+
+    const confirmReset =
+        confirm(
+            "Are you sure you want to reset this quotation?"
+        );
+
+
+    if (!confirmReset) {
+
+        return;
+
+    }
+
+
+    selectedModelKey = "";
+
+    selectedExShowroom = 0;
+
+    selectedVariantName = "";
+
+
+    document
+        .querySelectorAll(".model-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+
+    document.getElementById(
+        "variantContainer"
+    ).innerHTML = `
+
+        <div class="placeholder-text">
+
+            👉 Upar kisi bhi ARENA model par click karein
+            taaki variants dikh sakein!
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "customerName"
+    ).value = "";
+
+
+    document.getElementById(
+        "customerMobile"
+    ).value = "";
+
+
+    document.getElementById(
+        "schemeName"
+    ).value =
+        "MSIL / RIPS Scheme";
+
+
+    document.getElementById(
+        "schemeAmount"
+    ).value = "0";
+
+
+    document.getElementById(
+        "warrantyNone"
+    ).checked = true;
+
+
+    document.getElementById(
+        "exShowroom"
+    ).textContent = "₹0";
+
+
+    document.getElementById(
+        "rto"
+    ).textContent = "₹0";
+
+
+    document.getElementById(
+        "insurance"
+    ).textContent = "₹0";
+
+
+    document.getElementById(
+        "other"
+    ).textContent = "₹2,500";
+
+
+    document.getElementById(
+        "warrantyDisplay"
+    ).textContent = "₹0";
+
+
+    document.getElementById(
+        "schemeDisplay"
+    ).textContent = "- ₹0";
+
+
+    document.getElementById(
+        "schemeDisplayName"
+    ).textContent =
+        "MSIL / RIPS Scheme";
+
+
+    document.getElementById(
+        "totalPrice"
+    ).textContent = "₹0";
+
+
+    quotationNumber =
+        generateQuotationNumber();
+
+
+    document.getElementById(
+        "quotationHeader"
+    ).style.display = "none";
+
+}
+
+
+/* =========================================================
+   CUSTOMER MOBILE - NUMBERS ONLY
+========================================================= */
+
+document
+.getElementById("customerMobile")
+.addEventListener(
+    "input",
+    function() {
+
+        this.value =
+            this.value
+            .replace(
+                /[^0-9]/g,
+                ""
+            )
+            .slice(0,10);
+
+    }
+);
+
+
+/* =========================================================
+   EXECUTIVE MOBILE - NUMBERS ONLY
+========================================================= */
+
+document
+.getElementById("execMobile")
+.addEventListener(
+    "input",
+    function() {
+
+        this.value =
+            this.value
+            .replace(
+                /[^0-9]/g,
+                ""
+            )
+            .slice(0,10);
+
+    }
+);
 
 </script>
 
