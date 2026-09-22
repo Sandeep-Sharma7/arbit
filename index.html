@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maruti Suzuki ARENA - Price Calculator 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --arena-blue: #002884;
@@ -15,6 +17,7 @@
             --text-dark: #1e293b;
             --card-bg: #ffffff;
             --border-color: #cbd5e1;
+            --green: #15803d;
         }
 
         * {
@@ -34,13 +37,10 @@
             align-items: center;
         }
 
-        /* Login / Profile Modal */
+        /* Login */
         .login-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: rgba(0, 24, 82, 0.9);
             backdrop-filter: blur(8px);
             display: flex;
@@ -53,7 +53,7 @@
             background: var(--card-bg);
             padding: 35px;
             border-radius: 16px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 25px 50px rgba(0,0,0,.4);
             width: 90%;
             max-width: 420px;
             text-align: center;
@@ -64,11 +64,10 @@
             color: var(--arena-blue);
             margin-bottom: 8px;
             font-weight: 800;
-            letter-spacing: 0.5px;
         }
 
         .login-box p {
-            font-size: 0.9rem;
+            font-size: .9rem;
             color: #64748b;
             margin-bottom: 25px;
         }
@@ -80,7 +79,7 @@
 
         .input-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: .85rem;
             font-weight: 700;
             margin-bottom: 6px;
             color: #475569;
@@ -94,19 +93,16 @@
             font-size: 1rem;
             outline: none;
             background: #f8fafc;
-            transition: all 0.2s;
-        }
-
-        .input-group input:focus {
-            border-color: var(--arena-blue-light);
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(0, 66, 204, 0.15);
         }
 
         .login-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--arena-blue), var(--arena-blue-light));
-            color: #ffffff;
+            background: linear-gradient(
+                135deg,
+                var(--arena-blue),
+                var(--arena-blue-light)
+            );
+            color: white;
             border: none;
             padding: 14px;
             border-radius: 8px;
@@ -114,34 +110,29 @@
             font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
-            transition: opacity 0.2s;
         }
 
-        .login-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* Main Container */
+        /* Main */
         .container {
             max-width: 950px;
             width: 100%;
             background: var(--arena-blue-dark);
             border-radius: 16px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,.6);
             overflow: hidden;
             display: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,.1);
         }
 
         .header {
             background: var(--arena-blue-dark);
-            color: #ffffff;
+            color: white;
             padding: 30px;
             border-bottom: 4px solid var(--arena-orange);
         }
 
         .brand-subtitle {
-            font-size: 0.75rem;
+            font-size: .75rem;
             letter-spacing: 3px;
             color: var(--arena-orange);
             font-weight: 700;
@@ -152,20 +143,18 @@
         .header h1 {
             font-size: 2rem;
             font-weight: 800;
-            color: #ffffff;
             margin-bottom: 6px;
         }
 
         .header-meta {
-            font-size: 0.85rem;
+            font-size: .85rem;
             color: #94a3b8;
-            font-weight: 500;
             margin-bottom: 20px;
         }
 
         .exec-card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.12);
             border-radius: 10px;
             padding: 16px 20px;
             display: flex;
@@ -175,35 +164,26 @@
 
         .exec-info h3 {
             font-size: 1rem;
-            color: #ffffff;
-            font-weight: 700;
+            color: white;
             margin-bottom: 3px;
         }
 
         .exec-info p {
-            font-size: 0.82rem;
+            font-size: .82rem;
             color: #94a3b8;
         }
 
         .edit-btn {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
+            border: 1px solid rgba(255,255,255,.3);
+            color: white;
             padding: 6px 14px;
             border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .edit-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #ffffff;
         }
 
         .content-card {
-            background: var(--card-bg);
+            background: white;
             border-radius: 0 0 16px 16px;
             padding: 30px;
         }
@@ -217,44 +197,54 @@
 
         .step-badge {
             background: var(--arena-blue);
-            color: #ffffff;
+            color: white;
             width: 28px;
             height: 28px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: .85rem;
             font-weight: 800;
         }
 
         .step-title {
-            font-size: 0.95rem;
+            font-size: .95rem;
             font-weight: 800;
             color: var(--arena-blue);
-            letter-spacing: 0.5px;
+            letter-spacing: .5px;
             text-transform: uppercase;
         }
 
-        /* Model Grid with Vehicle Icon before name */
+        /* Models */
         .model-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2,1fr);
             gap: 14px;
             margin-bottom: 30px;
         }
 
         .model-btn {
-            background: #ffffff;
+            background: white;
             border: 2px solid #e2e8f0;
             padding: 14px 18px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 14px;
             text-align: left;
+            transition: .2s;
+        }
+
+        .model-btn:hover {
+            border-color: var(--arena-blue-light);
+            transform: translateY(-1px);
+        }
+
+        .model-btn.active {
+            background: var(--arena-blue);
+            border-color: var(--arena-blue);
         }
 
         .model-icon {
@@ -265,8 +255,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-shrink: 0;
-            transition: background 0.2s;
         }
 
         .model-icon svg {
@@ -275,40 +263,27 @@
             fill: var(--arena-blue);
         }
 
-        .model-name {
-            font-size: 0.98rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .model-btn:hover {
-            border-color: var(--arena-blue-light);
-            background: #f8fafc;
-            transform: translateY(-1px);
-        }
-
-        .model-btn.active {
-            background: var(--arena-blue);
-            border-color: var(--arena-blue);
-            box-shadow: 0 6px 16px rgba(0, 40, 132, 0.25);
-        }
-
-        .model-btn.active .model-name {
-            color: #ffffff;
-        }
-
         .model-btn.active .model-icon {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255,255,255,.15);
         }
 
         .model-btn.active .model-icon svg {
-            fill: #ffffff;
+            fill: white;
         }
 
-        /* Variant Buttons (Clean, without prices) */
+        .model-name {
+            font-size: .98rem;
+            font-weight: 700;
+        }
+
+        .model-btn.active .model-name {
+            color: white;
+        }
+
+        /* Variants */
         .variant-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
             gap: 12px;
             margin-bottom: 30px;
         }
@@ -318,12 +293,9 @@
             border: 2px solid #e2e8f0;
             padding: 16px;
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: .95rem;
             font-weight: 700;
-            color: var(--text-dark);
             cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
         }
 
         .variant-btn:hover {
@@ -335,10 +307,86 @@
             background: #fff7ed;
             border-color: var(--arena-orange);
             color: #c2410c;
-            box-shadow: 0 4px 12px rgba(255, 85, 0, 0.15);
         }
 
-        /* Price Breakdown Card */
+        /* Extended Warranty */
+        .warranty-section {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .warranty-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .warranty-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .warranty-title {
+            color: #166534;
+            font-weight: 800;
+            font-size: .95rem;
+            text-transform: uppercase;
+        }
+
+        .warranty-options {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+        }
+
+        .warranty-option {
+            position: relative;
+        }
+
+        .warranty-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .warranty-option label {
+            display: block;
+            background: white;
+            border: 2px solid #dcfce7;
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            color: #166534;
+            transition: .2s;
+        }
+
+        .warranty-option label span {
+            display: block;
+            font-size: .78rem;
+            color: #64748b;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .warranty-option input:checked + label {
+            border-color: var(--green);
+            background: #dcfce7;
+            box-shadow: 0 4px 12px rgba(21,128,61,.15);
+        }
+
+        /* Price */
         .price-breakdown {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -351,8 +399,7 @@
             justify-content: space-between;
             padding: 12px 0;
             border-bottom: 1px dashed #cbd5e1;
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: .95rem;
             color: #334155;
         }
 
@@ -369,291 +416,554 @@
             margin-top: 6px;
         }
 
+        .warranty-price {
+            color: var(--green);
+            font-weight: 700;
+        }
+
         .placeholder-text {
             color: #94a3b8;
             font-style: italic;
             text-align: center;
             padding: 25px;
-            font-size: 0.92rem;
             background: #f8fafc;
             border-radius: 10px;
             border: 2px dashed #cbd5e1;
         }
 
-        @media (max-width: 600px) {
+        @media(max-width:600px) {
             body { padding: 10px; }
             .model-grid { grid-template-columns: 1fr; }
+            .warranty-options { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.6rem; }
-            .exec-card { flex-direction: column; gap: 12px; text-align: center; }
+            .exec-card {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<!-- Login / Executive Modal -->
+<!-- LOGIN -->
 <div class="login-modal" id="loginModal">
     <div class="login-box">
         <h2>ARENA PORTAL</h2>
         <p>Sales Executive details darj karein</p>
+
         <form onsubmit="handleLogin(event)">
             <div class="input-group">
                 <label for="execName">Executive Name</label>
-                <input type="text" id="execName" placeholder="e.g. Rahul Sharma" required>
+                <input
+                    type="text"
+                    id="execName"
+                    placeholder="e.g. Rahul Sharma"
+                    required
+                >
             </div>
+
             <div class="input-group">
                 <label for="execMobile">Mobile Number</label>
-                <input type="tel" id="execMobile" placeholder="10-digit Mobile Number" pattern="[0-9]{10}" maxlength="10" required>
+                <input
+                    type="tel"
+                    id="execMobile"
+                    placeholder="10-digit Mobile Number"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    required
+                >
             </div>
-            <button type="submit" class="login-btn">Continue to Calculator</button>
+
+            <button type="submit" class="login-btn">
+                Continue to Calculator
+            </button>
         </form>
     </div>
 </div>
 
-<!-- Main App Container -->
+<!-- MAIN -->
 <div class="container" id="mainContainer">
+
     <div class="header">
-        <div class="brand-subtitle">M A R U T I   S U Z U K I   •   A R E N A</div>
+        <div class="brand-subtitle">
+            M A R U T I   S U Z U K I   •   A R E N A
+        </div>
+
         <h1>Price Calculator</h1>
-        <div class="header-meta">ARENA Price List • Gorakhpur • September 2026</div>
+
+        <div class="header-meta">
+            ARENA Price List • Gorakhpur • September 2026
+        </div>
 
         <div class="exec-card">
             <div class="exec-info">
                 <h3 id="displayExecName">Rahul Sharma</h3>
-                <p>Sales Executive &bull; Mob: <span id="displayExecMobile">45534553</span></p>
+                <p>
+                    Sales Executive • Mob:
+                    <span id="displayExecMobile"></span>
+                </p>
             </div>
-            <button class="edit-btn" onclick="handleEditProfile()">Edit</button>
+
+            <button class="edit-btn" onclick="handleEditProfile()">
+                Edit
+            </button>
         </div>
     </div>
 
-    <!-- White Content Section -->
     <div class="content-card">
-        <!-- Step 1: Select Model with Vehicle Icon Before Name -->
+
+        <!-- STEP 1 -->
         <div class="step-header">
             <div class="step-badge">1</div>
             <div class="step-title">Select Model</div>
         </div>
 
-        <div class="model-grid" id="modelGrid">
-            <!-- Car Icon SVG Template reusable for models -->
-            <button type="button" class="model-btn" onclick="selectModel('alto', this)">
-                <div class="model-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                </div>
+        <div class="model-grid">
+
+            <button class="model-btn" onclick="selectModel('alto',this)">
+                <div class="model-icon">🚗</div>
                 <span class="model-name">Alto K10</span>
             </button>
-            <button type="button" class="model-btn" onclick="selectModel('wagonr', this)">
-                <div class="model-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                </div>
+
+            <button class="model-btn" onclick="selectModel('wagonr',this)">
+                <div class="model-icon">🚗</div>
                 <span class="model-name">Wagon R</span>
             </button>
-            <button type="button" class="model-btn" onclick="selectModel('swift', this)">
-                <div class="model-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                </div>
+
+            <button class="model-btn" onclick="selectModel('swift',this)">
+                <div class="model-icon">🚗</div>
                 <span class="model-name">Swift</span>
             </button>
-            <button type="button" class="model-btn" onclick="selectModel('dzire', this)">
-                <div class="model-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                </div>
+
+            <button class="model-btn" onclick="selectModel('dzire',this)">
+                <div class="model-icon">🚗</div>
                 <span class="model-name">Dzire</span>
             </button>
-            <button type="button" class="model-btn" onclick="selectModel('brezza', this)">
-                <div class="model-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                </div>
+
+            <button class="model-btn" onclick="selectModel('brezza',this)">
+                <div class="model-icon">🚙</div>
                 <span class="model-name">Brezza</span>
             </button>
-            <button type="button" class="model-btn" onclick="selectModel('ertiga', this)">
-                <div class="model-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.76l.12.34V17z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
-                </div>
+
+            <button class="model-btn" onclick="selectModel('ertiga',this)">
+                <div class="model-icon">🚐</div>
                 <span class="model-name">Ertiga</span>
             </button>
+
         </div>
 
-        <!-- Step 2: Select Variant (No amounts displayed) -->
+        <!-- STEP 2 -->
         <div class="step-header">
             <div class="step-badge">2</div>
             <div class="step-title">Select Variant</div>
         </div>
 
         <div id="variantContainer">
-            <div class="placeholder-text">👉 Upar kisi bhi ARENA model par click karein taaki variants dikh sakein!</div>
+            <div class="placeholder-text">
+                👉 Upar kisi bhi ARENA model par click karein taaki variants dikh sakein!
+            </div>
         </div>
 
-        <!-- Price Breakdown Card -->
-        <div class="price-breakdown" style="margin-top: 30px;">
-            <div class="step-header" style="margin-bottom: 12px;">
-                <div class="step-badge" style="background:#002884;">₹</div>
-                <div class="step-title">Price Summary & Breakdown</div>
+        <!-- STEP 3 EXTENDED WARRANTY -->
+        <div class="step-header">
+            <div class="step-badge">3</div>
+            <div class="step-title">Extended Warranty</div>
+        </div>
+
+        <div class="warranty-section">
+
+            <div class="warranty-heading">
+                <div class="warranty-icon">✓</div>
+                <div class="warranty-title">
+                    Extended Warranty Facility
+                </div>
             </div>
+
+            <div class="warranty-options">
+
+                <div class="warranty-option">
+                    <input
+                        type="radio"
+                        id="warrantyNone"
+                        name="warranty"
+                        value="0"
+                        checked
+                        onchange="updateWarranty()"
+                    >
+                    <label for="warrantyNone">
+                        No Warranty
+                        <span>₹0</span>
+                    </label>
+                </div>
+
+                <div class="warranty-option">
+                    <input
+                        type="radio"
+                        id="warranty2"
+                        name="warranty"
+                        value="6500"
+                        onchange="updateWarranty()"
+                    >
+                    <label for="warranty2">
+                        2 Year
+                        <span>₹6,500</span>
+                    </label>
+                </div>
+
+                <div class="warranty-option">
+                    <input
+                        type="radio"
+                        id="warranty3"
+                        name="warranty"
+                        value="9500"
+                        onchange="updateWarranty()"
+                    >
+                    <label for="warranty3">
+                        3 Year
+                        <span>₹9,500</span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PRICE BREAKDOWN -->
+        <div class="price-breakdown">
+
+            <div class="step-header" style="margin-bottom:12px;">
+                <div class="step-badge">₹</div>
+                <div class="step-title">
+                    Price Summary & Breakdown
+                </div>
+            </div>
+
             <div class="price-row">
                 <span>Ex-Showroom Price</span>
                 <span id="exShowroom">₹0</span>
             </div>
+
             <div class="price-row">
                 <span>RTO / Registration (Est. 10%)</span>
                 <span id="rto">₹0</span>
             </div>
+
             <div class="price-row">
                 <span>Insurance (Comprehensive)</span>
                 <span id="insurance">₹0</span>
             </div>
+
             <div class="price-row">
                 <span>Fastag & Mandatory Accessories</span>
                 <span id="other">₹2,500</span>
             </div>
+
+            <div class="price-row">
+                <span>Extended Warranty</span>
+                <span id="warrantyDisplay" class="warranty-price">
+                    ₹0
+                </span>
+            </div>
+
             <div class="price-row total">
                 <span>Estimated On-Road Price</span>
                 <span id="totalPrice">₹0</span>
             </div>
+
         </div>
+
     </div>
 </div>
 
 <script>
-    window.onload = function() {
-        const savedName = localStorage.getItem("arena_exec_name");
-        const savedMobile = localStorage.getItem("arena_exec_mobile");
 
-        if (savedName && savedMobile) {
-            showCalculator(savedName, savedMobile);
+window.onload = function() {
+
+    const savedName =
+        localStorage.getItem("arena_exec_name");
+
+    const savedMobile =
+        localStorage.getItem("arena_exec_mobile");
+
+    if (savedName && savedMobile) {
+        showCalculator(savedName, savedMobile);
+    }
+};
+
+function handleLogin(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("execName").value.trim();
+
+    const mobile =
+        document.getElementById("execMobile").value.trim();
+
+    if (name && mobile.length === 10) {
+
+        localStorage.setItem(
+            "arena_exec_name",
+            name
+        );
+
+        localStorage.setItem(
+            "arena_exec_mobile",
+            mobile
+        );
+
+        showCalculator(name,mobile);
+
+    } else {
+
+        alert(
+            "Kripya sahi naam aur 10-digit mobile number darj karein."
+        );
+    }
+}
+
+function showCalculator(name,mobile) {
+
+    document.getElementById("loginModal")
+        .style.display = "none";
+
+    document.getElementById("mainContainer")
+        .style.display = "block";
+
+    document.getElementById("displayExecName")
+        .textContent = name;
+
+    document.getElementById("displayExecMobile")
+        .textContent = mobile;
+}
+
+function handleEditProfile() {
+
+    document.getElementById("loginModal")
+        .style.display = "flex";
+
+    document.getElementById("mainContainer")
+        .style.display = "none";
+
+    document.getElementById("execName").value =
+        localStorage.getItem("arena_exec_name") || "";
+
+    document.getElementById("execMobile").value =
+        localStorage.getItem("arena_exec_mobile") || "";
+}
+
+
+/* VEHICLE DATA */
+
+const vehicleData = {
+
+    alto: [
+        {name:"Std (Petrol)",price:399000},
+        {name:"LXi (Petrol)",price:483000},
+        {name:"VXi (Petrol)",price:506000},
+        {name:"VXi+ (Petrol)",price:535000},
+        {name:"LXi (CNG)",price:573000},
+        {name:"VXi (CNG)",price:596000}
+    ],
+
+    wagonr: [
+        {name:"LXi 1.0L (Petrol)",price:554000},
+        {name:"VXi 1.0L (Petrol)",price:599000},
+        {name:"ZXi 1.2L (Petrol)",price:628000},
+        {name:"ZXi+ 1.2L (Petrol)",price:675000},
+        {name:"LXi 1.0L (CNG)",price:644000},
+        {name:"VXi 1.0L (CNG)",price:689000}
+    ],
+
+    swift: [
+        {name:"LXi (Petrol)",price:649000},
+        {name:"VXi (Petrol)",price:729000},
+        {name:"VXi (O) (Petrol)",price:756000},
+        {name:"ZXi (Petrol)",price:829000},
+        {name:"ZXi+ (Petrol)",price:899000},
+        {name:"VXi (CNG)",price:819000},
+        {name:"ZXi (CNG)",price:919000}
+    ],
+
+    dzire: [
+        {name:"LXi (Petrol)",price:679000},
+        {name:"VXi (Petrol)",price:779000},
+        {name:"ZXi (Petrol)",price:889000},
+        {name:"ZXi+ (Petrol)",price:939000},
+        {name:"VXi (CNG)",price:874000},
+        {name:"ZXi (CNG)",price:984000}
+    ],
+
+    brezza: [
+        {name:"LXi (Petrol)",price:834000},
+        {name:"VXi (Petrol)",price:969000},
+        {name:"ZXi (Petrol)",price:1114000},
+        {name:"ZXi+ (Petrol)",price:1258000},
+        {name:"LXi (CNG)",price:929000},
+        {name:"VXi (CNG)",price:1064000},
+        {name:"ZXi (CNG)",price:1209000}
+    ],
+
+    ertiga: [
+        {name:"LXi (Petrol)",price:869000},
+        {name:"VXi (Petrol)",price:983000},
+        {name:"ZXi (Petrol)",price:1093000},
+        {name:"ZXi+ (Petrol)",price:1203000},
+        {name:"VXi (CNG)",price:1078000},
+        {name:"ZXi (CNG)",price:1188000}
+    ]
+};
+
+let selectedModelKey = "";
+let selectedExShowroom = 0;
+
+
+/* SELECT MODEL */
+
+function selectModel(modelKey,btnElement) {
+
+    selectedModelKey = modelKey;
+
+    document
+        .querySelectorAll(".model-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    btnElement.classList.add("active");
+
+    const variantContainer =
+        document.getElementById("variantContainer");
+
+    variantContainer.innerHTML = "";
+
+    const grid =
+        document.createElement("div");
+
+    grid.className = "variant-grid";
+
+    vehicleData[modelKey].forEach(
+        (variant,index) => {
+
+            const vBtn =
+                document.createElement("button");
+
+            vBtn.type = "button";
+            vBtn.className = "variant-btn";
+            vBtn.textContent = variant.name;
+
+            vBtn.onclick = () =>
+                selectVariant(index,vBtn);
+
+            grid.appendChild(vBtn);
         }
-    };
+    );
 
-    function handleLogin(event) {
-        event.preventDefault();
-        const name = document.getElementById("execName").value.trim();
-        const mobile = document.getElementById("execMobile").value.trim();
+    variantContainer.appendChild(grid);
 
-        if (name && mobile.length === 10) {
-            localStorage.setItem("arena_exec_name", name);
-            localStorage.setItem("arena_exec_mobile", mobile);
-            showCalculator(name, mobile);
-        } else {
-            alert("Kripya sahi naam aur 10-digit mobile number darj karein.");
-        }
+    /* Auto select first variant */
+    grid.children[0].click();
+}
+
+
+/* SELECT VARIANT */
+
+function selectVariant(
+    variantIndex,
+    btnElement
+) {
+
+    document
+        .querySelectorAll(".variant-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    btnElement.classList.add("active");
+
+    selectedExShowroom =
+        vehicleData[selectedModelKey]
+        [variantIndex].price;
+
+    calculatePrice();
+}
+
+
+/* WARRANTY */
+
+function updateWarranty() {
+
+    calculatePrice();
+}
+
+
+/* CALCULATE TOTAL */
+
+function calculatePrice() {
+
+    if (!selectedExShowroom) {
+        return;
     }
 
-    function showCalculator(name, mobile) {
-        document.getElementById("loginModal").style.display = "none";
-        document.getElementById("mainContainer").style.display = "block";
-        document.getElementById("displayExecName").textContent = name;
-        document.getElementById("displayExecMobile").textContent = mobile;
-    }
+    const exShowroom =
+        selectedExShowroom;
 
-    function handleEditProfile() {
-        document.getElementById("loginModal").style.display = "flex";
-        document.getElementById("mainContainer").style.display = "none";
-        document.getElementById("execName").value = localStorage.getItem("arena_exec_name") || "";
-        document.getElementById("execMobile").value = localStorage.getItem("arena_exec_mobile") || "";
-    }
+    const rto =
+        Math.round(exShowroom * 0.10);
 
-    const vehicleData = {
-        alto: [
-            { name: "Std (Petrol)", price: 399000 },
-            { name: "LXi (Petrol)", price: 483000 },
-            { name: "VXi (Petrol)", price: 506000 },
-            { name: "VXi+ (Petrol)", price: 535000 },
-            { name: "LXi (CNG)", price: 573000 },
-            { name: "VXi (CNG)", price: 596000 }
-        ],
-        wagonr: [
-            { name: "LXi 1.0L (Petrol)", price: 554000 },
-            { name: "VXi 1.0L (Petrol)", price: 599000 },
-            { name: "ZXi 1.2L (Petrol)", price: 628000 },
-            { name: "ZXi+ 1.2L (Petrol)", price: 675000 },
-            { name: "LXi 1.0L (CNG)", price: 644000 },
-            { name: "VXi 1.0L (CNG)", price: 689000 }
-        ],
-        swift: [
-            { name: "LXi (Petrol)", price: 649000 },
-            { name: "VXi (Petrol)", price: 729000 },
-            { name: "VXi (O) (Petrol)", price: 756000 },
-            { name: "ZXi (Petrol)", price: 829000 },
-            { name: "ZXi+ (Petrol)", price: 899000 },
-            { name: "VXi (CNG)", price: 819000 },
-            { name: "ZXi (CNG)", price: 919000 }
-        ],
-        dzire: [
-            { name: "LXi (Petrol)", price: 679000 },
-            { name: "VXi (Petrol)", price: 779000 },
-            { name: "ZXi (Petrol)", price: 889000 },
-            { name: "ZXi+ (Petrol)", price: 939000 },
-            { name: "VXi (CNG)", price: 874000 },
-            { name: "ZXi (CNG)", price: 984000 }
-        ],
-        brezza: [
-            { name: "LXi (Petrol)", price: 834000 },
-            { name: "VXi (Petrol)", price: 969000 },
-            { name: "ZXi (Petrol)", price: 1114000 },
-            { name: "ZXi+ (Petrol)", price: 1258000 },
-            { name: "LXi (CNG)", price: 929000 },
-            { name: "VXi (CNG)", price: 1064000 },
-            { name: "ZXi (CNG)", price: 1209000 }
-        ],
-        ertiga: [
-            { name: "LXi (Petrol)", price: 869000 },
-            { name: "VXi (Petrol)", price: 983000 },
-            { name: "ZXi (Petrol)", price: 1093000 },
-            { name: "ZXi+ (Petrol)", price: 1203000 },
-            { name: "VXi (CNG)", price: 1078000 },
-            { name: "ZXi (CNG)", price: 1188000 }
-        ]
-    };
+    const insurance =
+        Math.round(exShowroom * 0.045);
 
-    let selectedModelKey = "";
+    const other = 2500;
 
-    function selectModel(modelKey, btnElement) {
-        selectedModelKey = modelKey;
-        
-        document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
-        btnElement.classList.add('active');
+    const warranty =
+        Number(
+            document.querySelector(
+                'input[name="warranty"]:checked'
+            ).value
+        );
 
-        const variantContainer = document.getElementById("variantContainer");
-        variantContainer.innerHTML = '';
+    const total =
+        exShowroom +
+        rto +
+        insurance +
+        other +
+        warranty;
 
-        if (vehicleData[modelKey]) {
-            const grid = document.createElement('div');
-            grid.className = 'variant-grid';
+    document.getElementById(
+        "exShowroom"
+    ).textContent =
+        "₹" + exShowroom.toLocaleString("en-IN");
 
-            vehicleData[modelKey].forEach((variant, index) => {
-                const vBtn = document.createElement('button');
-                vBtn.type = 'button';
-                vBtn.className = 'variant-btn';
-                // Variant name only, no price shown
-                vBtn.textContent = variant.name;
-                vBtn.onclick = () => selectVariant(index, vBtn);
-                grid.appendChild(vBtn);
-            });
-            variantContainer.appendChild(grid);
+    document.getElementById(
+        "rto"
+    ).textContent =
+        "₹" + rto.toLocaleString("en-IN");
 
-            // Auto-select first variant instantly
-            grid.children[0].click();
-        }
-    }
+    document.getElementById(
+        "insurance"
+    ).textContent =
+        "₹" + insurance.toLocaleString("en-IN");
 
-    function selectVariant(variantIndex, btnElement) {
-        document.querySelectorAll('.variant-btn').forEach(btn => btn.classList.remove('active'));
-        btnElement.classList.add('active');
+    document.getElementById(
+        "other"
+    ).textContent =
+        "₹" + other.toLocaleString("en-IN");
 
-        if (selectedModelKey && variantIndex !== "") {
-            const exShowroom = vehicleData[selectedModelKey][variantIndex].price;
-            const rto = Math.round(exShowroom * 0.10);
-            const insurance = Math.round(exShowroom * 0.045);
-            const other = 2500;
-            const total = exShowroom + rto + insurance + other;
+    document.getElementById(
+        "warrantyDisplay"
+    ).textContent =
+        "₹" + warranty.toLocaleString("en-IN");
 
-            document.getElementById("exShowroom").textContent = "₹" + exShowroom.toLocaleString('en-IN');
-            document.getElementById("rto").textContent = "₹" + rto.toLocaleString('en-IN');
-            document.getElementById("insurance").textContent = "₹" + insurance.toLocaleString('en-IN');
-            document.getElementById("other").textContent = "₹" + other.toLocaleString('en-IN');
-            document.getElementById("totalPrice").textContent = "₹" + total.toLocaleString('en-IN');
-        }
-    }
+    document.getElementById(
+        "totalPrice"
+    ).textContent =
+        "₹" + total.toLocaleString("en-IN");
+}
+
 </script>
 
 </body>
 </html>
+```
