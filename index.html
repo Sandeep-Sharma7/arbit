@@ -155,6 +155,7 @@
 
     .btn-primary { background: var(--primary); color: white; }
     .btn-whatsapp { background: #25D366; color: white; }
+    .btn-download { background: #0288D1; color: white; }
     .btn-secondary { background: #ECEFF1; color: var(--text); }
     .btn-danger { background: #D32F2F; color: white; }
 
@@ -458,13 +459,13 @@
   <div class="no-print-controls">
     <div>
       <h2>Maruti Suzuki Arena Price Calculator</h2>
-      <p>Real HD Wikimedia Photo Integration</p>
+      <p>Download HD Image & WhatsApp Share Enabled</p>
     </div>
     <div class="btn-group">
-      <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      <button class="btn btn-download" onclick="downloadAsPNG()"><i class="fa-solid fa-download"></i> Download Photo</button>
+      <button class="btn btn-whatsapp" onclick="shareToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Share Image</button>
       <button class="btn btn-secondary" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
-      <button class="btn btn-whatsapp" onclick="sendWhatsAppImage()"><i class="fa-brands fa-whatsapp"></i> Share Image</button>
-      <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+      <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
     </div>
   </div>
 
@@ -496,7 +497,7 @@
           </div>
           <div class="car-preview-container">
             <div class="car-preview-wrapper" id="carPreviewBox">
-              <img id="realCarPhoto" src="" alt="Maruti Suzuki Car" crossorigin="anonymous">
+              <img id="realCarPhoto" src="" alt="Maruti Suzuki Car">
             </div>
             <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Custom Photo</label>
             <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
@@ -621,7 +622,6 @@
   </div>
 
   <script>
-    // Exact Wikimedia Commons Direct HD Image Links Provided by You
     const realCarCDNImages = {
       "EPIC NEW SWIFT": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Suzuki_Swift_%282024%29_hybrid_DSC_6076.jpg",
       "S-PRESSO": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Suzuki_S-presso_1.0_GLX_Adventure_2021.jpg",
@@ -793,18 +793,43 @@
       setRto('UP53');
     }
 
-    function sendWhatsAppImage() {
+    // Function 1: Direct Download as PNG Photo
+    function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
-      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+      html2canvas(card, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+        const link = document.createElement('a');
+        const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
+        link.download = `Arena_Quotation_${modelName}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }).catch(err => {
+        alert("Image generate hone me error aaya. Kripya 'Upload Custom Photo' karke try karein.");
+      });
+    }
+
+    // Function 2: Web Share or Clipboard Copy for WhatsApp
+    function shareToWhatsApp() {
+      const card = document.getElementById('quotationCard');
+      html2canvas(card, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
         canvas.toBlob(blob => {
-          const item = new ClipboardItem({ "image/png": blob });
-          navigator.clipboard.write([item]).then(() => {
-            alert("Quotation image copied! Opening WhatsApp...");
-            window.open("https://web.whatsapp.com/", "_blank");
-          }).catch(err => {
-            window.open("https://web.whatsapp.com/", "_blank");
-          });
-        });
+          const file = new File([blob], 'Quotation.png', { type: 'image/png' });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              files: [file],
+              title: 'Maruti Suzuki Quotation',
+              text: 'Here is the Maruti Suzuki Arena Quotation.'
+            }).catch(e => console.log(e));
+          } else if (navigator.clipboard && navigator.clipboard.write) {
+            const item = new ClipboardItem({ "image/png": blob });
+            navigator.clipboard.write([item]).then(() => {
+              alert("Quotation Image Clipboard me COPY ho gayi hai! Ab WhatsApp me PASTE (Ctrl+V) karke bhej do.");
+              window.open("https://web.whatsapp.com/", "_blank");
+            });
+          } else {
+            downloadAsPNG();
+            alert("Image Download ho gayi hai! Isko WhatsApp par attach karke bhej dein.");
+          }
+        }, 'image/png');
       });
     }
   </script>
