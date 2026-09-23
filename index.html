@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- html2canvas library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -40,7 +39,6 @@
       padding: 10px;
     }
 
-    /* Login Screen Overlay Styles */
     .login-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -75,9 +73,7 @@
       margin-bottom: 20px;
     }
 
-    .form-group {
-      margin-bottom: 14px;
-    }
+    .form-group { margin-bottom: 14px; }
 
     .form-group label {
       display: block;
@@ -96,11 +92,6 @@
       font-size: 13px;
       font-family: 'Open Sans', sans-serif;
       outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-group input:focus {
-      border-color: var(--primary);
     }
 
     .login-btn {
@@ -114,16 +105,9 @@
       font-size: 13px;
       cursor: pointer;
       margin-top: 10px;
-      transition: background 0.2s;
     }
 
-    .login-btn:hover {
-      background: var(--secondary);
-    }
-
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     .no-print-controls {
       background: #ffffff;
@@ -146,17 +130,6 @@
       }
     }
 
-    .no-print-controls h2 {
-      font-size: 15px;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .no-print-controls p {
-      font-size: 11px;
-      color: #666;
-    }
-
     .btn-group {
       display: flex;
       gap: 6px;
@@ -164,9 +137,7 @@
       flex-wrap: wrap;
     }
 
-    @media (min-width: 600px) {
-      .btn-group { width: auto; }
-    }
+    @media (min-width: 600px) { .btn-group { width: auto; } }
 
     .btn {
       flex: 1;
@@ -222,24 +193,11 @@
       line-height: 1.1;
     }
 
-    .tagline {
-      font-size: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #555;
-    }
-
     .arena-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 16px;
       color: #000;
-      text-align: right;
-    }
-
-    .sub-date {
-      font-size: 8px;
-      color: #666;
       text-align: right;
     }
 
@@ -303,15 +261,15 @@
       align-items: center;
       justify-content: center;
       background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
       border-radius: 6px;
       overflow: hidden;
       padding: 4px;
     }
 
     .car-preview-img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
@@ -503,11 +461,11 @@
         <div class="brand-header">
           <div>
             <div class="logo-text">MARUTI SUZUKI</div>
-            <div class="tagline">ARENA - WAY OF LIFE</div>
+            <div style="font-size: 8px; letter-spacing: 1px; color: #555;">ARENA - WAY OF LIFE</div>
           </div>
           <div>
             <div class="arena-title">ARENA</div>
-            <div class="sub-date">PRICE LIST - SEP 2026</div>
+            <div style="font-size: 8px; color: #666; text-align: right;">PRICE LIST - SEP 2026</div>
           </div>
         </div>
 
@@ -523,7 +481,7 @@
             <div class="variant-subtitle-display" id="displayVariantName">LXI 1L ISS 5MT</div>
           </div>
           <div class="car-preview-wrapper">
-            <img id="carImage" src="" alt="Car Preview" class="car-preview-img" onerror="handleImageError(this)">
+            <img id="carImage" src="" alt="Car Graphic" class="car-preview-img">
           </div>
         </div>
 
@@ -645,42 +603,42 @@
   </div>
 
   <script>
-    // Specific images mapped by category name
-    const carImages = {
-      'NEW ALTO K10': 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=400&auto=format&fit=crop',
-      'NEW CELERIO': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&auto=format&fit=crop',
-      'S-PRESSO': 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&auto=format&fit=crop',
-      'WAGON -R': 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400&auto=format&fit=crop',
-      'EPIC NEW SWIFT': 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400&auto=format&fit=crop',
-      'Dazzling New Dzire': 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=400&auto=format&fit=crop',
-      'NEW BREZZA (July)': 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&auto=format&fit=crop',
-      'VICTORIS': 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=400&auto=format&fit=crop',
-      'NEW ERTIGA': 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400&auto=format&fit=crop',
-      'EECO NEW': 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=400&auto=format&fit=crop'
-    };
+    // Embedded Vector SVG car representations for reliable display
+    function getCarSVG(category) {
+      const cat = category.toUpperCase().trim();
+      
+      let bodyColor = "#0A2540";
+      let roofType = "standard";
+
+      if (cat.includes("WAGON")) {
+        // High roof tall boy WagonR design
+        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><rect x="35" y="15" width="145" height="55" rx="8" fill="%232563eb"/><path d="M 40 20 L 70 20 L 70 45 L 20 45 Z" fill="%23e2e8f0"/><path d="M 75 20 L 130 20 L 130 45 L 75 45 Z" fill="%23cbd5e1"/><path d="M 135 20 L 175 30 L 175 45 L 135 45 Z" fill="%23e2e8f0"/><rect x="15" y="42" width="190" height="30" rx="6" fill="%231e40af"/><circle cx="55" cy="72" r="14" fill="%231e293b"/><circle cx="55" cy="72" r="6" fill="%2394a3b8"/><circle cx="165" cy="72" r="14" fill="%231e293b"/><circle cx="165" cy="72" r="6" fill="%2394a3b8"/><text x="110" y="93" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="12" fill="%230f172a">WAGON-R</text></g></svg>`;
+      } else if (cat.includes("BREZZA")) {
+        // SUV Brezza design
+        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><rect x="30" y="22" width="155" height="48" rx="10" fill="%23dc2626"/><path d="M 50 25 L 90 25 L 90 45 L 30 45 Z" fill="%23cbd5e1"/><path d="M 95 25 L 150 25 L 155 45 L 95 45 Z" fill="%23cbd5e1"/><rect x="10" y="42" width="198" height="32" rx="6" fill="%23991b1b"/><circle cx="55" cy="74" r="15" fill="%23090d16"/><circle cx="55" cy="74" r="7" fill="%23cbd5e1"/><circle cx="165" cy="74" r="15" fill="%23090d16"/><circle cx="165" cy="74" r="7" fill="%23cbd5e1"/><text x="110" y="95" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="12" fill="%230f172a">BREZZA SUV</text></g></svg>`;
+      } else if (cat.includes("SWIFT")) {
+        // Hatchback Swift design
+        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><path d="M 30 50 Q 60 20 120 22 L 175 42 L 195 52 L 195 72 L 15 72 Z" fill="%230284c7"/><circle cx="55" cy="72" r="14" fill="%230f172a"/><circle cx="55" cy="72" r="6" fill="%23cbd5e1"/><circle cx="160" cy="72" r="14" fill="%230f172a"/><circle cx="160" cy="72" r="6" fill="%23cbd5e1"/><text x="105" y="93" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="12" fill="%230f172a">SWIFT</text></g></svg>`;
+      } else {
+        // Standard Arena Model SVG
+        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><rect x="35" y="28" width="145" height="42" rx="8" fill="%230A2540"/><path d="M 50 30 L 85 30 L 85 46 L 35 46 Z" fill="%23cbd5e1"/><path d="M 90 30 L 140 30 L 150 46 L 90 46 Z" fill="%23cbd5e1"/><rect x="15" y="46" width="185" height="26" rx="5" fill="%231E3A8A"/><circle cx="55" cy="72" r="13" fill="%231e293b"/><circle cx="55" cy="72" r="5" fill="%23ffffff"/><circle cx="160" cy="72" r="13" fill="%231e293b"/><circle cx="160" cy="72" r="5" fill="%23ffffff"/><text x="105" y="93" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="11" fill="%230f172a">${encodeURIComponent(category)}</text></g></svg>`;
+      }
+    }
 
     const dataset = [
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI 1L 5MT", "ex": 400029.02, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L 5MT", "ex": 452529.58, "msp4": 5250.82, "msp5": 9144.82, "msp6": 10088.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L 5MT", "ex": 500029.30, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L AGS", "ex": 497530.06, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L AGS", "ex": 545029.78, "msp4": 6194.82, "msp5": 10796.82, "msp6": 11976.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI CNG 1L 5MT", "ex": 484530.00, "msp4": 5604.82, "msp5": 9734.82, "msp6": 10678.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI CNG 1L 5MT", "ex": 534528.96, "msp4": 6076.82, "msp5": 10560.82, "msp6": 11740.82 },
       { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
       { "category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS 5MT", "ex": 518559.26, "msp4": 5958.82, "msp5": 10324.82, "msp6": 11386.82 },
-      { "category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI 1L ISS 5MT", "ex": 573559.06, "msp4": 6548.82, "msp5": 11386.82, "msp6": 12566.82 },
       { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
-      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO LXI 1L ISS 5MT", "ex": 429528.84, "msp4": 5014.82, "msp5": 8672.82, "msp6": 9616.82 },
       { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
       { "category": "WAGON -R", "name": "MARUTI WAGONR VXI 1L ISS 5MT", "ex": 570059.24, "msp4": 6548.82, "msp5": 11386.82, "msp6": 12566.82 },
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.00, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L 5MT", "ex": 729500.00, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
       { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
-      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI 1.2L 5MT", "ex": 749000.00, "msp4": 8436.82, "msp5": 14690.82, "msp6": 16342.82 },
       { "category": "NEW BREZZA (July)", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
-      { "category": "NEW BREZZA (July)", "name": "MARUTI BREZZA VXI 1.5L 5MT", "ex": 969500.00, "msp4": 16165.82, "msp5": 20059.82, "msp6": 22419.82 },
       { "category": "NEW BREZZA (July)", "name": "MARUTI BREZZA ZXI 1.5L 5MT", "ex": 1114500.00, "msp4": 18525.82, "msp5": 22891.82, "msp6": 25723.82 }
     ];
 
@@ -722,17 +680,10 @@
         option.textContent = cat;
         categorySelect.appendChild(option);
       });
-    }
-
-    function generateSVGPlaceholder(carName) {
-      const encodedText = encodeURIComponent(carName);
-      return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><rect width="100%" height="100%" fill="%230A2540"/><path d="M20,65 L35,40 L165,40 L180,65 L190,65 C195,65 195,75 190,75 L10,75 C5,75 5,65 10,65 Z" fill="%23ffffff" opacity="0.8"/><circle cx="50" cy="75" r="12" fill="%23263238"/><circle cx="50" cy="75" r="5" fill="%23ffffff"/><circle cx="150" cy="75" r="12" fill="%23263238"/><circle cx="150" cy="75" r="5" fill="%23ffffff"/><text x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="11" fill="%23ffffff">${encodedText}</text></svg>`;
-    }
-
-    function handleImageError(img) {
-      const currentCategory = document.getElementById('categorySelect').value;
-      img.onerror = null; // Prevent infinite loop
-      img.src = generateSVGPlaceholder(currentCategory);
+      // Default to WAGON -R if present
+      if (categories.includes('WAGON -R')) {
+        categorySelect.value = 'WAGON -R';
+      }
     }
 
     function onCategoryChange() {
@@ -748,12 +699,9 @@
         variantSelect.appendChild(option);
       });
 
+      // Update Car Image with dynamic SVG graphic
       const carImgElement = document.getElementById('carImage');
-      if (carImages[selectedCategory]) {
-        carImgElement.src = carImages[selectedCategory];
-      } else {
-        carImgElement.src = generateSVGPlaceholder(selectedCategory);
-      }
+      carImgElement.src = getCarSVG(selectedCategory);
 
       calculatePrices();
     }
@@ -842,7 +790,7 @@
             alert("Quotation image copied to clipboard! Opening WhatsApp...");
             window.open("https://web.whatsapp.com/", "_blank");
           }).catch(err => {
-            alert("Could not copy automatically. Opening WhatsApp Web directly.");
+            alert("Opening WhatsApp Web directly.");
             window.open("https://web.whatsapp.com/", "_blank");
           });
         });
