@@ -254,23 +254,39 @@
       color: #555;
     }
 
+    .car-preview-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .car-preview-wrapper {
-      width: 180px;
-      height: 95px;
+      width: 190px;
+      height: 110px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
       overflow: hidden;
       padding: 4px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
     }
 
     .car-preview-img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+
+    .upload-btn-label {
+      font-size: 8px;
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 3px;
+      font-weight: 700;
     }
 
     .feature-highlights {
@@ -409,7 +425,7 @@
 
     @media print {
       body { background: white; padding: 0; }
-      .no-print-controls, .login-overlay { display: none !important; }
+      .no-print-controls, .login-overlay, .upload-btn-label { display: none !important; }
       .quotation-wrapper { max-width: 100%; }
       .quotation-card { box-shadow: none; border: none; padding: 0; }
       .input-edit { border: none; }
@@ -478,10 +494,14 @@
             <select id="variantSelect" onchange="calculatePrices()"></select>
 
             <div class="model-title-display" id="displayModelName">WAGON -R</div>
-            <div class="variant-subtitle-display" id="displayVariantName">LXI 1L ISS 5MT</div>
+            <div class="variant-subtitle-display" id="displayVariantName">MARUTI WAGONR LXI 1L ISS 5MT</div>
           </div>
-          <div class="car-preview-wrapper">
-            <img id="carImage" src="" alt="Car Graphic" class="car-preview-img">
+          <div class="car-preview-container">
+            <div class="car-preview-wrapper">
+              <img id="carImage" src="" alt="Car Image" class="car-preview-img">
+            </div>
+            <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Change Custom Image</label>
+            <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
           </div>
         </div>
 
@@ -603,27 +623,16 @@
   </div>
 
   <script>
-    // Embedded Vector SVG car representations for reliable display
-    function getCarSVG(category) {
-      const cat = category.toUpperCase().trim();
-      
-      let bodyColor = "#0A2540";
-      let roofType = "standard";
-
-      if (cat.includes("WAGON")) {
-        // High roof tall boy WagonR design
-        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><rect x="35" y="15" width="145" height="55" rx="8" fill="%232563eb"/><path d="M 40 20 L 70 20 L 70 45 L 20 45 Z" fill="%23e2e8f0"/><path d="M 75 20 L 130 20 L 130 45 L 75 45 Z" fill="%23cbd5e1"/><path d="M 135 20 L 175 30 L 175 45 L 135 45 Z" fill="%23e2e8f0"/><rect x="15" y="42" width="190" height="30" rx="6" fill="%231e40af"/><circle cx="55" cy="72" r="14" fill="%231e293b"/><circle cx="55" cy="72" r="6" fill="%2394a3b8"/><circle cx="165" cy="72" r="14" fill="%231e293b"/><circle cx="165" cy="72" r="6" fill="%2394a3b8"/><text x="110" y="93" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="12" fill="%230f172a">WAGON-R</text></g></svg>`;
-      } else if (cat.includes("BREZZA")) {
-        // SUV Brezza design
-        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><rect x="30" y="22" width="155" height="48" rx="10" fill="%23dc2626"/><path d="M 50 25 L 90 25 L 90 45 L 30 45 Z" fill="%23cbd5e1"/><path d="M 95 25 L 150 25 L 155 45 L 95 45 Z" fill="%23cbd5e1"/><rect x="10" y="42" width="198" height="32" rx="6" fill="%23991b1b"/><circle cx="55" cy="74" r="15" fill="%23090d16"/><circle cx="55" cy="74" r="7" fill="%23cbd5e1"/><circle cx="165" cy="74" r="15" fill="%23090d16"/><circle cx="165" cy="74" r="7" fill="%23cbd5e1"/><text x="110" y="95" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="12" fill="%230f172a">BREZZA SUV</text></g></svg>`;
-      } else if (cat.includes("SWIFT")) {
-        // Hatchback Swift design
-        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><path d="M 30 50 Q 60 20 120 22 L 175 42 L 195 52 L 195 72 L 15 72 Z" fill="%230284c7"/><circle cx="55" cy="72" r="14" fill="%230f172a"/><circle cx="55" cy="72" r="6" fill="%23cbd5e1"/><circle cx="160" cy="72" r="14" fill="%230f172a"/><circle cx="160" cy="72" r="6" fill="%23cbd5e1"/><text x="105" y="93" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="12" fill="%230f172a">SWIFT</text></g></svg>`;
-      } else {
-        // Standard Arena Model SVG
-        return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" width="240" height="120"><rect width="100%" height="100%" fill="%23f1f5f9" rx="6"/><g transform="translate(10, 10)"><rect x="35" y="28" width="145" height="42" rx="8" fill="%230A2540"/><path d="M 50 30 L 85 30 L 85 46 L 35 46 Z" fill="%23cbd5e1"/><path d="M 90 30 L 140 30 L 150 46 L 90 46 Z" fill="%23cbd5e1"/><rect x="15" y="46" width="185" height="26" rx="5" fill="%231E3A8A"/><circle cx="55" cy="72" r="13" fill="%231e293b"/><circle cx="55" cy="72" r="5" fill="%23ffffff"/><circle cx="160" cy="72" r="13" fill="%231e293b"/><circle cx="160" cy="72" r="5" fill="%23ffffff"/><text x="105" y="93" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="bold" font-size="11" fill="%230f172a">${encodeURIComponent(category)}</text></g></svg>`;
-      }
-    }
+    // Authentic Maruti Model High-Quality Web Images
+    const carImages = {
+      "WAGON -R": "https://imgd.aeplcdn.com/664x374/n/cw/ec/47712/wagon-r-exterior-right-front-three-quarter.jpeg",
+      "NEW ALTO K10": "https://imgd.aeplcdn.com/664x374/n/cw/ec/125255/alto-k10-exterior-right-front-three-quarter-3.jpeg",
+      "NEW CELERIO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/41197/celerio-exterior-right-front-three-quarter.jpeg",
+      "S-PRESSO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/46994/spresso-exterior-right-front-three-quarter.jpeg",
+      "EPIC NEW SWIFT": "https://imgd.aeplcdn.com/664x374/n/cw/ec/159099/swift-exterior-right-front-three-quarter-2.jpeg",
+      "Dazzling New Dzire": "https://imgd.aeplcdn.com/664x374/n/cw/ec/45691/dzire-exterior-right-front-three-quarter-3.jpeg",
+      "NEW BREZZA (July)": "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/vitara-brezza-exterior-right-front-three-quarter-2.jpeg"
+    };
 
     const dataset = [
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
@@ -680,7 +689,6 @@
         option.textContent = cat;
         categorySelect.appendChild(option);
       });
-      // Default to WAGON -R if present
       if (categories.includes('WAGON -R')) {
         categorySelect.value = 'WAGON -R';
       }
@@ -699,11 +707,24 @@
         variantSelect.appendChild(option);
       });
 
-      // Update Car Image with dynamic SVG graphic
+      // Update Car Image with HD Web Photo
       const carImgElement = document.getElementById('carImage');
-      carImgElement.src = getCarSVG(selectedCategory);
+      if (carImages[selectedCategory]) {
+        carImgElement.src = carImages[selectedCategory];
+      }
 
       calculatePrices();
+    }
+
+    function uploadLocalCarImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('carImage').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     function setWarranty(years) {
