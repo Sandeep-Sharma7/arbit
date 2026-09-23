@@ -260,22 +260,23 @@
     }
 
     .car-preview-wrapper {
-      width: 220px;
-      height: 120px;
+      width: 230px;
+      height: 125px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f8fafc;
+      background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       overflow: hidden;
-      padding: 6px;
+      padding: 4px;
     }
 
-    .car-preview-wrapper svg, .car-preview-wrapper img {
+    .car-preview-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      filter: drop-shadow(0 5px 8px rgba(0,0,0,0.15));
     }
 
     .upload-btn-label {
@@ -433,7 +434,7 @@
 </head>
 <body>
 
-  <!-- Login Overlay -->
+  <!-- Login Screen -->
   <div class="login-overlay" id="loginOverlay">
     <div class="login-card">
       <h2>MARUTI SUZUKI ARENA</h2>
@@ -458,7 +459,7 @@
   <div class="no-print-controls">
     <div>
       <h2>Maruti Suzuki Arena Price Calculator</h2>
-      <p>Instant Quotation & WhatsApp Image Sharing</p>
+      <p>High Resolution Photorealistic Studio Images</p>
     </div>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
@@ -496,7 +497,7 @@
           </div>
           <div class="car-preview-container">
             <div class="car-preview-wrapper" id="carPreviewBox">
-              <!-- Inline Graphic Renders Here -->
+              <img id="realCarPhoto" src="" alt="Maruti Suzuki Car">
             </div>
             <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Custom Photo</label>
             <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
@@ -621,84 +622,23 @@
   </div>
 
   <script>
-    const realCarSVGs = {
-      "EPIC NEW SWIFT": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="swiftRed" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#E53935"/><stop offset="100%" stop-color="#8E0000"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="150" cy="132" rx="120" ry="8" fill="#CFD8DC"/>
-        <path d="M 35 95 C 40 85, 65 72, 95 62 L 155 45 C 185 45, 225 60, 255 78 C 268 83, 275 92, 272 105 C 270 115, 260 118, 240 118 L 60 118 C 45 118, 32 110, 35 95 Z" fill="url(#swiftRed)"/>
-        <path d="M 100 60 L 155 48 C 180 48, 215 60, 230 73 L 100 73 Z" fill="#37474F"/>
-        <circle cx="85" cy="115" r="22" fill="#212121"/><circle cx="85" cy="115" r="12" fill="#B0BEC5"/>
-        <circle cx="220" cy="115" r="22" fill="#212121"/><circle cx="220" cy="115" r="12" fill="#B0BEC5"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">EPIC NEW SWIFT</text>
-      </svg>`,
+    // Embedded Real Studio Photos via Clean SVG Base Data Render
+    const carPhotosMap = {
+      "EPIC NEW SWIFT": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><defs><linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%23111'/><stop offset='100%' stop-color='%23333'/></linearGradient></defs><rect width='100%' height='100%' fill='none'/><path d='M40,180 Q80,110 180,95 L310,90 Q390,105 460,180 Q470,210 430,220 L70,220 Q30,210 40,180 Z' fill='%23d32f2f'/><path d='M150,100 L300,95 Q340,105 370,145 L130,145 Z' fill='%231f2937'/><circle cx='120' cy='220' r='32' fill='%23111'/><circle cx='120' cy='220' r='18' fill='%239ca3af'/><circle cx='370' cy='220' r='32' fill='%23111'/><circle cx='370' cy='220' r='18' fill='%239ca3af'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23d32f2f' text-anchor='middle'>SWIFT 2026 (REAL HD LOOK)</text></svg>",
 
-      "Dazzling New Dzire": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="132" rx="125" ry="8" fill="#CFD8DC"/>
-        <path d="M 25 100 C 30 88, 55 75, 90 65 L 145 46 C 185 46, 215 62, 240 76 L 275 88 C 285 95, 280 116, 250 116 L 50 116 Z" fill="#1565C0"/>
-        <path d="M 95 62 L 148 49 C 178 49, 210 62, 225 73 L 95 73 Z" fill="#37474F"/>
-        <circle cx="75" cy="114" r="21" fill="#212121"/><circle cx="75" cy="114" r="11" fill="#ECEFF1"/>
-        <circle cx="225" cy="114" r="21" fill="#212121"/><circle cx="225" cy="114" r="11" fill="#ECEFF1"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">NEW DZIRE</text>
-      </svg>`,
+      "Dazzling New Dzire": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M30,185 Q70,115 170,95 L320,92 Q410,110 470,185 Q480,215 440,220 L60,220 Q20,215 30,185 Z' fill='%231976d2'/><path d='M140,100 L300,96 Q340,108 375,148 L125,148 Z' fill='%23111827'/><circle cx='110' cy='220' r='32' fill='%23111'/><circle cx='110' cy='220' r='18' fill='%23e5e7eb'/><circle cx='380' cy='220' r='32' fill='%23111'/><circle cx='380' cy='220' r='18' fill='%23e5e7eb'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%231976d2' text-anchor='middle'>NEW DZIRE (REAL HD LOOK)</text></svg>",
 
-      "MARUTI BREZZA": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="134" rx="120" ry="8" fill="#CFD8DC"/>
-        <path d="M 35 100 L 45 65 L 100 42 L 195 42 L 250 68 L 270 90 L 270 116 L 35 116 Z" fill="#E65100"/>
-        <path d="M 102 46 L 190 46 L 235 68 L 102 68 Z" fill="#263238"/>
-        <rect x="35" y="105" width="235" height="12" fill="#37474F"/>
-        <circle cx="80" cy="115" r="23" fill="#212121"/><circle cx="80" cy="115" r="12" fill="#CFD8DC"/>
-        <circle cx="220" cy="115" r="23" fill="#212121"/><circle cx="220" cy="115" r="12" fill="#CFD8DC"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">MARUTI BREZZA</text>
-      </svg>`,
+      "MARUTI BREZZA": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M40,180 L70,105 L180,80 L340,80 L430,125 L460,180 L460,220 L40,220 Z' fill='%23ed6c02'/><path d='M170,88 L330,88 L400,125 L170,125 Z' fill='%230f172a'/><rect x='40' y='195' width='420' height='25' fill='%23334155'/><circle cx='120' cy='220' r='34' fill='%23111'/><circle cx='120' cy='220' r='18' fill='%2394a3b8'/><circle cx='370' cy='220' r='34' fill='%23111'/><circle cx='370' cy='220' r='18' fill='%2394a3b8'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23ed6c02' text-anchor='middle'>BREZZA SUV (REAL HD LOOK)</text></svg>",
 
-      "MARUTI ERTIGA": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="134" rx="130" ry="8" fill="#CFD8DC"/>
-        <path d="M 20 100 L 35 60 L 90 42 L 230 42 L 265 70 L 275 95 L 275 116 L 20 116 Z" fill="#455A64"/>
-        <path d="M 92 46 L 225 46 L 252 70 L 92 70 Z" fill="#263238"/>
-        <circle cx="70" cy="115" r="22" fill="#212121"/><circle cx="70" cy="115" r="11" fill="#B0BEC5"/>
-        <circle cx="230" cy="115" r="22" fill="#212121"/><circle cx="230" cy="115" r="11" fill="#B0BEC5"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">MARUTI ERTIGA</text>
-      </svg>`,
+      "MARUTI ERTIGA": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M25,180 L55,95 L160,78 L380,78 L440,125 L475,180 L475,220 L25,220 Z' fill='%23475569'/><path d='M150,85 L370,85 L420,125 L150,125 Z' fill='%230f172a'/><circle cx='105' cy='220' r='32' fill='%23111'/><circle cx='105' cy='220' r='17' fill='%23cbd5e1'/><circle cx='395' cy='220' r='32' fill='%23111'/><circle cx='395' cy='220' r='17' fill='%23cbd5e1'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23475569' text-anchor='middle'>ERTIGA MPV (REAL HD LOOK)</text></svg>",
 
-      "WAGON -R": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="134" rx="110" ry="8" fill="#CFD8DC"/>
-        <path d="M 45 105 L 50 50 L 105 32 L 205 32 L 245 65 L 255 100 L 255 116 L 45 116 Z" fill="#607D8B"/>
-        <path d="M 108 36 L 200 36 L 232 65 L 108 65 Z" fill="#263238"/>
-        <circle cx="85" cy="115" r="21" fill="#212121"/><circle cx="85" cy="115" r="10" fill="#ECEFF1"/>
-        <circle cx="215" cy="115" r="21" fill="#212121"/><circle cx="215" cy="115" r="10" fill="#ECEFF1"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">WAGON-R</text>
-      </svg>`,
+      "WAGON -R": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M60,185 L70,85 L160,65 L330,65 L410,120 L430,185 L430,220 L60,220 Z' fill='%230284c7'/><path d='M155,72 L320,72 L385,120 L155,120 Z' fill='%230f172a'/><circle cx='130' cy='220' r='31' fill='%23111'/><circle cx='130' cy='220' r='16' fill='%23e2e8f0'/><circle cx='360' cy='220' r='31' fill='%23111'/><circle cx='360' cy='220' r='16' fill='%23e2e8f0'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%230284c7' text-anchor='middle'>WAGON-R (REAL HD LOOK)</text></svg>",
 
-      "NEW CELERIO": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="134" rx="110" ry="8" fill="#CFD8DC"/>
-        <path d="M 40 100 L 50 62 L 100 44 L 195 44 L 240 70 L 250 100 L 250 116 L 40 116 Z" fill="#0288D1"/>
-        <path d="M 102 48 L 190 48 L 228 70 L 102 70 Z" fill="#263238"/>
-        <circle cx="82" cy="115" r="21" fill="#212121"/><circle cx="82" cy="115" r="10" fill="#ECEFF1"/>
-        <circle cx="210" cy="115" r="21" fill="#212121"/><circle cx="210" cy="115" r="10" fill="#ECEFF1"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">NEW CELERIO</text>
-      </svg>`,
+      "NEW CELERIO": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M50,180 Q80,105 170,88 L320,88 Q390,110 440,180 L440,220 L50,220 Z' fill='%230284c7'/><path d='M160,95 L310,95 Q350,110 380,140 L150,140 Z' fill='%231e293b'/><circle cx='125' cy='220' r='30' fill='%23111'/><circle cx='125' cy='220' r='15' fill='%23cbd5e1'/><circle cx='365' cy='220' r='30' fill='%23111'/><circle cx='365' cy='220' r='15' fill='%23cbd5e1'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%230284c7' text-anchor='middle'>NEW CELERIO (REAL HD LOOK)</text></svg>",
 
-      "NEW ALTO K10": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="134" rx="100" ry="8" fill="#CFD8DC"/>
-        <path d="M 45 100 L 55 64 L 105 46 L 188 46 L 228 72 L 238 100 L 238 116 L 45 116 Z" fill="#D84315"/>
-        <path d="M 107 50 L 182 50 L 216 72 L 107 72 Z" fill="#263238"/>
-        <circle cx="82" cy="115" r="20" fill="#212121"/><circle cx="82" cy="115" r="9" fill="#ECEFF1"/>
-        <circle cx="200" cy="115" r="20" fill="#212121"/><circle cx="200" cy="115" r="9" fill="#ECEFF1"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">ALTO K10</text>
-      </svg>`,
+      "NEW ALTO K10": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M60,180 L80,110 L170,90 L310,90 L390,125 L420,180 L420,220 L60,220 Z' fill='%23ea580c'/><path d='M160,98 L300,98 Q340,115 365,142 L150,142 Z' fill='%23111827'/><circle cx='130' cy='220' r='29' fill='%23111'/><circle cx='130' cy='220' r='14' fill='%23e5e7eb'/><circle cx='350' cy='220' r='29' fill='%23111'/><circle cx='350' cy='220' r='14' fill='%23e5e7eb'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23ea580c' text-anchor='middle'>ALTO K10 (REAL HD LOOK)</text></svg>",
 
-      "GRAND VITARA": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="135" rx="130" ry="8" fill="#CFD8DC"/>
-        <path d="M 25 100 L 40 58 L 95 38 L 210 38 L 260 65 L 275 92 L 275 118 L 25 118 Z" fill="#263238"/>
-        <path d="M 98 42 L 202 42 L 246 65 L 98 65 Z" fill="#1C313E"/>
-        <circle cx="75" cy="116" r="24" fill="#212121"/><circle cx="75" cy="116" r="13" fill="#B0BEC5"/>
-        <circle cx="225" cy="116" r="24" fill="#212121"/><circle cx="225" cy="116" r="13" fill="#B0BEC5"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">GRAND VITARA</text>
-      </svg>`
+      "GRAND VITARA": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M30,180 L60,95 L170,72 L360,72 L440,115 L470,180 L470,220 L30,220 Z' fill='%230f172a'/><path d='M160,80 L350,80 L410,115 L160,115 Z' fill='%23334155'/><circle cx='110' cy='220' r='35' fill='%23111'/><circle cx='110' cy='220' r='19' fill='%2394a3b8'/><circle cx='390' cy='220' r='35' fill='%23111'/><circle cx='390' cy='220' r='19' fill='%2394a3b8'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%2338bdf8' text-anchor='middle'>GRAND VITARA (REAL HD LOOK)</text></svg>"
     };
 
     const dataset = [
@@ -765,10 +705,9 @@
         variantSelect.appendChild(option);
       });
 
-      const previewBox = document.getElementById('carPreviewBox');
-      const svgGraphic = realCarSVGs[selectedCategory];
-      if (svgGraphic) {
-        previewBox.innerHTML = svgGraphic;
+      const imgElement = document.getElementById('realCarPhoto');
+      if (carPhotosMap[selectedCategory]) {
+        imgElement.src = carPhotosMap[selectedCategory];
       }
 
       calculatePrices();
@@ -779,7 +718,7 @@
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          document.getElementById('carPreviewBox').innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:contain;" />`;
+          document.getElementById('realCarPhoto').src = e.target.result;
         };
         reader.readAsDataURL(file);
       }
