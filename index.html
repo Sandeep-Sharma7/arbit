@@ -272,7 +272,7 @@
       padding: 4px;
     }
 
-    .car-preview-wrapper img, .car-preview-wrapper svg {
+    .car-preview-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -458,7 +458,7 @@
   <div class="no-print-controls">
     <div>
       <h2>Maruti Suzuki Arena Calculator</h2>
-      <p>Guaranteed 100% Embedded Offline Images</p>
+      <p>Real HD Car Photos Direct Integration</p>
     </div>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
@@ -491,12 +491,12 @@
             <label>VARIANT:</label>
             <select id="variantSelect" onchange="calculatePrices()"></select>
 
-            <div class="model-title-display" id="displayModelName">WAGON -R</div>
-            <div class="variant-subtitle-display" id="displayVariantName">MARUTI WAGONR LXI 1L ISS 5MT</div>
+            <div class="model-title-display" id="displayModelName">EPIC NEW SWIFT</div>
+            <div class="variant-subtitle-display" id="displayVariantName">MARUTI SWIFT LXI 1.2L 5MT</div>
           </div>
           <div class="car-preview-container">
             <div class="car-preview-wrapper" id="carPreviewBox">
-              <!-- SVG Embedded Image Loads Here -->
+              <!-- Real Photo Loads Here -->
             </div>
             <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Photo</label>
             <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
@@ -621,44 +621,27 @@
   </div>
 
   <script>
-    // Embedded Vector SVG Badges - Zero Network Dependency & Always Loaded
-    function generateCarSVG(modelName, color) {
-      return `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        <rect width="300" height="160" rx="10" fill="#f4f6f8"/>
-        <path d="M 40 100 L 70 65 L 140 55 L 210 65 L 260 100 L 260 120 L 40 120 Z" fill="${color}" />
-        <path d="M 80 65 L 135 60 L 135 90 L 55 90 Z" fill="#b0bec5" />
-        <path d="M 145 60 L 200 65 L 240 90 L 145 90 Z" fill="#b0bec5" />
-        <circle cx="85" cy="120" r="22" fill="#212121" />
-        <circle cx="85" cy="120" r="10" fill="#cfd8dc" />
-        <circle cx="215" cy="120" r="22" fill="#212121" />
-        <circle cx="215" cy="120" r="10" fill="#cfd8dc" />
-        <rect x="250" y="98" width="10" height="10" fill="#ffb300" rx="2" />
-        <text x="150" y="32" font-family="'Montserrat', sans-serif" font-weight="800" font-size="16" fill="#0A2540" text-anchor="middle">${modelName}</text>
-      </svg>`;
-    }
-
-    const embeddedCarSVGs = {
-      "WAGON -R": generateCarSVG("WAGON-R", "#1565C0"),
-      "S-PRESSO": generateCarSVG("S-PRESSO", "#E65100"),
-      "Dazzling New Dzire": generateCarSVG("DZIRE", "#2E7D32"),
-      "MARUTI BREZZA": generateCarSVG("BREZZA", "#C62828"),
-      "MARUTI ERTIGA": generateCarSVG("ERTIGA", "#4A148C"),
-      "EPIC NEW SWIFT": generateCarSVG("SWIFT", "#D81B60"),
-      "NEW CELERIO": generateCarSVG("CELERIO", "#00838F"),
-      "NEW ALTO K10": generateCarSVG("ALTO K10", "#F57F17"),
-      "GRAND VITARA": generateCarSVG("GRAND VITARA", "#37474F")
+    // Real Car HD Image Direct Data URLs (CDN Clean Embed)
+    const realCarPhotos = {
+      "EPIC NEW SWIFT": "https://imgd.aeplcdn.com/664x374/n/cw/ec/158309/swift-exterior-right-front-three-quarter-19.jpeg?isig=0&q=80",
+      "Dazzling New Dzire": "https://imgd.aeplcdn.com/664x374/n/cw/ec/170173/dzire-exterior-right-front-three-quarter-3.jpeg?isig=0&q=80",
+      "MARUTI BREZZA": "https://imgd.aeplcdn.com/664x374/n/cw/ec/110543/brezza-exterior-right-front-three-quarter-5.jpeg?isig=0&q=80",
+      "MARUTI ERTIGA": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115599/ertiga-exterior-right-front-three-quarter-2.jpeg?isig=0&q=80",
+      "WAGON -R": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115615/wagon-r-exterior-right-front-three-quarter-3.jpeg?isig=0&q=80",
+      "S-PRESSO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115593/s-presso-exterior-right-front-three-quarter-2.jpeg?isig=0&q=80",
+      "NEW CELERIO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115597/celerio-exterior-right-front-three-quarter-2.jpeg?isig=0&q=80",
+      "NEW ALTO K10": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115595/alto-k10-exterior-right-front-three-quarter-2.jpeg?isig=0&q=80",
+      "GRAND VITARA": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115601/grand-vitara-exterior-right-front-three-quarter-2.jpeg?isig=0&q=80"
     };
 
     const dataset = [
-      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
-      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
-      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
-      { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
-      { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA ZXI 1.5L 5MT", "ex": 1114500.00, "msp4": 18525.82, "msp5": 22891.82, "msp6": 25723.82 },
-      { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA LXI 1.5L 5MT", "ex": 869000.00, "msp4": 14200.00, "msp5": 18500.00, "msp6": 21000.00 },
-      { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA VXI 1.5L 5MT", "ex": 983000.00, "msp4": 15500.00, "msp5": 20100.00, "msp6": 23200.00 },
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.00, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L 5MT", "ex": 729500.00, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
+      { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
+      { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA LXI 1.5L 5MT", "ex": 869000.00, "msp4": 14200.00, "msp5": 18500.00, "msp6": 21000.00 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
       { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
       { "category": "GRAND VITARA", "name": "GRAND VITARA SIGMA 1.5L 5MT", "ex": 1099000.00, "msp4": 18200.00, "msp5": 22500.00, "msp6": 25100.00 }
@@ -717,12 +700,11 @@
         variantSelect.appendChild(option);
       });
 
-      // Render Embedded Offline SVG Image Directly
+      // Render Real Car Photo from Reliable Cross-Origin CDN
       const previewBox = document.getElementById('carPreviewBox');
-      if (embeddedCarSVGs[selectedCategory]) {
-        previewBox.innerHTML = embeddedCarSVGs[selectedCategory];
-      } else {
-        previewBox.innerHTML = generateCarSVG(selectedCategory, "#0A2540");
+      const imgUrl = realCarPhotos[selectedCategory];
+      if (imgUrl) {
+        previewBox.innerHTML = `<img src="${imgUrl}" fill="true" alt="${selectedCategory}" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/220x120?text=${selectedCategory}';" />`;
       }
 
       calculatePrices();
