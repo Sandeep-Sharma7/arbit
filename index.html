@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MARUTI SUZUKI ARENA - REAL PHOTO PRICE CALCULATOR</title>
+  <title>MARUTI SUZUKI ARENA - PRICE LIST & QUOTATION</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -458,7 +458,7 @@
   <div class="no-print-controls">
     <div>
       <h2>Maruti Suzuki Arena Price Calculator</h2>
-      <p>Instant Model Selection with Real High Quality Photo Options</p>
+      <p>Real HD Wikimedia Photo Integration</p>
     </div>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
@@ -496,9 +496,9 @@
           </div>
           <div class="car-preview-container">
             <div class="car-preview-wrapper" id="carPreviewBox">
-              <img id="realCarPhoto" src="" alt="Maruti Suzuki Car">
+              <img id="realCarPhoto" src="" alt="Maruti Suzuki Car" crossorigin="anonymous">
             </div>
-            <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Official HD Photo</label>
+            <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Custom Photo</label>
             <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
           </div>
         </div>
@@ -621,19 +621,22 @@
   </div>
 
   <script>
-    const carPhotosMap = {
-      "EPIC NEW SWIFT": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><rect width='100%' height='100%' fill='none'/><path d='M40,180 Q80,110 180,95 L310,90 Q390,105 460,180 Q470,210 430,220 L70,220 Q30,210 40,180 Z' fill='%23d32f2f'/><path d='M150,100 L300,95 Q340,105 370,145 L130,145 Z' fill='%231f2937'/><circle cx='120' cy='220' r='32' fill='%23111'/><circle cx='120' cy='220' r='18' fill='%239ca3af'/><circle cx='370' cy='220' r='32' fill='%23111'/><circle cx='370' cy='220' r='18' fill='%239ca3af'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23d32f2f' text-anchor='middle'>MARUTI SWIFT 2026</text></svg>",
-      "Dazzling New Dzire": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M30,185 Q70,115 170,95 L320,92 Q410,110 470,185 Q480,215 440,220 L60,220 Q20,215 30,185 Z' fill='%231976d2'/><path d='M140,100 L300,96 Q340,108 375,148 L125,148 Z' fill='%23111827'/><circle cx='110' cy='220' r='32' fill='%23111'/><circle cx='110' cy='220' r='18' fill='%23e5e7eb'/><circle cx='380' cy='220' r='32' fill='%23111'/><circle cx='380' cy='220' r='18' fill='%23e5e7eb'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%231976d2' text-anchor='middle'>MARUTI DZIRE 2026</text></svg>",
-      "MARUTI BREZZA": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M40,180 L70,105 L180,80 L340,80 L430,125 L460,180 L460,220 L40,220 Z' fill='%23ed6c02'/><path d='M170,88 L330,88 L400,125 L170,125 Z' fill='%230f172a'/><rect x='40' y='195' width='420' height='25' fill='%23334155'/><circle cx='120' cy='220' r='34' fill='%23111'/><circle cx='120' cy='220' r='18' fill='%2394a3b8'/><circle cx='370' cy='220' r='34' fill='%23111'/><circle cx='370' cy='220' r='18' fill='%2394a3b8'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23ed6c02' text-anchor='middle'>MARUTI BREZZA SUV</text></svg>",
-      "MARUTI ERTIGA": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M25,180 L55,95 L160,78 L380,78 L440,125 L475,180 L475,220 L25,220 Z' fill='%23475569'/><path d='M150,85 L370,85 L420,125 L150,125 Z' fill='%230f172a'/><circle cx='105' cy='220' r='32' fill='%23111'/><circle cx='105' cy='220' r='17' fill='%23cbd5e1'/><circle cx='395' cy='220' r='32' fill='%23111'/><circle cx='395' cy='220' r='17' fill='%23cbd5e1'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23475569' text-anchor='middle'>MARUTI ERTIGA MPV</text></svg>",
-      "WAGON -R": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M60,185 L70,85 L160,65 L330,65 L410,120 L430,185 L430,220 L60,220 Z' fill='%230284c7'/><path d='M155,72 L320,72 L385,120 L155,120 Z' fill='%230f172a'/><circle cx='130' cy='220' r='31' fill='%23111'/><circle cx='130' cy='220' r='16' fill='%23e2e8f0'/><circle cx='360' cy='220' r='31' fill='%23111'/><circle cx='360' cy='220' r='16' fill='%23e2e8f0'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%230284c7' text-anchor='middle'>MARUTI WAGON-R</text></svg>",
-      "NEW CELERIO": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M50,180 Q80,105 170,88 L320,88 Q390,110 440,180 L440,220 L50,220 Z' fill='%230284c7'/><path d='M160,95 L310,95 Q350,110 380,140 L150,140 Z' fill='%231e293b'/><circle cx='125' cy='220' r='30' fill='%23111'/><circle cx='125' cy='220' r='15' fill='%23cbd5e1'/><circle cx='365' cy='220' r='30' fill='%23111'/><circle cx='365' cy='220' r='15' fill='%23cbd5e1'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%230284c7' text-anchor='middle'>MARUTI CELERIO</text></svg>",
-      "NEW ALTO K10": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M60,180 L80,110 L170,90 L310,90 L390,125 L420,180 L420,220 L60,220 Z' fill='%23ea580c'/><path d='M160,98 L300,98 Q340,115 365,142 L150,142 Z' fill='%23111827'/><circle cx='130' cy='220' r='29' fill='%23111'/><circle cx='130' cy='220' r='14' fill='%23e5e7eb'/><circle cx='350' cy='220' r='29' fill='%23111'/><circle cx='350' cy='220' r='14' fill='%23e5e7eb'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%23ea580c' text-anchor='middle'>ALTO K10</text></svg>",
-      "GRAND VITARA": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 280'><path d='M30,180 L60,95 L170,72 L360,72 L440,115 L470,180 L470,220 L30,220 Z' fill='%230f172a'/><path d='M160,80 L350,80 L410,115 L160,115 Z' fill='%23334155'/><circle cx='110' cy='220' r='35' fill='%23111'/><circle cx='110' cy='220' r='19' fill='%2394a3b8'/><circle cx='390' cy='220' r='35' fill='%23111'/><circle cx='390' cy='220' r='19' fill='%2394a3b8'/><text x='250' y='265' font-family='Montserrat, sans-serif' font-weight='800' font-size='20' fill='%2338bdf8' text-anchor='middle'>GRAND VITARA</text></svg>"
+    // Exact Wikimedia Commons Direct HD Image Links Provided by You
+    const realCarCDNImages = {
+      "EPIC NEW SWIFT": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Suzuki_Swift_%282024%29_hybrid_DSC_6076.jpg",
+      "S-PRESSO": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Suzuki_S-presso_1.0_GLX_Adventure_2021.jpg",
+      "Dazzling New Dzire": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/2020_Maruti_Suzuki_Dzire_VXi_1.2.jpg/640px-2020_Maruti_Suzuki_Dzire_VXi_1.2.jpg",
+      "MARUTI BREZZA": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/2022_Maruti_Suzuki_Brezza_ZXi.jpg/640px-2022_Maruti_Suzuki_Brezza_ZXi.jpg",
+      "MARUTI ERTIGA": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/2019_Suzuki_Ertiga_GL_1.5.jpg/640px-2019_Suzuki_Ertiga_GL_1.5.jpg",
+      "WAGON -R": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/2019_Maruti_Suzuki_Wagon_R_VXi_1.2.jpg/640px-2019_Maruti_Suzuki_Wagon_R_VXi_1.2.jpg",
+      "NEW CELERIO": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2021_Maruti_Suzuki_Celerio_ZXi%2B.jpg/640px-2021_Maruti_Suzuki_Celerio_ZXi%2B.jpg",
+      "NEW ALTO K10": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/2022_Maruti_Suzuki_Alto_K10_VXi%2B.jpg/640px-2022_Maruti_Suzuki_Alto_K10_VXi%2B.jpg",
+      "GRAND VITARA": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/2022_Maruti_Suzuki_Grand_Vitara_Alpha.jpg/640px-2022_Maruti_Suzuki_Grand_Vitara_Alpha.jpg"
     };
 
     const dataset = [
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.00, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
       { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
       { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
       { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA LXI 1.5L 5MT", "ex": 869000.00, "msp4": 14200.00, "msp5": 18500.00, "msp6": 21000.00 },
@@ -697,8 +700,8 @@
       });
 
       const imgElement = document.getElementById('realCarPhoto');
-      if (carPhotosMap[selectedCategory]) {
-        imgElement.src = carPhotosMap[selectedCategory];
+      if (realCarCDNImages[selectedCategory]) {
+        imgElement.src = realCarCDNImages[selectedCategory];
       }
 
       calculatePrices();
@@ -792,7 +795,7 @@
 
     function sendWhatsAppImage() {
       const card = document.getElementById('quotationCard');
-      html2canvas(card, { scale: 2 }).then(canvas => {
+      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
         canvas.toBlob(blob => {
           const item = new ClipboardItem({ "image/png": blob });
           navigator.clipboard.write([item]).then(() => {
