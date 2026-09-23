@@ -161,6 +161,7 @@
       display: flex;
       gap: 6px;
       width: 100%;
+      flex-wrap: wrap;
     }
 
     @media (min-width: 600px) {
@@ -185,6 +186,7 @@
     .btn-primary { background: var(--primary); color: white; }
     .btn-whatsapp { background: #25D366; color: white; }
     .btn-secondary { background: #ECEFF1; color: var(--text); }
+    .btn-danger { background: #D32F2F; color: white; }
 
     .quotation-wrapper {
       width: 100%;
@@ -296,10 +298,12 @@
 
     .car-preview-img {
       width: 100%;
-      max-width: 160px;
-      height: 75px;
+      max-width: 170px;
+      height: 80px;
       object-fit: contain;
       align-self: center;
+      background: #fff;
+      border-radius: 4px;
     }
 
     .feature-highlights {
@@ -476,6 +480,7 @@
       <p>Data synchronized from price list</p>
     </div>
     <div class="btn-group">
+      <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
       <button class="btn btn-secondary" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
       <button class="btn btn-whatsapp" onclick="sendWhatsAppImage()"><i class="fa-brands fa-whatsapp"></i> Share Image</button>
       <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
@@ -508,7 +513,7 @@
             <div class="model-title-display" id="displayModelName">BREZZA</div>
             <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
           </div>
-          <img id="carImage" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
+          <img id="carImage" src="" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
         </div>
 
         <div class="feature-highlights">
@@ -630,7 +635,7 @@
   </div>
 
   <script>
-    // Exact original vehicle category pictures mapping
+    // Optimized high-quality vehicle pictures mapped for each specific category
     const carImages = {
       'NEW ALTO K10': 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80',
       'NEW CELERIO': 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=600&q=80',
@@ -818,6 +823,11 @@
       document.getElementById('loginOverlay').classList.add('hidden');
     }
 
+    function handleLogout() {
+      // Show login overlay again
+      document.getElementById('loginOverlay').classList.remove('hidden');
+    }
+
     function init() {
       const catSelect = document.getElementById('categorySelect');
       const categories = [...new Set(dataset.map(item => item.category))];
@@ -834,7 +844,7 @@
       variantSelect.innerHTML = filtered.map(v => `<option value="${v.name}">${v.name}</option>`).join('');
       currentSelectedVariant = filtered[0];
       
-      // Update correct vehicle picture automatically based on category (e.g. Wagon R, Swift, Brezza, etc.)
+      // Update correct vehicle picture automatically based on category
       if (carImages[selectedCat]) {
         document.getElementById('carImage').src = carImages[selectedCat];
       }
