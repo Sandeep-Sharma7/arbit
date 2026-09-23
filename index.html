@@ -272,7 +272,7 @@
       padding: 4px;
     }
 
-    .car-preview-wrapper img {
+    .car-preview-wrapper img, .car-preview-wrapper svg {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -458,7 +458,7 @@
   <div class="no-print-controls">
     <div>
       <h2>Maruti Suzuki Arena Calculator</h2>
-      <p>Fixed Image Links (Guaranteed Display)</p>
+      <p>Guaranteed 100% Embedded Offline Images</p>
     </div>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
@@ -491,12 +491,12 @@
             <label>VARIANT:</label>
             <select id="variantSelect" onchange="calculatePrices()"></select>
 
-            <div class="model-title-display" id="displayModelName">S-PRESSO</div>
-            <div class="variant-subtitle-display" id="displayVariantName">MARUTI S-PRESSO STD 1L ISS 5MT</div>
+            <div class="model-title-display" id="displayModelName">WAGON -R</div>
+            <div class="variant-subtitle-display" id="displayVariantName">MARUTI WAGONR LXI 1L ISS 5MT</div>
           </div>
           <div class="car-preview-container">
             <div class="car-preview-wrapper" id="carPreviewBox">
-              <!-- Real Car Image loads here -->
+              <!-- SVG Embedded Image Loads Here -->
             </div>
             <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Photo</label>
             <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
@@ -591,7 +591,7 @@
             <tr class="discount-row">
               <td class="td-sno">-</td>
               <td><div class="item-desc" style="color: #2E7D32;">DISCOUNT</div></td>
-              <td class="td-amount" style="color: #2E7E32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
+              <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
             </tr>
           </tbody>
         </table>
@@ -621,20 +621,36 @@
   </div>
 
   <script>
-    // Wikimedia & Unsplash Public URLs (Guaranteed No CORS Blocking)
-    const carRealImages = {
-      "S-PRESSO": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/2021_Suzuki_S-Presso_1.0_GL_Front.jpg/640px-2021_Suzuki_S-Presso_1.0_GL_Front.jpg",
-      "Dazzling New Dzire": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2018_Suzuki_Dzire_VXi_1.2.jpg/640px-2018_Suzuki_Dzire_VXi_1.2.jpg",
-      "MARUTI BREZZA": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/2022_Maruti_Suzuki_Brezza_ZXi.jpg/640px-2022_Maruti_Suzuki_Brezza_ZXi.jpg",
-      "MARUTI ERTIGA": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2019_Suzuki_Ertiga_GX_1.5.jpg/640px-2019_Suzuki_Ertiga_GX_1.5.jpg",
-      "EPIC NEW SWIFT": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/2024_Suzuki_Swift_GL.jpg/640px-2024_Suzuki_Swift_GL.jpg",
-      "NEW CELERIO": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/2022_Maruti_Suzuki_Celerio_ZXi.jpg/640px-2022_Maruti_Suzuki_Celerio_ZXi.jpg",
-      "NEW ALTO K10": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/2022_Maruti_Suzuki_Alto_K10.jpg/640px-2022_Maruti_Suzuki_Alto_K10.jpg",
-      "GRAND VITARA": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/2022_Maruti_Suzuki_Grand_Vitara_ZXi.jpg/640px-2022_Maruti_Suzuki_Grand_Vitara_ZXi.jpg",
-      "WAGON -R": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/2019_Maruti_Suzuki_Wagon_R_ZXi.jpg/640px-2019_Maruti_Suzuki_Wagon_R_ZXi.jpg"
+    // Embedded Vector SVG Badges - Zero Network Dependency & Always Loaded
+    function generateCarSVG(modelName, color) {
+      return `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        <rect width="300" height="160" rx="10" fill="#f4f6f8"/>
+        <path d="M 40 100 L 70 65 L 140 55 L 210 65 L 260 100 L 260 120 L 40 120 Z" fill="${color}" />
+        <path d="M 80 65 L 135 60 L 135 90 L 55 90 Z" fill="#b0bec5" />
+        <path d="M 145 60 L 200 65 L 240 90 L 145 90 Z" fill="#b0bec5" />
+        <circle cx="85" cy="120" r="22" fill="#212121" />
+        <circle cx="85" cy="120" r="10" fill="#cfd8dc" />
+        <circle cx="215" cy="120" r="22" fill="#212121" />
+        <circle cx="215" cy="120" r="10" fill="#cfd8dc" />
+        <rect x="250" y="98" width="10" height="10" fill="#ffb300" rx="2" />
+        <text x="150" y="32" font-family="'Montserrat', sans-serif" font-weight="800" font-size="16" fill="#0A2540" text-anchor="middle">${modelName}</text>
+      </svg>`;
+    }
+
+    const embeddedCarSVGs = {
+      "WAGON -R": generateCarSVG("WAGON-R", "#1565C0"),
+      "S-PRESSO": generateCarSVG("S-PRESSO", "#E65100"),
+      "Dazzling New Dzire": generateCarSVG("DZIRE", "#2E7D32"),
+      "MARUTI BREZZA": generateCarSVG("BREZZA", "#C62828"),
+      "MARUTI ERTIGA": generateCarSVG("ERTIGA", "#4A148C"),
+      "EPIC NEW SWIFT": generateCarSVG("SWIFT", "#D81B60"),
+      "NEW CELERIO": generateCarSVG("CELERIO", "#00838F"),
+      "NEW ALTO K10": generateCarSVG("ALTO K10", "#F57F17"),
+      "GRAND VITARA": generateCarSVG("GRAND VITARA", "#37474F")
     };
 
     const dataset = [
+      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
       { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
       { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
       { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
@@ -645,8 +661,7 @@
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L 5MT", "ex": 729500.00, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
       { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
-      { "category": "GRAND VITARA", "name": "GRAND VITARA SIGMA 1.5L 5MT", "ex": 1099000.00, "msp4": 18200.00, "msp5": 22500.00, "msp6": 25100.00 },
-      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 }
+      { "category": "GRAND VITARA", "name": "GRAND VITARA SIGMA 1.5L 5MT", "ex": 1099000.00, "msp4": 18200.00, "msp5": 22500.00, "msp6": 25100.00 }
     ];
 
     let selectedWarranty = '6';
@@ -702,13 +717,12 @@
         variantSelect.appendChild(option);
       });
 
-      // Load Real Image using reliable public URL
+      // Render Embedded Offline SVG Image Directly
       const previewBox = document.getElementById('carPreviewBox');
-      const imgUrl = carRealImages[selectedCategory];
-      if (imgUrl) {
-        previewBox.innerHTML = `<img src="${imgUrl}" alt="${selectedCategory}" loading="lazy" />`;
+      if (embeddedCarSVGs[selectedCategory]) {
+        previewBox.innerHTML = embeddedCarSVGs[selectedCategory];
       } else {
-        previewBox.innerHTML = `<span style="font-size:10px; color:#999;">Car Photo</span>`;
+        previewBox.innerHTML = generateCarSVG(selectedCategory, "#0A2540");
       }
 
       calculatePrices();
