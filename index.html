@@ -296,14 +296,37 @@
       color: #555;
     }
 
-    .car-preview-img {
+    /* Car Image Preview Box */
+    .car-preview-box {
       width: 100%;
       max-width: 170px;
-      height: 80px;
-      object-fit: contain;
+      height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       align-self: center;
-      background: #fff;
-      border-radius: 4px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      padding: 4px;
+      overflow: hidden;
+    }
+
+    .car-preview-box img {
+      width: 100%;
+      height: 70px;
+      object-fit: contain;
+    }
+
+    .car-preview-box span {
+      font-size: 8px;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      margin-top: 2px;
     }
 
     .feature-highlights {
@@ -513,7 +536,12 @@
             <div class="model-title-display" id="displayModelName">BREZZA</div>
             <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
           </div>
-          <img id="carImage" src="" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
+          
+          <!-- Car Image Preview Box -->
+          <div class="car-preview-box">
+            <img id="carPreviewImg" src="" alt="Car Image">
+            <span id="badgeCategoryText">ARENA</span>
+          </div>
         </div>
 
         <div class="feature-highlights">
@@ -635,20 +663,6 @@
   </div>
 
   <script>
-    // Base64 encoded vehicle pictures mapped for each specific category
-    const carImages = {
-      'NEW ALTO K10': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'NEW CELERIO': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'S-PRESSO': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'WAGON -R': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'EPIC NEW SWIFT': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'Dazzling New Dzire': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'NEW BREZZA (July)': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'VICTORIS': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'NEW ERTIGA': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-      'EECO NEW': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
-    };
-
     const dataset = [
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI 1L 5MT", "ex": 400029.02, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
@@ -799,6 +813,20 @@
       { "category": "VICTORIS", "name": "MARUTI VICTORIS ALPHA ALLGRIP DUAL 1.5L 5MT", "ex": 1535124.00, "msp4": 25487.82, "msp5": 31741.82, "msp6": 35517.82 }
     ];
 
+    // Car Images Mapping based on Category names
+    const carImages = {
+      "NEW ALTO K10": "https://img.zigwheels.com/medium/in/maruti-suzuki/alto-k10/maruti-suzuki-alto-k10-right-front-three-quarter-3.jpg",
+      "NEW CELERIO": "https://img.zigwheels.com/medium/in/maruti-suzuki/celerio/maruti-suzuki-celerio-right-front-three-quarter-3.jpg",
+      "S-PRESSO": "https://img.zigwheels.com/medium/in/maruti-suzuki/s-presso/maruti-suzuki-s-presso-right-front-three-quarter-3.jpg",
+      "WAGON -R": "https://img.zigwheels.com/medium/in/maruti-suzuki/wagon-r/maruti-suzuki-wagon-r-right-front-three-quarter-3.jpg",
+      "EECO NEW": "https://img.zigwheels.com/medium/in/maruti-suzuki/eeco/maruti-suzuki-eeco-right-front-three-quarter-3.jpg",
+      "EPIC NEW SWIFT": "https://img.zigwheels.com/medium/in/maruti-suzuki/swift/maruti-suzuki-swift-right-front-three-quarter-3.jpg",
+      "Dazzling New Dzire": "https://img.zigwheels.com/medium/in/maruti-suzuki/dzire/maruti-suzuki-dzire-right-front-three-quarter-3.jpg",
+      "NEW BREZZA (July)": "https://img.zigwheels.com/medium/in/maruti-suzuki/brezza/maruti-suzuki-brezza-right-front-three-quarter-3.jpg",
+      "NEW ERTIGA": "https://img.zigwheels.com/medium/in/maruti-suzuki/ertiga/maruti-suzuki-ertiga-right-front-three-quarter-3.jpg",
+      "VICTORIS": "https://img.zigwheels.com/medium/in/maruti-suzuki/grand-vitara/maruti-suzuki-grand-vitara-right-front-three-quarter-3.jpg"
+    };
+
     let currentSelectedVariant = dataset[0];
     let currentWarrantyYears = '6';
 
@@ -812,19 +840,16 @@
         return;
       }
 
-      // Populate left bottom details from login
       document.getElementById('displayRmName').innerText = rmName;
       document.getElementById('displayRmMobile').innerText = 'Mob: ' + mobile;
       if (dealership) {
         document.getElementById('displayDealership').innerText = dealership;
       }
 
-      // Hide login overlay
       document.getElementById('loginOverlay').classList.add('hidden');
     }
 
     function handleLogout() {
-      // Show login overlay again
       document.getElementById('loginOverlay').classList.remove('hidden');
     }
 
@@ -844,10 +869,16 @@
       variantSelect.innerHTML = filtered.map(v => `<option value="${v.name}">${v.name}</option>`).join('');
       currentSelectedVariant = filtered[0];
       
-      // Update correct vehicle picture automatically based on category
+      document.getElementById('badgeCategoryText').innerText = selectedCat;
+      
+      // Update Car Image dynamically
+      const imgElem = document.getElementById('carPreviewImg');
       if (carImages[selectedCat]) {
-        document.getElementById('carImage').src = carImages[selectedCat];
+        imgElem.src = carImages[selectedCat];
+      } else {
+        imgElem.src = 'https://img.zigwheels.com/medium/in/maruti-suzuki/wagon-r/maruti-suzuki-wagon-r-right-front-three-quarter-3.jpg';
       }
+
       calculatePrices();
     }
 
