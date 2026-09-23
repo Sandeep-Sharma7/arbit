@@ -261,8 +261,8 @@
     }
 
     .car-preview-wrapper {
-      width: 190px;
-      height: 110px;
+      width: 200px;
+      height: 115px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -460,7 +460,7 @@
   <div class="no-print-controls">
     <div>
       <h2>Maruti Suzuki Arena Calculator</h2>
-      <p>Data synchronized from price list</p>
+      <p>Data synchronized with official image links</p>
     </div>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
@@ -623,32 +623,35 @@
   </div>
 
   <script>
-    // Authentic Maruti Model High-Quality Web Images
+    // Direct Official HD Images mapped to each Model
     const carImages = {
       "WAGON -R": "https://imgd.aeplcdn.com/664x374/n/cw/ec/47712/wagon-r-exterior-right-front-three-quarter.jpeg",
-      "NEW ALTO K10": "https://imgd.aeplcdn.com/664x374/n/cw/ec/125255/alto-k10-exterior-right-front-three-quarter-3.jpeg",
+      "MARUTI BREZZA": "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/vitara-brezza-exterior-right-front-three-quarter-2.jpeg",
+      "MARUTI ERTIGA": "https://imgd.aeplcdn.com/664x374/n/cw/ec/115777/ertiga-exterior-right-front-three-quarter-3.jpeg",
       "NEW CELERIO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/41197/celerio-exterior-right-front-three-quarter.jpeg",
-      "S-PRESSO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/46994/spresso-exterior-right-front-three-quarter.jpeg",
       "EPIC NEW SWIFT": "https://imgd.aeplcdn.com/664x374/n/cw/ec/159099/swift-exterior-right-front-three-quarter-2.jpeg",
+      "NEW ALTO K10": "https://imgd.aeplcdn.com/664x374/n/cw/ec/125255/alto-k10-exterior-right-front-three-quarter-3.jpeg",
+      "GRAND VITARA": "https://imgd.aeplcdn.com/664x374/n/cw/ec/123875/grand-vitara-exterior-right-front-three-quarter-3.jpeg",
       "Dazzling New Dzire": "https://imgd.aeplcdn.com/664x374/n/cw/ec/45691/dzire-exterior-right-front-three-quarter-3.jpeg",
-      "NEW BREZZA (July)": "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/vitara-brezza-exterior-right-front-three-quarter-2.jpeg"
+      "S-PRESSO": "https://imgd.aeplcdn.com/664x374/n/cw/ec/46994/spresso-exterior-right-front-three-quarter.jpeg"
     };
 
     const dataset = [
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI 1L 5MT", "ex": 400029.02, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L 5MT", "ex": 452529.58, "msp4": 5250.82, "msp5": 9144.82, "msp6": 10088.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L 5MT", "ex": 500029.30, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82 },
-      { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
-      { "category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS 5MT", "ex": 518559.26, "msp4": 5958.82, "msp5": 10324.82, "msp6": 11386.82 },
-      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
       { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
       { "category": "WAGON -R", "name": "MARUTI WAGONR VXI 1L ISS 5MT", "ex": 570059.24, "msp4": 6548.82, "msp5": 11386.82, "msp6": 12566.82 },
+      { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
+      { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA ZXI 1.5L 5MT", "ex": 1114500.00, "msp4": 18525.82, "msp5": 22891.82, "msp6": 25723.82 },
+      { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA LXI 1.5L 5MT", "ex": 869000.00, "msp4": 14200.00, "msp5": 18500.00, "msp6": 21000.00 },
+      { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA VXI 1.5L 5MT", "ex": 983000.00, "msp4": 15500.00, "msp5": 20100.00, "msp6": 23200.00 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS 5MT", "ex": 518559.26, "msp4": 5958.82, "msp5": 10324.82, "msp6": 11386.82 },
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.00, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L 5MT", "ex": 729500.00, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI 1L 5MT", "ex": 400029.02, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
+      { "category": "GRAND VITARA", "name": "GRAND VITARA SIGMA 1.5L 5MT", "ex": 1099000.00, "msp4": 18200.00, "msp5": 22500.00, "msp6": 25100.00 },
       { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
-      { "category": "NEW BREZZA (July)", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
-      { "category": "NEW BREZZA (July)", "name": "MARUTI BREZZA ZXI 1.5L 5MT", "ex": 1114500.00, "msp4": 18525.82, "msp5": 22891.82, "msp6": 25723.82 }
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 }
     ];
 
     let selectedWarranty = '6';
@@ -707,7 +710,7 @@
         variantSelect.appendChild(option);
       });
 
-      // Update Car Image with HD Web Photo
+      // Update Car Image
       const carImgElement = document.getElementById('carImage');
       if (carImages[selectedCategory]) {
         carImgElement.src = carImages[selectedCategory];
