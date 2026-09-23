@@ -433,7 +433,7 @@
 </head>
 <body>
 
-  <!-- Login Screen -->
+  <!-- Login Overlay -->
   <div class="login-overlay" id="loginOverlay">
     <div class="login-card">
       <h2>MARUTI SUZUKI ARENA</h2>
@@ -457,8 +457,8 @@
   <!-- Top Controls -->
   <div class="no-print-controls">
     <div>
-      <h2>Maruti Suzuki Arena Calculator</h2>
-      <p>Self-contained Reliable High-Detail Model Graphics</p>
+      <h2>Maruti Suzuki Arena Price Calculator</h2>
+      <p>Instant Quotation & WhatsApp Image Sharing</p>
     </div>
     <div class="btn-group">
       <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
@@ -479,7 +479,7 @@
           </div>
           <div>
             <div class="arena-title">ARENA</div>
-            <div style="font-size: 8px; color: #666; text-align: right;">PRICE LIST - SEP 2026</div>
+            <div style="font-size: 8px; color: #666; text-align: right;">PRICE LIST - 2026</div>
           </div>
         </div>
 
@@ -496,7 +496,7 @@
           </div>
           <div class="car-preview-container">
             <div class="car-preview-wrapper" id="carPreviewBox">
-              <!-- Inline SVG Graphic Renders Instantly Without Internet/CORS Error -->
+              <!-- Inline Graphic Renders Here -->
             </div>
             <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Custom Photo</label>
             <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
@@ -523,7 +523,7 @@
               <td class="td-sno">1</td>
               <td>
                 <div class="item-desc">Ex-Showroom Price</div>
-                <div class="item-subtext">Base Price (2026)</div>
+                <div class="item-subtext">Base Price</div>
               </td>
               <td class="td-amount" id="exShowroomVal">₹0</td>
             </tr>
@@ -621,145 +621,92 @@
   </div>
 
   <script>
-    // Detailed Realistic Car SVG Models - Zero Dependency, Guaranteed Load Always
     const realCarSVGs = {
       "EPIC NEW SWIFT": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="swiftRed" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#E53935"/>
-            <stop offset="50%" stop-color="#C62828"/>
-            <stop offset="100%" stop-color="#8E0000"/>
-          </linearGradient>
-          <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#37474F"/>
-            <stop offset="100%" stop-color="#263238"/>
+            <stop offset="0%" stop-color="#E53935"/><stop offset="100%" stop-color="#8E0000"/>
           </linearGradient>
         </defs>
         <ellipse cx="150" cy="132" rx="120" ry="8" fill="#CFD8DC"/>
         <path d="M 35 95 C 40 85, 65 72, 95 62 L 155 45 C 185 45, 225 60, 255 78 C 268 83, 275 92, 272 105 C 270 115, 260 118, 240 118 L 60 118 C 45 118, 32 110, 35 95 Z" fill="url(#swiftRed)"/>
-        <path d="M 100 60 L 155 48 C 180 48, 215 60, 230 73 L 100 73 Z" fill="url(#glassGrad)"/>
-        <path d="M 235 76 C 248 80, 265 85, 270 92 L 240 92 Z" fill="#FFB300" opacity="0.9"/>
-        <path d="M 40 90 C 35 90, 32 95, 36 100 L 55 100 Z" fill="#E0E0E0"/>
-        <rect x="50" y="70" width="12" height="6" rx="2" fill="#212121"/>
-        <circle cx="85" cy="115" r="22" fill="#212121"/>
-        <circle cx="85" cy="115" r="12" fill="#B0BEC5"/>
-        <circle cx="85" cy="115" r="5" fill="#37474F"/>
-        <circle cx="220" cy="115" r="22" fill="#212121"/>
-        <circle cx="220" cy="115" r="12" fill="#B0BEC5"/>
-        <circle cx="220" cy="115" r="5" fill="#37474F"/>
+        <path d="M 100 60 L 155 48 C 180 48, 215 60, 230 73 L 100 73 Z" fill="#37474F"/>
+        <circle cx="85" cy="115" r="22" fill="#212121"/><circle cx="85" cy="115" r="12" fill="#B0BEC5"/>
+        <circle cx="220" cy="115" r="22" fill="#212121"/><circle cx="220" cy="115" r="12" fill="#B0BEC5"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">EPIC NEW SWIFT</text>
       </svg>`,
 
       "Dazzling New Dzire": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="dzireBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1E88E5"/>
-            <stop offset="100%" stop-color="#0D47A1"/>
-          </linearGradient>
-        </defs>
         <ellipse cx="150" cy="132" rx="125" ry="8" fill="#CFD8DC"/>
-        <path d="M 25 100 C 30 88, 55 75, 90 65 L 145 46 C 185 46, 215 62, 240 76 L 275 88 C 285 95, 280 116, 250 116 L 50 116 C 35 116, 22 110, 25 100 Z" fill="url(#dzireBlue)"/>
+        <path d="M 25 100 C 30 88, 55 75, 90 65 L 145 46 C 185 46, 215 62, 240 76 L 275 88 C 285 95, 280 116, 250 116 L 50 116 Z" fill="#1565C0"/>
         <path d="M 95 62 L 148 49 C 178 49, 210 62, 225 73 L 95 73 Z" fill="#37474F"/>
-        <circle cx="75" cy="114" r="21" fill="#212121"/>
-        <circle cx="75" cy="114" r="11" fill="#ECEFF1"/>
-        <circle cx="225" cy="114" r="21" fill="#212121"/>
-        <circle cx="225" cy="114" r="11" fill="#ECEFF1"/>
+        <circle cx="75" cy="114" r="21" fill="#212121"/><circle cx="75" cy="114" r="11" fill="#ECEFF1"/>
+        <circle cx="225" cy="114" r="21" fill="#212121"/><circle cx="225" cy="114" r="11" fill="#ECEFF1"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">NEW DZIRE</text>
       </svg>`,
 
       "MARUTI BREZZA": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="brezzaOrange" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#FB8C00"/>
-            <stop offset="100%" stop-color="#E65100"/>
-          </linearGradient>
-        </defs>
         <ellipse cx="150" cy="134" rx="120" ry="8" fill="#CFD8DC"/>
-        <path d="M 35 100 L 45 65 L 100 42 L 195 42 L 250 68 L 270 90 L 270 116 L 35 116 Z" fill="url(#brezzaOrange)"/>
+        <path d="M 35 100 L 45 65 L 100 42 L 195 42 L 250 68 L 270 90 L 270 116 L 35 116 Z" fill="#E65100"/>
         <path d="M 102 46 L 190 46 L 235 68 L 102 68 Z" fill="#263238"/>
         <rect x="35" y="105" width="235" height="12" fill="#37474F"/>
-        <circle cx="80" cy="115" r="23" fill="#212121"/>
-        <circle cx="80" cy="115" r="12" fill="#CFD8DC"/>
-        <circle cx="220" cy="115" r="23" fill="#212121"/>
-        <circle cx="220" cy="115" r="12" fill="#CFD8DC"/>
+        <circle cx="80" cy="115" r="23" fill="#212121"/><circle cx="80" cy="115" r="12" fill="#CFD8DC"/>
+        <circle cx="220" cy="115" r="23" fill="#212121"/><circle cx="220" cy="115" r="12" fill="#CFD8DC"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">MARUTI BREZZA</text>
       </svg>`,
 
       "MARUTI ERTIGA": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="150" cy="134" rx="130" ry="8" fill="#CFD8DC"/>
-        <path d="M 20 100 L 35 60 L 90 42 L 230 42 L 265 70 L 275 95 L 275 116 L 20 116 Z" fill="#546E7A"/>
+        <path d="M 20 100 L 35 60 L 90 42 L 230 42 L 265 70 L 275 95 L 275 116 L 20 116 Z" fill="#455A64"/>
         <path d="M 92 46 L 225 46 L 252 70 L 92 70 Z" fill="#263238"/>
-        <circle cx="70" cy="115" r="22" fill="#212121"/>
-        <circle cx="70" cy="115" r="11" fill="#B0BEC5"/>
-        <circle cx="230" cy="115" r="22" fill="#212121"/>
-        <circle cx="230" cy="115" r="11" fill="#B0BEC5"/>
+        <circle cx="70" cy="115" r="22" fill="#212121"/><circle cx="70" cy="115" r="11" fill="#B0BEC5"/>
+        <circle cx="230" cy="115" r="22" fill="#212121"/><circle cx="230" cy="115" r="11" fill="#B0BEC5"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">MARUTI ERTIGA</text>
       </svg>`,
 
       "WAGON -R": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="150" cy="134" rx="110" ry="8" fill="#CFD8DC"/>
-        <path d="M 45 105 L 50 50 L 105 32 L 205 32 L 245 65 L 255 100 L 255 116 L 45 116 Z" fill="#78909C"/>
+        <path d="M 45 105 L 50 50 L 105 32 L 205 32 L 245 65 L 255 100 L 255 116 L 45 116 Z" fill="#607D8B"/>
         <path d="M 108 36 L 200 36 L 232 65 L 108 65 Z" fill="#263238"/>
-        <circle cx="85" cy="115" r="21" fill="#212121"/>
-        <circle cx="85" cy="115" r="10" fill="#ECEFF1"/>
-        <circle cx="215" cy="115" r="21" fill="#212121"/>
-        <circle cx="215" cy="115" r="10" fill="#ECEFF1"/>
+        <circle cx="85" cy="115" r="21" fill="#212121"/><circle cx="85" cy="115" r="10" fill="#ECEFF1"/>
+        <circle cx="215" cy="115" r="21" fill="#212121"/><circle cx="215" cy="115" r="10" fill="#ECEFF1"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">WAGON-R</text>
-      </svg>`,
-
-      "S-PRESSO": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="150" cy="134" rx="100" ry="8" fill="#CFD8DC"/>
-        <path d="M 50 105 L 58 55 L 110 38 L 190 38 L 230 65 L 245 100 L 245 116 L 50 116 Z" fill="#FF6D00"/>
-        <path d="M 112 42 L 185 42 L 218 65 L 112 65 Z" fill="#263238"/>
-        <circle cx="88" cy="115" r="22" fill="#212121"/>
-        <circle cx="88" cy="115" r="11" fill="#CFD8DC"/>
-        <circle cx="205" cy="115" r="22" fill="#212121"/>
-        <circle cx="205" cy="115" r="11" fill="#CFD8DC"/>
-        <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">S-PRESSO</text>
       </svg>`,
 
       "NEW CELERIO": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="150" cy="134" rx="110" ry="8" fill="#CFD8DC"/>
-        <path d="M 40 100 L 50 62 L 100 44 L 195 44 L 240 70 L 250 100 L 250 116 L 40 116 Z" fill="#29B6F6"/>
+        <path d="M 40 100 L 50 62 L 100 44 L 195 44 L 240 70 L 250 100 L 250 116 L 40 116 Z" fill="#0288D1"/>
         <path d="M 102 48 L 190 48 L 228 70 L 102 70 Z" fill="#263238"/>
-        <circle cx="82" cy="115" r="21" fill="#212121"/>
-        <circle cx="82" cy="115" r="10" fill="#ECEFF1"/>
-        <circle cx="210" cy="115" r="21" fill="#212121"/>
-        <circle cx="210" cy="115" r="10" fill="#ECEFF1"/>
+        <circle cx="82" cy="115" r="21" fill="#212121"/><circle cx="82" cy="115" r="10" fill="#ECEFF1"/>
+        <circle cx="210" cy="115" r="21" fill="#212121"/><circle cx="210" cy="115" r="10" fill="#ECEFF1"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">NEW CELERIO</text>
       </svg>`,
 
       "NEW ALTO K10": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="150" cy="134" rx="100" ry="8" fill="#CFD8DC"/>
-        <path d="M 45 100 L 55 64 L 105 46 L 188 46 L 228 72 L 238 100 L 238 116 L 45 116 Z" fill="#FF3D00"/>
+        <path d="M 45 100 L 55 64 L 105 46 L 188 46 L 228 72 L 238 100 L 238 116 L 45 116 Z" fill="#D84315"/>
         <path d="M 107 50 L 182 50 L 216 72 L 107 72 Z" fill="#263238"/>
-        <circle cx="82" cy="115" r="20" fill="#212121"/>
-        <circle cx="82" cy="115" r="9" fill="#ECEFF1"/>
-        <circle cx="200" cy="115" r="20" fill="#212121"/>
-        <circle cx="200" cy="115" r="9" fill="#ECEFF1"/>
+        <circle cx="82" cy="115" r="20" fill="#212121"/><circle cx="82" cy="115" r="9" fill="#ECEFF1"/>
+        <circle cx="200" cy="115" r="20" fill="#212121"/><circle cx="200" cy="115" r="9" fill="#ECEFF1"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">ALTO K10</text>
       </svg>`,
 
       "GRAND VITARA": `<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="150" cy="135" rx="130" ry="8" fill="#CFD8DC"/>
-        <path d="M 25 100 L 40 58 L 95 38 L 210 38 L 260 65 L 275 92 L 275 118 L 25 118 Z" fill="#37474F"/>
+        <path d="M 25 100 L 40 58 L 95 38 L 210 38 L 260 65 L 275 92 L 275 118 L 25 118 Z" fill="#263238"/>
         <path d="M 98 42 L 202 42 L 246 65 L 98 65 Z" fill="#1C313E"/>
-        <circle cx="75" cy="116" r="24" fill="#212121"/>
-        <circle cx="75" cy="116" r="13" fill="#B0BEC5"/>
-        <circle cx="225" cy="116" r="24" fill="#212121"/>
-        <circle cx="225" cy="116" r="13" fill="#B0BEC5"/>
+        <circle cx="75" cy="116" r="24" fill="#212121"/><circle cx="75" cy="116" r="13" fill="#B0BEC5"/>
+        <circle cx="225" cy="116" r="24" fill="#212121"/><circle cx="225" cy="116" r="13" fill="#B0BEC5"/>
         <text x="150" y="146" font-family="Montserrat" font-weight="800" font-size="11" fill="#0A2540" text-anchor="middle">GRAND VITARA</text>
       </svg>`
     };
 
     const dataset = [
       { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.00, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
-      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L 5MT", "ex": 729500.00, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
       { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
       { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
       { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA LXI 1.5L 5MT", "ex": 869000.00, "msp4": 14200.00, "msp5": 18500.00, "msp6": 21000.00 },
       { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
-      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
       { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
       { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
       { "category": "GRAND VITARA", "name": "GRAND VITARA SIGMA 1.5L 5MT", "ex": 1099000.00, "msp4": 18200.00, "msp5": 22500.00, "msp6": 25100.00 }
@@ -818,7 +765,6 @@
         variantSelect.appendChild(option);
       });
 
-      // Render Inline Pure Graphic Model
       const previewBox = document.getElementById('carPreviewBox');
       const svgGraphic = realCarSVGs[selectedCategory];
       if (svgGraphic) {
