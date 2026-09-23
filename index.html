@@ -513,7 +513,8 @@
             <div class="model-title-display" id="displayModelName">BREZZA</div>
             <div class="variant-subtitle-display" id="displayVariantName">ZXI 1.5L 5MT</div>
           </div>
-          <img id="carImage" src="" alt="Car Preview" class="car-preview-img">
+          <!-- Added crossorigin="anonymous" to allow html2canvas to render remote URLs -->
+          <img id="carImage" src="" alt="Car Preview" class="car-preview-img" crossorigin="anonymous">
         </div>
 
         <div class="feature-highlights">
@@ -635,18 +636,18 @@
   </div>
 
   <script>
-    // Optimized high-quality vehicle pictures mapped for each specific category
-     const carImages = {
-     'NEW ALTO K10': 'alto_k10.jpg', // Yahan apne folder mein rakhi hui image ka exact naam daalein
-     'NEW CELERIO': 'celerio.jpg',
-     'S-PRESSO': 'spresso.jpg',
-     'WAGON -R': 'wagonr.jpg',
-     'EPIC NEW SWIFT': 'swift.jpg',
-     'Dazzling New Dzire': 'dzire.jpg',
-     'NEW BREZZA (July)': 'brezza.jpg',
-     'VICTORIS': 'victoris.jpg',
-     'NEW ERTIGA': 'ertiga.jpg',
-     'EECO NEW': 'eeco.jpg'
+    // Updated image URLs using public web links (replace with your domain/CDN URLs when hosted online)
+    const carImages = {
+      'NEW ALTO K10': 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=400&auto=format&fit=crop',
+      'NEW CELERIO': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&auto=format&fit=crop',
+      'S-PRESSO': 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&auto=format&fit=crop',
+      'WAGON -R': 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400&auto=format&fit=crop',
+      'EPIC NEW SWIFT': 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400&auto=format&fit=crop',
+      'Dazzling New Dzire': 'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=400&auto=format&fit=crop',
+      'NEW BREZZA (July)': 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&auto=format&fit=crop',
+      'VICTORIS': 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=400&auto=format&fit=crop',
+      'NEW ERTIGA': 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400&auto=format&fit=crop',
+      'EECO NEW': 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=400&auto=format&fit=crop'
     };
 
     const dataset = [
@@ -911,7 +912,24 @@
         const canvas = await html2canvas(element, {
           scale: 2,
           useCORS: true,
-          logging: false
+          logging: false,
+          onclone: (clonedDoc) => {
+            // Replaces input fields with formatted spans so amounts are rendered in captured canvas
+            const inputs = clonedDoc.querySelectorAll('input.input-edit');
+            inputs.forEach(input => {
+              const span = clonedDoc.createElement('span');
+              span.textContent = input.value;
+              span.style.fontWeight = '700';
+              span.style.fontSize = '11px';
+              span.style.display = 'inline-block';
+              span.style.width = '70px';
+              span.style.textAlign = 'right';
+              if (input.style.color) {
+                span.style.color = input.style.color;
+              }
+              input.parentNode.replaceChild(span, input);
+            });
+          }
         });
 
         canvas.toBlob(async (blob) => {
