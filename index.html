@@ -182,7 +182,6 @@
       justify-content: center;
     }
 
-    /* Strict 1 Page Fixed Box Dimension */
     .quotation-card {
       width: 650px;
       max-width: 100%;
@@ -247,24 +246,25 @@
       font-weight: 700;
       color: #666;
       display: block;
-      margin-bottom: 1px;
+      margin-bottom: 2px;
     }
 
-    /* UPDATED DROPDOWN STYLES TO PREVENT TEXT CUTTING */
+    /* UPDATED DROPDOWN STYLES TO FIX TEXT CUTTING ISSUE */
     .car-info-selects select {
       width: 100%;
-      padding: 5px 8px;
-      margin-bottom: 5px;
+      height: 28px;
+      padding: 3px 6px;
+      margin-bottom: 6px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--primary);
       background: #fdfdfd;
-      height: auto;
-      line-height: normal;
+      line-height: 1.2;
       box-sizing: border-box;
+      outline: none;
     }
 
     .model-title-display {
@@ -339,7 +339,6 @@
       color: var(--primary);
     }
 
-    /* Fixed Table Layout with strict widths */
     .price-table {
       width: 100%;
       border-collapse: collapse;
@@ -366,7 +365,6 @@
     .td-sno { width: 24px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
     .td-desc { width: auto; }
     
-    /* Fixed width for amount column */
     .td-amount { 
       text-align: right; 
       font-weight: 700; 
@@ -401,7 +399,6 @@
       border-color: var(--primary);
     }
 
-    /* Input fit styling */
     .input-edit {
       border: 1px dashed #bbb;
       padding: 2px 4px;
@@ -464,7 +461,6 @@
       border-top: 1px solid #eee;
     }
 
-    /* Image Capture Optimization Class */
     .export-mode .input-edit {
       border: none !important;
       background: transparent !important;
@@ -763,7 +759,6 @@
         document.getElementById('displayModelName').innerText = currentCarData.category;
         document.getElementById('displayVariantName').innerText = currentCarData.name;
 
-        // Set Car Photo
         const carImg = document.getElementById('realCarPhoto');
         if (realCarCDNImages[currentCarData.category]) {
           carImg.src = realCarCDNImages[currentCarData.category];
@@ -771,7 +766,6 @@
           carImg.src = "https://i.ibb.co/5gTPnyPw/Epic-New-Swift.png";
         }
 
-        // Populate base values
         document.getElementById('insuranceVal').value = Math.round(currentCarData.ins);
         document.getElementById('registrationVal').value = Math.round(currentCarData.reg);
         document.getElementById('kitVal').value = Math.round(currentCarData.kit);
@@ -866,11 +860,9 @@
       onVariantChange();
     }
 
-    /* FIX: Image Generation with Perfect Input-to-Text Conversion */
     async function generateCanvasImage() {
       const card = document.getElementById('quotationCard');
 
-      // 1. Convert input elements to plain text temporarily for pixel-perfect render
       const inputs = card.querySelectorAll('.input-edit');
       const replacements = [];
 
@@ -888,7 +880,6 @@
         replacements.push({ input, span });
       });
 
-      // 2. Render Canvas
       const canvas = await html2canvas(card, {
         scale: 2,
         useCORS: true,
@@ -896,7 +887,6 @@
         backgroundColor: '#ffffff'
       });
 
-      // 3. Restore inputs back
       replacements.forEach(item => {
         item.span.remove();
         item.input.style.display = 'inline-block';
@@ -926,7 +916,6 @@
               files: [file]
             });
           } else {
-            // Fallback download if direct share not supported
             downloadAsPNG();
             alert("Aapka quotation image download ho gaya hai! Aap isse WhatsApp par share kar sakte hain.");
           }
@@ -940,4 +929,4 @@
 </body>
 </html>
 ```<FollowUp>
-Code ko test karke dekhiye, ab dropdowns mein text properly fit aur visible hoga. Koi aur styling ya layout modification chahiye ho toh batayein!</FollowUp>
+Is updated code ko apply karke test kijiye, dropdowns mein Model Category aur Variant ka text ab bilkul properly center aur clearly display hoga. Agar koi aur modification ki zarurat ho toh batayein!</FollowUp>
