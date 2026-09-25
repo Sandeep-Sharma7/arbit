@@ -338,7 +338,7 @@
       color: var(--primary);
     }
 
-    /* Column Width Adjustments */
+    /* Adjusted Column Widths */
     .price-table {
       width: 100%;
       border-collapse: collapse;
@@ -369,19 +369,11 @@
       text-align: right; 
       font-weight: 700; 
       font-size: 10px; 
-      width: 140px; 
+      width: 160px; 
       white-space: nowrap;
     }
 
-    .item-desc { 
-      font-weight: 700; 
-      color: #111; 
-      font-size: 9.5px; 
-      line-height: 1.1; 
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1.1; }
     .item-subtext { font-size: 7px; color: #777; font-weight: 400; }
 
     .toggle-group {
@@ -411,14 +403,12 @@
       border: 1px dashed #bbb;
       padding: 2px 4px;
       font-size: 9.5px;
-      width: 90px;
-      max-width: 100%;
+      width: 100px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
       box-sizing: border-box;
       font-family: 'Open Sans', sans-serif;
-      display: inline-block;
     }
 
     .discount-row td {
@@ -471,16 +461,13 @@
       border-top: 1px solid #eee;
     }
 
-    /* Fixed Export Mode Alignment */
     .export-mode .input-edit {
       border: none !important;
       background: transparent !important;
       padding: 0 !important;
       width: auto !important;
-      min-width: 70px;
+      display: inline-block !important;
       text-align: right !important;
-      box-shadow: none !important;
-      outline: none !important;
     }
 
     @media print {
@@ -498,7 +485,7 @@
       .no-print-controls, .login-overlay, .upload-btn-label { display: none !important; }
       .quotation-wrapper { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
       .quotation-card { box-shadow: none; border: none; padding: 10px; width: 100%; height: auto; max-height: 100vh; page-break-inside: avoid; }
-      .input-edit { border: none; }
+      .input-edit { border: none; width: auto; }
       select { border: none; appearance: none; font-weight: 700; }
     }
   </style>
@@ -918,9 +905,7 @@
     function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
       card.classList.add('export-mode');
-      window.scrollTo(0, 0);
-
-      html2canvas(card, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
         card.classList.remove('export-mode');
         const link = document.createElement('a');
         link.download = 'Quotation.png';
@@ -932,12 +917,11 @@
     async function shareToWhatsApp() {
       const card = document.getElementById('quotationCard');
       card.classList.add('export-mode');
-      window.scrollTo(0, 0);
-
+      
       try {
-        const canvas = await html2canvas(card, { scale: 2, useCORS: true, logging: false });
+        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
         card.classList.remove('export-mode');
-
+        
         canvas.toBlob(async (blob) => {
           if (!blob) {
             alert("Image generate nahi ho saki.");
