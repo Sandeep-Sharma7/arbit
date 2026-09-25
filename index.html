@@ -338,54 +338,59 @@
       color: var(--primary);
     }
 
-    /* Adjusted Column Widths */
+    /* Adjusted Price Table Formatting */
     .price-table {
       width: 100%;
       border-collapse: collapse;
-      table-layout: fixed;
     }
 
     .price-table th {
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 4px;
+      padding: 5px;
       font-size: 8.5px;
       text-transform: uppercase;
     }
 
     .price-table td {
-      padding: 3px 4px;
+      padding: 4px;
       border-bottom: 1px solid #e0e0e0;
       font-size: 9.5px;
       vertical-align: middle;
-      word-wrap: break-word;
     }
 
-    .td-sno { width: 30px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-sno { width: 25px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
     .td-desc { width: auto; }
     
     .td-amount { 
       text-align: right; 
       font-weight: 700; 
       font-size: 10px; 
-      width: 160px; 
+      width: 150px; 
       white-space: nowrap;
     }
 
+    .amount-flex {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 2px;
+    }
+
     .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1.1; }
-    .item-subtext { font-size: 7px; color: #777; font-weight: 400; }
+    .item-subtext { font-size: 7.5px; color: #777; font-weight: 400; }
 
     .toggle-group {
       display: inline-flex;
       gap: 2px;
-      margin-top: 1px;
+      margin-top: 2px;
       flex-wrap: wrap;
     }
 
     .toggle-btn {
-      padding: 1px 3px;
-      font-size: 7px;
+      padding: 1px 4px;
+      font-size: 7.5px;
       font-weight: 700;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -403,7 +408,7 @@
       border: 1px dashed #bbb;
       padding: 2px 4px;
       font-size: 9.5px;
-      width: 100px;
+      width: 95px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
@@ -465,9 +470,6 @@
       border: none !important;
       background: transparent !important;
       padding: 0 !important;
-      width: auto !important;
-      display: inline-block !important;
-      text-align: right !important;
     }
 
     @media print {
@@ -485,7 +487,7 @@
       .no-print-controls, .login-overlay, .upload-btn-label { display: none !important; }
       .quotation-wrapper { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
       .quotation-card { box-shadow: none; border: none; padding: 10px; width: 100%; height: auto; max-height: 100vh; page-break-inside: avoid; }
-      .input-edit { border: none; width: auto; }
+      .input-edit { border: none; }
       select { border: none; appearance: none; font-weight: 700; }
     }
   </style>
@@ -603,7 +605,9 @@
                 <div class="item-desc"><input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance</div>
                 <div class="item-subtext">1+3 Year Comprehensive</div>
               </td>
-              <td class="td-amount">₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()"></td>
+              <td class="td-amount">
+                <div class="amount-flex">₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()"></div>
+              </td>
             </tr>
             <tr>
               <td class="td-sno">3</td>
@@ -614,28 +618,36 @@
                   <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other</button>
                 </div>
               </td>
-              <td class="td-amount">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></td>
+              <td class="td-amount">
+                <div class="amount-flex">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></div>
+              </td>
             </tr>
             <tr>
               <td class="td-sno">4</td>
               <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic MSGA Kit</div>
               </td>
-              <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
+              <td class="td-amount">
+                <div class="amount-flex">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></div>
+              </td>
             </tr>
             <tr>
               <td class="td-sno">5</td>
               <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag</div>
               </td>
-              <td class="td-amount">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></td>
+              <td class="td-amount">
+                <div class="amount-flex">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></div>
+              </td>
             </tr>
             <tr>
               <td class="td-sno">6</td>
               <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Rewards</div>
               </td>
-              <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
+              <td class="td-amount">
+                <div class="amount-flex">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></div>
+              </td>
             </tr>
             <tr>
               <td class="td-sno">7</td>
@@ -661,7 +673,9 @@
             <tr class="discount-row">
               <td class="td-sno">-</td>
               <td class="td-desc"><div class="item-desc" style="color: #2E7D32;">DISCOUNT / OFFERS</div></td>
-              <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
+              <td class="td-amount" style="color: #2E7D32;">
+                <div class="amount-flex">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -875,28 +889,28 @@
       if (selectedWarranty === '6') warrantyCost = Math.round(currentCarData.msp6);
       else if (selectedWarranty === '5') warrantyCost = Math.round(currentCarData.msp5);
       else if (selectedWarranty === '4') warrantyCost = Math.round(currentCarData.msp4);
-      else warrantyCost = 0;
 
       document.getElementById('warrantyVal').innerText = "₹" + warrantyCost.toLocaleString('en-IN');
 
-      let tcsCost = 0;
+      let tcs = 0;
       if (exShowroom > 1000000) {
-        tcsCost = Math.round(exShowroom * 0.01);
+        tcs = Math.round(exShowroom * 0.01);
       }
-      document.getElementById('tcsVal').innerText = "₹" + tcsCost.toLocaleString('en-IN');
+      document.getElementById('tcsVal').innerText = "₹" + tcs.toLocaleString('en-IN');
 
       const discountVal = parseFloat(document.getElementById('discountVal').value) || 0;
 
-      const grandTotal = exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcsCost - discountVal;
-      document.getElementById('grandTotalVal').innerText = "₹" + Math.round(grandTotal).toLocaleString('en-IN');
+      const grandTotal = exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcs - discountVal;
+
+      document.getElementById('grandTotalVal').innerText = "₹" + grandTotal.toLocaleString('en-IN');
     }
 
-    function uploadLocalCarImage(e) {
-      const file = e.target.files[0];
+    function uploadLocalCarImage(event) {
+      const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(evt) {
-          document.getElementById('realCarPhoto').src = evt.target.result;
+        reader.onload = function(e) {
+          document.getElementById('realCarPhoto').src = e.target.result;
         };
         reader.readAsDataURL(file);
       }
@@ -905,57 +919,20 @@
     function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
       card.classList.add('export-mode');
-      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
-        card.classList.remove('export-mode');
+      html2canvas(card, { scale: 2 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = 'Quotation.png';
+        link.download = 'Maruti_Suzuki_Quotation.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
+        card.classList.remove('export-mode');
       });
     }
 
-    async function shareToWhatsApp() {
-      const card = document.getElementById('quotationCard');
-      card.classList.add('export-mode');
-      
-      try {
-        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
-        card.classList.remove('export-mode');
-        
-        canvas.toBlob(async (blob) => {
-          if (!blob) {
-            alert("Image generate nahi ho saki.");
-            return;
-          }
-          const file = new File([blob], "Quotation.png", { type: "image/png" });
-
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            try {
-              await navigator.share({
-                files: [file],
-                title: 'Maruti Suzuki Arena Quotation',
-                text: 'Maruti Suzuki Arena Quotation Details Attached'
-              });
-            } catch (error) {
-              if (error.name !== 'AbortError') {
-                console.error('Sharing failed:', error);
-              }
-            }
-          } else {
-            const link = document.createElement('a');
-            link.download = 'Quotation.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            setTimeout(() => {
-              alert("Image download ho gayi hai. Ab WhatsApp par ise attach karke share karein.");
-              window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Maruti Suzuki Arena Quotation Details Attached'), '_blank');
-            }, 1000);
-          }
-        }, 'image/png');
-      } catch (err) {
-        card.classList.remove('export-mode');
-        alert("Image share karne me koi dikkat aayi.");
-      }
+    function shareToWhatsApp() {
+      downloadAsPNG();
+      setTimeout(() => {
+        alert("Image download ho gayi hai. Aap ab isko WhatsApp par share kar sakte hain.");
+      }, 1000);
     }
 
     function resetForm() {
