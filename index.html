@@ -1,4 +1,4 @@
-[source: 1]<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
@@ -338,10 +338,11 @@
       color: var(--primary);
     }
 
+    /* Fixed Table Layout to ensure amounts fit perfectly */
     .price-table {
       width: 100%;
       border-collapse: collapse;
-      table-layout: auto;
+      table-layout: fixed;
     }
 
     .price-table th {
@@ -361,14 +362,14 @@
       word-wrap: break-word;
     }
 
-    .td-sno { width: 20px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-sno { width: 25px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
     .td-desc { width: auto; }
     
     .td-amount { 
       text-align: right; 
       font-weight: 700; 
-      font-size: 10px; 
-      width: 140px; 
+      font-size: 9.5px; 
+      width: 130px; 
       white-space: nowrap;
     }
 
@@ -400,14 +401,15 @@
 
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 2px 4px;
+      padding: 1px 3px;
       font-size: 9.5px;
-      width: 90px;
+      width: 85px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
       box-sizing: border-box;
       font-family: 'Open Sans', sans-serif;
+      outline: none;
     }
 
     .discount-row td {
@@ -419,12 +421,12 @@
     .grand-total-box {
       background: var(--primary);
       color: white;
-      padding: 6px 10px;
+      padding: 5px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 5px;
-      margin-top: 6px;
+      margin-top: 5px;
     }
 
     .grand-total-label {
@@ -460,10 +462,17 @@
       border-top: 1px solid #eee;
     }
 
+    /* WhatsApp & Image Export Mode Fixes */
     .export-mode .input-edit {
       border: none !important;
       background: transparent !important;
       padding: 0 !important;
+      width: auto !important;
+      text-align: right !important;
+    }
+
+    .export-mode .toggle-group, .export-mode .upload-btn-label {
+      display: none !important;
     }
 
     @media print {
@@ -851,7 +860,7 @@
       if (!currentCarData) return;
 
       const exShowroom = Math.round(currentCarData.ex);
-      document.getElementById('exShowroomVal').innerText = "₹ " + exShowroom.toLocaleString('en-IN');
+      document.getElementById('exShowroomVal').innerText = "₹" + exShowroom.toLocaleString('en-IN');
 
       const isIns = document.getElementById('chkInsurance').checked;
       const insVal = isIns ? (parseFloat(document.getElementById('insuranceVal').value) || 0) : 0;
@@ -873,74 +882,86 @@
       else if (selectedWarranty === '4') warrantyCost = Math.round(currentCarData.msp4);
       else warrantyCost = 0;
 
-      document.getElementById('warrantyVal').innerText = "₹ " + warrantyCost.toLocaleString('en-IN');
+      document.getElementById('warrantyVal').innerText = "₹" + warrantyCost.toLocaleString('en-IN');
 
       let tcsCost = 0;
       if (exShowroom > 1000000) {
         tcsCost = Math.round(exShowroom * 0.01);
       }
-      document.getElementById('tcsVal').innerText = "₹ " + tcsCost.toLocaleString('en-IN');
+      document.getElementById('tcsVal').innerText = "₹" + tcsCost.toLocaleString('en-IN');
 
       const discountVal = parseFloat(document.getElementById('discountVal').value) || 0;
 
-      const grandTotal = Math.round(exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcsCost - discountVal);
+      const grandTotal = exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcsCost - discountVal;
 
-      document.getElementById('grandTotalVal').innerText = "₹ " + grandTotal.toLocaleString('en-IN');
-    }
-
-    function uploadLocalCarImage(event) {
-      const reader = new FileReader();
-      reader.onload = function() {
-        document.getElementById('realCarPhoto').src = reader.result;
-      };
-      if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
-      }
+      document.getElementById('grandTotalVal').innerText = "₹" + grandTotal.toLocaleString('en-IN');
     }
 
     function resetForm() {
-      document.getElementById('chkInsurance').checked = true;
-      document.getElementById('chkKit').checked = true;
-      document.getElementById('chkFastag').checked = true;
-      document.getElementById('chkRewards').checked = true;
-      document.getElementById('discountVal').value = 0;
-      setWarranty('6');
-      setRto('UP53');
-      onCategoryChange();
+      if (confirm("Reset current inputs?")) {
+        setWarranty('6');
+        setRto('UP53');
+        document.getElementById('chkInsurance').checked = true;
+        document.getElementById('chkKit').checked = true;
+        document.getElementById('chkFastag').checked = true;
+        document.getElementById('chkRewards').checked = true;
+        document.getElementById('discountVal').value = 0;
+        onVariantChange();
+      }
     }
 
-    function shareToWhatsApp() {
+    function uploadLocalCarImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('realCarPhoto').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function generateCanvasImage(callback) {
       const card = document.getElementById('quotationCard');
+      
+      // Temporarily add export mode for clean image rendering
       card.classList.add('export-mode');
 
-      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+      html2canvas(card, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff'
+      }).then(canvas => {
         card.classList.remove('export-mode');
-        canvas.toBlob(blob => {
-          if (navigator.canShare && navigator.canShare({ files: [new File([blob], 'quotation.png', { type: 'image/png' })] })) {
-            const file = new File([blob], 'quotation.png', { type: 'image/png' });
-            navigator.share({
-              files: [file],
-              title: 'Maruti Suzuki Quotation',
-              text: 'Here is the Maruti Suzuki Price Quotation.'
-            }).catch(() => downloadAsPNG());
-          } else {
-            downloadAsPNG();
-            alert("Image downloaded! WhatsApp par manually attach karke share karein.");
-          }
-        }, 'image/png');
+        callback(canvas);
       });
     }
 
     function downloadAsPNG() {
-      const card = document.getElementById('quotationCard');
-      card.classList.add('export-mode');
-
-      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
-        card.classList.remove('export-mode');
+      generateCanvasImage(canvas => {
         const link = document.createElement('a');
-        link.download = 'Maruti_Suzuki_Quotation.png';
+        link.download = 'Maruti_Price_Quote.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
+      });
+    }
+
+    function shareToWhatsApp() {
+      generateCanvasImage(canvas => {
+        canvas.toBlob(blob => {
+          const file = new File([blob], 'Maruti_Price_Quote.png', { type: 'image/png' });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              files: [file],
+              title: 'Maruti Suzuki Quotation',
+              text: 'Here is the price quotation for Maruti Suzuki Arena.'
+            }).catch(err => console.log('Share canceled', err));
+          } else {
+            downloadAsPNG();
+            alert("Aapki photo download ho gayi hai. Aap ise manually WhatsApp par share kar sakte hain.");
+          }
+        }, 'image/png');
       });
     }
   </script>
