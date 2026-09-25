@@ -129,6 +129,18 @@
       }
     }
 
+    .header-logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
     .btn-group {
       display: flex;
       gap: 6px;
@@ -457,9 +469,9 @@
 
   <!-- Top Controls -->
   <div class="no-print-controls">
-    <div>
-      <h2>Maruti Suzuki Arena Price Calculator</h2>
-      <p>Download HD Image & WhatsApp Share Enabled</p>
+    <div class="header-logo-title">
+      <h2>Maruti Suzuki Arena</h2>
+      <img src="Logo.jpeg" alt="Maruti Suzuki Arena Logo" class="header-logo">
     </div>
     <div class="btn-group">
       <button class="btn btn-download" onclick="downloadAsPNG()"><i class="fa-solid fa-download"></i> Download Photo</button>
@@ -835,3 +847,4 @@
   </script>
 </body>
 </html>
+```<FollowUp>Kya aapko logo ka layout, size ya font styling me koi aur badlav karna hai?</FollowUp>
