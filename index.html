@@ -494,12 +494,20 @@
       <h2>MARUTI SUZUKI ARENA</h2>
       <p>Enter details to generate price quote</p>
       <div class="form-group">
+        <label>Customer Name *</label>
+        <input type="text" id="loginCustomerName" placeholder="Enter Customer Name">
+      </div>
+      <div class="form-group">
+        <label>Customer Mobile Number *</label>
+        <input type="tel" id="loginCustomerMobile" placeholder="Enter Customer Mobile Number" maxlength="10">
+      </div>
+      <div class="form-group">
         <label>RM Name *</label>
         <input type="text" id="loginRmName" value="" placeholder="Enter RM Name">
       </div>
       <div class="form-group">
-        <label>Mobile Number *</label>
-        <input type="tel" id="loginMobile" value="" placeholder="Enter Mobile Number" maxlength="10">
+        <label>RM Mobile Number *</label>
+        <input type="tel" id="loginMobile" value="" placeholder="Enter RM Mobile Number" maxlength="10">
       </div>
       <div class="form-group">
         <label>Dealership Location</label>
@@ -663,6 +671,8 @@
       <div>
         <div class="footer-section">
           <div>
+            <div style="font-weight: 700; font-size: 8.5px;" id="displayCustomerName"></div>
+            <div style="color: #333; font-weight: 600; font-size: 7px; margin-bottom: 3px;" id="displayCustomerMobile"></div>
             <div style="font-weight: 700; font-size: 8.5px;" id="displayRmName"></div>
             <div style="color: #666; font-size: 7px;">Relationship Manager</div>
             <div style="color: #333; font-weight: 600; font-size: 7px;" id="displayRmMobile"></div>
@@ -704,11 +714,31 @@
     };
 
     function handleLogin() {
+      const custName = document.getElementById('loginCustomerName').value.trim();
+      const custMobile = document.getElementById('loginCustomerMobile').value.trim();
       const rmName = document.getElementById('loginRmName').value.trim();
       const mobile = document.getElementById('loginMobile').value.trim();
       const dealership = document.getElementById('loginDealership').value.trim();
 
-      // Validation Check: Name and Mobile Number required
+      // Validation Checks
+      if (custName === "") {
+        alert("Kripya Customer Name bharein!");
+        document.getElementById('loginCustomerName').focus();
+        return;
+      }
+
+      if (custMobile === "") {
+        alert("Kripya Customer Mobile Number bharein!");
+        document.getElementById('loginCustomerMobile').focus();
+        return;
+      }
+
+      if (!/^\d{10}$/.test(custMobile)) {
+        alert("Kripya Customer ka sahi 10-digit Mobile Number bharein!");
+        document.getElementById('loginCustomerMobile').focus();
+        return;
+      }
+
       if (rmName === "") {
         alert("Kripya RM Name bharein!");
         document.getElementById('loginRmName').focus();
@@ -716,19 +746,21 @@
       }
 
       if (mobile === "") {
-        alert("Kripya Mobile Number bharein!");
+        alert("Kripya RM Mobile Number bharein!");
         document.getElementById('loginMobile').focus();
         return;
       }
 
       if (!/^\d{10}$/.test(mobile)) {
-        alert("Kripya sahi 10-digit Mobile Number bharein!");
+        alert("Kripya RM ka sahi 10-digit Mobile Number bharein!");
         document.getElementById('loginMobile').focus();
         return;
       }
 
-      // Display details on quotation
-      document.getElementById('displayRmName').innerText = rmName;
+      // Display Customer & RM details on quotation
+      document.getElementById('displayCustomerName').innerText = "Customer: " + custName;
+      document.getElementById('displayCustomerMobile').innerText = "Mob: " + custMobile;
+      document.getElementById('displayRmName').innerText = "RM: " + rmName;
       document.getElementById('displayRmMobile').innerText = "Mob: " + mobile;
       document.getElementById('displayDealership').innerText = dealership || '';
 
@@ -869,82 +901,35 @@
       }
     }
 
-    function resetForm() {
-      document.getElementById('chkInsurance').checked = true;
-      document.getElementById('chkKit').checked = true;
-      document.getElementById('chkFastag').checked = true;
-      document.getElementById('chkRewards').checked = true;
-      document.getElementById('discountVal').value = 0;
-      setWarranty('6');
-      setRto('UP53');
-      onVariantChange();
-    }
-
-    async function generateCanvasImage() {
+    function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
-
-      const inputs = card.querySelectorAll('.input-edit');
-      const replacements = [];
-
-      inputs.forEach(input => {
-        const span = document.createElement('span');
-        span.innerText = input.value;
-        span.style.fontWeight = '700';
-        span.style.fontSize = '9.5px';
-        span.style.display = 'inline-block';
-        span.style.textAlign = 'right';
-        span.style.minWidth = '60px';
-        
-        input.style.display = 'none';
-        input.parentNode.appendChild(span);
-        replacements.push({ input, span });
+      card.classList.add('export-mode');
+      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+        card.classList.remove('export-mode');
+        const link = document.createElement('a');
+        link.download = 'Quotation.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
       });
-
-      const canvas = await html2canvas(card, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff'
-      });
-
-      replacements.forEach(item => {
-        item.span.remove();
-        item.input.style.display = 'inline-block';
-      });
-
-      return canvas;
     }
 
-    async function downloadAsPNG() {
-      const canvas = await generateCanvasImage();
-      const link = document.createElement('a');
-      link.download = `Quotation_${document.getElementById('displayModelName').innerText}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+    function shareToWhatsApp() {
+      downloadAsPNG();
+      setTimeout(() => {
+        alert("Image download ho gayi hai. Ab WhatsApp par ise attach karke share karein.");
+        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Maruti Suzuki Arena Quotation Details Attached'), '_blank');
+      }, 1000);
     }
 
-    async function shareToWhatsApp() {
-      try {
-        const canvas = await generateCanvasImage();
-        canvas.toBlob(async (blob) => {
-          const file = new File([blob], 'Maruti_Quotation.png', { type: 'image/png' });
-
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-              title: 'Maruti Suzuki Arena Price Quote',
-              text: `Maruti Suzuki Price Quote for ${document.getElementById('displayVariantName').innerText}`,
-              files: [file]
-            });
-          } else {
-            downloadAsPNG();
-            alert("Aapka quotation image download ho gaya hai! Aap isse WhatsApp par share kar sakte hain.");
-          }
-        }, 'image/png');
-      } catch (err) {
-        console.error("Share failed", err);
-        downloadAsPNG();
-      }
+    function resetForm() {
+      onVariantChange();
+      document.getElementById('discountVal').value = 0;
+      calculatePrices();
     }
   </script>
 </body>
 </html>
+```<FollowUp>
+<suggest>Customer ke details ko print/export karte samaye hide karne ka option add karein?</suggest>
+<suggest>Kya aap login details ko browser me save (LocalStorage) karwana chahte hain?</suggest>
+</FollowUp>
