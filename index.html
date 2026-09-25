@@ -338,17 +338,16 @@
       color: var(--primary);
     }
 
-    /* Price Table - fixed, screenshot-safe column sizing */
+    /* Price Table - stable widths for browser + html2canvas */
     .price-table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
     }
 
-    /* Predictable widths for browser + html2canvas image sharing */
     .price-table col.col-sno { width: 34px; }
     .price-table col.col-desc { width: auto; }
-    .price-table col.col-amount { width: 178px; }
+    .price-table col.col-amount { width: 190px; }
 
     .price-table th {
       background: var(--primary);
@@ -358,6 +357,7 @@
       font-size: 8.5px;
       text-transform: uppercase;
       vertical-align: middle;
+      box-sizing: border-box;
     }
 
     .price-table td {
@@ -366,6 +366,7 @@
       font-size: 9.5px;
       vertical-align: middle;
       overflow: visible;
+      box-sizing: border-box;
     }
 
     .td-sno {
@@ -383,28 +384,47 @@
       overflow: visible;
     }
 
+    /* Keep the complete amount safely inside the right column. */
     .td-amount {
-      width: 178px;
-      min-width: 178px;
+      width: 190px;
+      min-width: 190px;
+      max-width: 190px;
       text-align: right;
       font-weight: 700;
       font-size: 10px;
       white-space: nowrap;
-      padding-left: 8px !important;
-      padding-right: 8px !important;
+      padding-left: 6px !important;
+      padding-right: 12px !important;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
-    /* Enough room for complete editable values such as 1,23,456 */
     .td-amount .input-edit {
-      width: 108px;
-      max-width: 108px;
-      min-width: 108px;
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
       display: inline-block;
       text-align: right;
-      padding: 2px 5px;
+      padding: 2px 2px;
       margin: 0;
       vertical-align: middle;
       white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    /* html2canvas renders this plain text more reliably than native number inputs. */
+    .export-value {
+      display: inline-block;
+      width: 100px;
+      min-width: 100px;
+      max-width: 100px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 1.2;
+      white-space: nowrap;
+      vertical-align: middle;
+      box-sizing: border-box;
     }
 
     .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1.1; }
@@ -499,6 +519,15 @@
       border: none !important;
       background: transparent !important;
       padding: 0 !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
+      box-sizing: border-box !important;
+    }
+
+    .export-mode .td-amount {
+      overflow: hidden !important;
+      padding-right: 12px !important;
     }
 
     @media print {
@@ -938,25 +967,66 @@
       }
     }
 
-    function downloadAsPNG() {
+    async function createQuotationCanvas() {
       const card = document.getElementById('quotationCard');
-      card.classList.add('export-mode');
-      html2canvas(card, { scale: 2.5, useCORS: true, backgroundColor: '#ffffff', logging: false }).then(canvas => {
-        card.classList.remove('export-mode');
+
+      /*
+       * Do not screenshot the live <input type="number"> elements.
+       * html2canvas can clip their rightmost digits depending on the browser.
+       * A temporary clone with plain-text values guarantees that every digit is visible.
+       */
+      const exportCard = card.cloneNode(true);
+      exportCard.classList.add('export-mode');
+      exportCard.style.position = 'fixed';
+      exportCard.style.left = '-100000px';
+      exportCard.style.top = '0';
+      exportCard.style.width = card.offsetWidth + 'px';
+      exportCard.style.maxWidth = 'none';
+      exportCard.style.margin = '0';
+      exportCard.style.boxSizing = 'border-box';
+      exportCard.style.background = '#ffffff';
+      exportCard.setAttribute('aria-hidden', 'true');
+
+      exportCard.querySelectorAll('.input-edit').forEach(input => {
+        const span = document.createElement('span');
+        span.className = 'export-value';
+        span.textContent = input.value || '0';
+        span.style.color = getComputedStyle(input).color;
+        input.replaceWith(span);
+      });
+
+      document.body.appendChild(exportCard);
+
+      try {
+        return await html2canvas(exportCard, {
+          scale: 2.5,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false,
+          width: exportCard.scrollWidth,
+          windowWidth: Math.max(document.documentElement.clientWidth, exportCard.scrollWidth)
+        });
+      } finally {
+        exportCard.remove();
+      }
+    }
+
+    async function downloadAsPNG() {
+      try {
+        const canvas = await createQuotationCanvas();
         const link = document.createElement('a');
         link.download = 'Quotation.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
-      });
+      } catch (err) {
+        console.error('Quotation image generation failed:', err);
+        alert('Image generate nahi ho saki.');
+      }
     }
 
     async function shareToWhatsApp() {
-      const card = document.getElementById('quotationCard');
-      card.classList.add('export-mode');
-      
       try {
-        const canvas = await html2canvas(card, { scale: 2.5, useCORS: true, backgroundColor: '#ffffff', logging: false });
-        card.classList.remove('export-mode');
+        const canvas = await createQuotationCanvas();
         
         canvas.toBlob(async (blob) => {
           if (!blob) {
@@ -989,7 +1059,7 @@
           }
         }, 'image/png');
       } catch (err) {
-        card.classList.remove('export-mode');
+        console.error('Quotation image sharing failed:', err);
         alert("Image share karne me koi dikkat aayi.");
       }
     }
