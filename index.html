@@ -495,15 +495,15 @@
       <p>Enter details to generate price quote</p>
       <div class="form-group">
         <label>RM Name</label>
-        <input type="text" id="loginRmName" value="Rahul Sharma">
+        <input type="text" id="loginRmName" value="" placeholder="Enter RM Name">
       </div>
       <div class="form-group">
         <label>Mobile Number</label>
-        <input type="text" id="loginMobile" value="+91 98765 43210">
+        <input type="text" id="loginMobile" value="" placeholder="Enter Mobile Number">
       </div>
       <div class="form-group">
         <label>Dealership Location</label>
-        <input type="text" id="loginDealership" value="GORAKHPUR / UP">
+        <input type="text" id="loginDealership" value="" placeholder="Enter Dealership Location">
       </div>
       <button class="login-btn" onclick="handleLogin()">Login & Open Generator</button>
     </div>
@@ -663,12 +663,12 @@
       <div>
         <div class="footer-section">
           <div>
-            <div style="font-weight: 700; font-size: 8.5px;" id="displayRmName">Rahul Sharma</div>
+            <div style="font-weight: 700; font-size: 8.5px;" id="displayRmName"></div>
             <div style="color: #666; font-size: 7px;">Relationship Manager</div>
-            <div style="color: #333; font-weight: 600; font-size: 7px;" id="displayRmMobile">Mob: +91 98765 43210</div>
+            <div style="color: #333; font-weight: 600; font-size: 7px;" id="displayRmMobile"></div>
           </div>
           <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 8px;" id="displayDealership">GORAKHPUR / UP</div>
+            <div style="font-weight: 800; font-size: 8px;" id="displayDealership"></div>
             <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 9px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
             <div style="font-size: 7px; color: #777;">AUTHORIZED DEALERSHIP</div>
           </div>
@@ -708,9 +708,9 @@
       const mobile = document.getElementById('loginMobile').value.trim();
       const dealership = document.getElementById('loginDealership').value.trim();
 
-      if (rmName) document.getElementById('displayRmName').innerText = rmName;
-      if (mobile) document.getElementById('displayRmMobile').innerText = "Mob: " + mobile;
-      if (dealership) document.getElementById('displayDealership').innerText = dealership;
+      document.getElementById('displayRmName').innerText = rmName || '';
+      document.getElementById('displayRmMobile').innerText = mobile ? "Mob: " + mobile : '';
+      document.getElementById('displayDealership').innerText = dealership || '';
 
       document.getElementById('loginOverlay').classList.add('hidden');
     }
