@@ -250,17 +250,21 @@
       margin-bottom: 1px;
     }
 
+    /* UPDATED DROPDOWN STYLES TO PREVENT TEXT CUTTING */
     .car-info-selects select {
       width: 100%;
-      padding: 3px 5px;
-      margin-bottom: 3px;
+      padding: 5px 8px;
+      margin-bottom: 5px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 10px;
+      font-size: 11px;
       color: var(--primary);
       background: #fdfdfd;
+      height: auto;
+      line-height: normal;
+      box-sizing: border-box;
     }
 
     .model-title-display {
@@ -935,3 +939,5 @@
   </script>
 </body>
 </html>
+```<FollowUp>
+Code ko test karke dekhiye, ab dropdowns mein text properly fit aur visible hoga. Koi aur styling ya layout modification chahiye ho toh batayein!</FollowUp>
