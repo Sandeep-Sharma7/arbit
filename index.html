@@ -335,6 +335,7 @@
       color: var(--primary);
     }
 
+    /* Fixed Table Layout with strict widths */
     .price-table {
       width: 100%;
       border-collapse: collapse;
@@ -345,31 +346,32 @@
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 3px;
+      padding: 4px;
       font-size: 8.5px;
       text-transform: uppercase;
     }
 
     .price-table td {
-      padding: 2px 3px;
+      padding: 3px 4px;
       border-bottom: 1px solid #e0e0e0;
       font-size: 9.5px;
       vertical-align: middle;
       word-wrap: break-word;
     }
 
-    .td-sno { width: 16px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-sno { width: 24px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-desc { width: auto; }
     
-    /* FIX: Width badhai gayi hai taaki 6-digit values fit ho sakein */
+    /* Fixed width for amount column */
     .td-amount { 
       text-align: right; 
       font-weight: 700; 
-      font-size: 9.5px; 
-      width: 110px; 
+      font-size: 10px; 
+      width: 130px; 
       white-space: nowrap;
     }
 
-    .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1; }
+    .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1.1; }
     .item-subtext { font-size: 7px; color: #777; font-weight: 400; }
 
     .toggle-group {
@@ -395,16 +397,17 @@
       border-color: var(--primary);
     }
 
-    /* FIX: Input width and dynamic fit */
+    /* Input fit styling */
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 1px 2px;
+      padding: 2px 4px;
       font-size: 9.5px;
-      width: 80px;
+      width: 90px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
       box-sizing: border-box;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .discount-row td {
@@ -416,33 +419,33 @@
     .grand-total-box {
       background: var(--primary);
       color: white;
-      padding: 4px 8px;
+      padding: 5px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 5px;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     .grand-total-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 9.5px;
+      font-size: 10px;
       font-weight: 800;
     }
 
     .grand-total-amount {
       font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
     }
 
     .footer-section {
-      margin-top: 4px;
+      margin-top: 5px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       border-top: 1px solid #ccc;
-      padding-top: 3px;
+      padding-top: 4px;
       gap: 5px;
     }
 
@@ -457,7 +460,13 @@
       border-top: 1px solid #eee;
     }
 
-    /* Print settings for strictly 1 Page */
+    /* Image Capture Optimization Class */
+    .export-mode .input-edit {
+      border: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+    }
+
     @media print {
       @page {
         size: A4 portrait;
@@ -564,14 +573,14 @@
           <thead>
             <tr>
               <th class="td-sno">#</th>
-              <th style="text-align: left;">Particulars</th>
-              <th style="text-align: right;">Amount (₹)</th>
+              <th class="td-desc" style="text-align: left;">Particulars</th>
+              <th class="td-amount" style="text-align: right;">Amount (₹)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="td-sno">1</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc">Ex-Showroom Price</div>
                 <div class="item-subtext">Base Price</div>
               </td>
@@ -579,7 +588,7 @@
             </tr>
             <tr>
               <td class="td-sno">2</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance</div>
                 <div class="item-subtext">1+3 Year Comprehensive</div>
               </td>
@@ -587,7 +596,7 @@
             </tr>
             <tr>
               <td class="td-sno">3</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc">Registration Charges</div>
                 <div class="toggle-group">
                   <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">UP53</button>
@@ -598,28 +607,28 @@
             </tr>
             <tr>
               <td class="td-sno">4</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic Accessory Kit</div>
               </td>
               <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
             </tr>
             <tr>
               <td class="td-sno">5</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag</div>
               </td>
               <td class="td-amount">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></td>
             </tr>
             <tr>
               <td class="td-sno">6</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Rewards</div>
               </td>
               <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
             </tr>
             <tr>
               <td class="td-sno">7</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc">Extended Warranty</div>
                 <div class="toggle-group">
                   <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6Y</button>
@@ -632,7 +641,7 @@
             </tr>
             <tr>
               <td class="td-sno">8</td>
-              <td>
+              <td class="td-desc">
                 <div class="item-desc">TCS @ 1%</div>
                 <div class="item-subtext">If Ex-Showroom > 10 Lakhs</div>
               </td>
@@ -640,7 +649,7 @@
             </tr>
             <tr class="discount-row">
               <td class="td-sno">-</td>
-              <td><div class="item-desc" style="color: #2E7D32;">DISCOUNT / OFFERS</div></td>
+              <td class="td-desc"><div class="item-desc" style="color: #2E7D32;">DISCOUNT / OFFERS</div></td>
               <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
             </tr>
           </tbody>
@@ -688,6 +697,7 @@
 
     let selectedWarranty = '6';
     let selectedRto = 'UP53';
+    let currentCarData = null;
 
     window.onload = function() {
       populateCategories();
@@ -699,14 +709,10 @@
       const mobile = document.getElementById('loginMobile').value.trim();
       const dealership = document.getElementById('loginDealership').value.trim();
 
-      if (!rmName || !mobile) {
-        alert('Please enter required RM details.');
-        return;
-      }
+      if (rmName) document.getElementById('displayRmName').innerText = rmName;
+      if (mobile) document.getElementById('displayRmMobile').innerText = "Mob: " + mobile;
+      if (dealership) document.getElementById('displayDealership').innerText = dealership;
 
-      document.getElementById('displayRmName').innerText = rmName;
-      document.getElementById('displayRmMobile').innerText = 'Mob: ' + mobile;
-      document.getElementById('displayDealership').innerText = dealership || 'AUTHORIZED DEALERSHIP';
       document.getElementById('loginOverlay').classList.add('hidden');
     }
 
@@ -715,181 +721,216 @@
     }
 
     function populateCategories() {
+      const catSelect = document.getElementById('categorySelect');
+      catSelect.innerHTML = '';
       const categories = [...new Set(dataset.map(item => item.category))];
-      const categorySelect = document.getElementById('categorySelect');
-      categorySelect.innerHTML = '';
       categories.forEach(cat => {
-        const option = document.createElement('option');
-        option.value = cat;
-        option.textContent = cat;
-        categorySelect.appendChild(option);
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.innerText = cat;
+        catSelect.appendChild(opt);
       });
     }
 
     function onCategoryChange() {
-      const selectedCategory = document.getElementById('categorySelect').value;
-      const variantSelect = document.getElementById('variantSelect');
-      variantSelect.innerHTML = '';
+      const catSelect = document.getElementById('categorySelect');
+      const selectedCat = catSelect.value;
+      const varSelect = document.getElementById('variantSelect');
+      varSelect.innerHTML = '';
 
-      const filteredVariants = dataset.filter(item => item.category === selectedCategory);
-      filteredVariants.forEach(v => {
-        const option = document.createElement('option');
-        option.value = v.name;
-        option.textContent = v.name;
-        variantSelect.appendChild(option);
+      const filtered = dataset.filter(item => item.category === selectedCat);
+      filtered.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.name;
+        opt.innerText = item.name;
+        varSelect.appendChild(opt);
       });
-
-      const imgElement = document.getElementById('realCarPhoto');
-      if (realCarCDNImages[selectedCategory]) {
-        imgElement.src = realCarCDNImages[selectedCategory];
-      }
 
       onVariantChange();
     }
 
     function onVariantChange() {
-      const selectedVariantName = document.getElementById('variantSelect').value;
-      const variantData = dataset.find(item => item.name === selectedVariantName);
+      const catSelect = document.getElementById('categorySelect').value;
+      const varSelect = document.getElementById('variantSelect').value;
 
-      if (variantData) {
-        document.getElementById('insuranceVal').value = Math.round(variantData.ins || 0);
-        document.getElementById('registrationVal').value = Math.round(variantData.reg || 0);
-        document.getElementById('kitVal').value = Math.round(variantData.kit || 0);
-      }
+      currentCarData = dataset.find(item => item.category === catSelect && item.name === varSelect);
 
-      calculatePrices();
-    }
+      if (currentCarData) {
+        document.getElementById('displayModelName').innerText = currentCarData.category;
+        document.getElementById('displayVariantName').innerText = currentCarData.name;
 
-    function uploadLocalCarImage(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('realCarPhoto').src = e.target.result;
-        };
-        reader.readAsDataURL(file);
+        // Set Car Photo
+        const carImg = document.getElementById('realCarPhoto');
+        if (realCarCDNImages[currentCarData.category]) {
+          carImg.src = realCarCDNImages[currentCarData.category];
+        } else {
+          carImg.src = "https://i.ibb.co/5gTPnyPw/Epic-New-Swift.png";
+        }
+
+        // Populate base values
+        document.getElementById('insuranceVal').value = Math.round(currentCarData.ins);
+        document.getElementById('registrationVal').value = Math.round(currentCarData.reg);
+        document.getElementById('kitVal').value = Math.round(currentCarData.kit);
+
+        calculatePrices();
       }
     }
 
     function setWarranty(years) {
       selectedWarranty = years;
-      ['0', '4', '5', '6'].forEach(y => {
-        const btn = document.getElementById('btnW' + y);
-        if (btn) btn.classList.toggle('active', y === years);
+      ['btnW6', 'btnW5', 'btnW4', 'btnW0'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
       });
+      document.getElementById('btnW' + years).classList.add('active');
       calculatePrices();
     }
 
     function setRto(type) {
       selectedRto = type;
-      document.getElementById('btnRtoUP').classList.toggle('active', type === 'UP53');
-      document.getElementById('btnRtoOther').classList.toggle('active', type === 'OTHER');
+      if (type === 'UP53') {
+        document.getElementById('btnRtoUP').classList.add('active');
+        document.getElementById('btnRtoOther').classList.remove('active');
+        if (currentCarData) {
+          document.getElementById('registrationVal').value = Math.round(currentCarData.reg);
+        }
+      } else {
+        document.getElementById('btnRtoOther').classList.add('active');
+        document.getElementById('btnRtoUP').classList.remove('active');
+      }
       calculatePrices();
     }
 
     function calculatePrices() {
-      const selectedVariantName = document.getElementById('variantSelect').value;
-      const variantData = dataset.find(item => item.name === selectedVariantName);
+      if (!currentCarData) return;
 
-      if (!variantData) return;
+      const exShowroom = Math.round(currentCarData.ex);
+      document.getElementById('exShowroomVal').innerText = "₹" + exShowroom.toLocaleString('en-IN');
 
-      document.getElementById('displayModelName').innerText = variantData.category;
-      document.getElementById('displayVariantName').innerText = variantData.name;
+      const isIns = document.getElementById('chkInsurance').checked;
+      const insVal = isIns ? (parseFloat(document.getElementById('insuranceVal').value) || 0) : 0;
 
-      const exShowroom = variantData.ex || 0;
-      document.getElementById('exShowroomVal').innerText = '₹' + Math.round(exShowroom).toLocaleString('en-IN');
+      const regVal = parseFloat(document.getElementById('registrationVal').value) || 0;
 
-      const isInsuranceChecked = document.getElementById('chkInsurance').checked;
-      const insurance = isInsuranceChecked ? (parseFloat(document.getElementById('insuranceVal').value) || 0) : 0;
+      const isKit = document.getElementById('chkKit').checked;
+      const kitVal = isKit ? (parseFloat(document.getElementById('kitVal').value) || 0) : 0;
 
-      const registration = parseFloat(document.getElementById('registrationVal').value) || 0;
-      
-      const isKitChecked = document.getElementById('chkKit').checked;
-      const kit = isKitChecked ? (parseFloat(document.getElementById('kitVal').value) || 0) : 0;
+      const isFastag = document.getElementById('chkFastag').checked;
+      const fastagVal = isFastag ? (parseFloat(document.getElementById('fastagVal').value) || 0) : 0;
 
-      const isFastagChecked = document.getElementById('chkFastag').checked;
-      const fastag = isFastagChecked ? (parseFloat(document.getElementById('fastagVal').value) || 0) : 0;
-
-      const isRewardsChecked = document.getElementById('chkRewards').checked;
-      const rewards = isRewardsChecked ? (parseFloat(document.getElementById('rewardsVal').value) || 0) : 0;
+      const isRewards = document.getElementById('chkRewards').checked;
+      const rewardsVal = isRewards ? (parseFloat(document.getElementById('rewardsVal').value) || 0) : 0;
 
       let warrantyCost = 0;
-      if (selectedWarranty === '6') warrantyCost = variantData.msp6 || 0;
-      else if (selectedWarranty === '5') warrantyCost = variantData.msp5 || 0;
-      else if (selectedWarranty === '4') warrantyCost = variantData.msp4 || 0;
+      if (selectedWarranty === '6') warrantyCost = Math.round(currentCarData.msp6);
+      else if (selectedWarranty === '5') warrantyCost = Math.round(currentCarData.msp5);
+      else if (selectedWarranty === '4') warrantyCost = Math.round(currentCarData.msp4);
+      else warrantyCost = 0;
 
-      document.getElementById('warrantyVal').innerText = '₹' + Math.round(warrantyCost).toLocaleString('en-IN');
+      document.getElementById('warrantyVal').innerText = "₹" + warrantyCost.toLocaleString('en-IN');
 
-      const tcs = exShowroom > 1000000 ? exShowroom * 0.01 : 0;
-      document.getElementById('tcsVal').innerText = '₹' + Math.round(tcs).toLocaleString('en-IN');
+      let tcsCost = 0;
+      if (exShowroom > 1000000) {
+        tcsCost = Math.round(exShowroom * 0.01);
+      }
+      document.getElementById('tcsVal').innerText = "₹" + tcsCost.toLocaleString('en-IN');
 
-      const discount = parseFloat(document.getElementById('discountVal').value) || 0;
+      const discountVal = parseFloat(document.getElementById('discountVal').value) || 0;
 
-      const grandTotal = exShowroom + insurance + registration + kit + fastag + rewards + warrantyCost + tcs - discount;
-      document.getElementById('grandTotalVal').innerText = '₹' + Math.round(grandTotal).toLocaleString('en-IN');
+      const grandTotal = exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcsCost - discountVal;
+      document.getElementById('grandTotalVal').innerText = "₹" + Math.round(grandTotal).toLocaleString('en-IN');
+    }
+
+    function uploadLocalCarImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('realCarPhoto').src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     function resetForm() {
-      document.getElementById('discountVal').value = 0;
-      document.getElementById('fastagVal').value = 600;
-      document.getElementById('rewardsVal').value = 885;
-      
       document.getElementById('chkInsurance').checked = true;
       document.getElementById('chkKit').checked = true;
       document.getElementById('chkFastag').checked = true;
       document.getElementById('chkRewards').checked = true;
-
+      document.getElementById('discountVal').value = 0;
       setWarranty('6');
       setRto('UP53');
       onVariantChange();
     }
 
-    function downloadAsPNG() {
+    /* FIX: Image Generation with Perfect Input-to-Text Conversion */
+    async function generateCanvasImage() {
       const card = document.getElementById('quotationCard');
-      html2canvas(card, { 
-        scale: 2, 
-        useCORS: true, 
-        allowTaint: true
-      }).then(canvas => {
-        const link = document.createElement('a');
-        const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
-        link.download = `Arena_Quotation_${modelName}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      }).catch(err => {
-        alert("Image generate hone me error aaya.");
+
+      // 1. Convert input elements to plain text temporarily for pixel-perfect render
+      const inputs = card.querySelectorAll('.input-edit');
+      const replacements = [];
+
+      inputs.forEach(input => {
+        const span = document.createElement('span');
+        span.innerText = input.value;
+        span.style.fontWeight = '700';
+        span.style.fontSize = '9.5px';
+        span.style.display = 'inline-block';
+        span.style.textAlign = 'right';
+        span.style.minWidth = '60px';
+        
+        input.style.display = 'none';
+        input.parentNode.appendChild(span);
+        replacements.push({ input, span });
       });
+
+      // 2. Render Canvas
+      const canvas = await html2canvas(card, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+
+      // 3. Restore inputs back
+      replacements.forEach(item => {
+        item.span.remove();
+        item.input.style.display = 'inline-block';
+      });
+
+      return canvas;
     }
 
-    function shareToWhatsApp() {
-      const card = document.getElementById('quotationCard');
-      html2canvas(card, { 
-        scale: 2, 
-        useCORS: true, 
-        allowTaint: true
-      }).then(canvas => {
-        canvas.toBlob(blob => {
-          const file = new File([blob], 'Quotation.png', { type: 'image/png' });
+    async function downloadAsPNG() {
+      const canvas = await generateCanvasImage();
+      const link = document.createElement('a');
+      link.download = `Quotation_${document.getElementById('displayModelName').innerText}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    async function shareToWhatsApp() {
+      try {
+        const canvas = await generateCanvasImage();
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], 'Maruti_Quotation.png', { type: 'image/png' });
+
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({
-              files: [file],
-              title: 'Maruti Suzuki Quotation',
-              text: 'Here is the Maruti Suzuki Arena Quotation.'
-            }).catch(e => console.log(e));
+            await navigator.share({
+              title: 'Maruti Suzuki Arena Price Quote',
+              text: `Maruti Suzuki Price Quote for ${document.getElementById('displayVariantName').innerText}`,
+              files: [file]
+            });
           } else {
-            const link = document.createElement('a');
-            const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
-            link.download = `Arena_Quotation_${modelName}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            
-            setTimeout(() => {
-              alert("Quotation Image Download ho gayi hai! WhatsApp open ho raha hai, wahan attach karke bhej dein.");
-              window.open("https://api.whatsapp.com/", "_blank");
-            }, 500);
+            // Fallback download if direct share not supported
+            downloadAsPNG();
+            alert("Aapka quotation image download ho gaya hai! Aap isse WhatsApp par share kar sakte hain.");
           }
         }, 'image/png');
-      });
+      } catch (err) {
+        console.error("Share failed", err);
+        downloadAsPNG();
+      }
     }
   </script>
 </body>
