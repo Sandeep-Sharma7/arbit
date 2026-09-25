@@ -18,6 +18,7 @@
       --border: #CFD8DC;
       --text: #263238;
       --text-muted: #607D8B;
+      --dark-blue: #0A2540; /* Dark Blue Color */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -60,7 +61,7 @@
 
     .login-card h2 {
       font-family: 'Montserrat', sans-serif;
-      color: var(--primary);
+      color: var(--dark-blue);
       font-size: 18px;
       font-weight: 800;
       margin-bottom: 5px;
@@ -135,6 +136,10 @@
       gap: 12px;
     }
 
+    .header-logo-title h2 {
+      color: var(--dark-blue);
+    }
+
     .header-logo {
       height: 38px;
       width: auto;
@@ -192,16 +197,28 @@
     .brand-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       border-bottom: 2px solid #000;
       padding-bottom: 6px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-img {
+      height: 35px;
+      width: auto;
+      object-fit: contain;
     }
 
     .logo-text {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 16px;
-      color: #000;
+      color: var(--dark-blue);
       line-height: 1.1;
     }
 
@@ -209,7 +226,7 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 16px;
-      color: #000;
+      color: var(--dark-blue);
       text-align: right;
     }
 
@@ -470,8 +487,8 @@
   <!-- Top Controls -->
   <div class="no-print-controls">
     <div class="header-logo-title">
+      <a href="https://imgbb.com/"><img src="https://i.ibb.co/60JgyVBC/Logo.jpg" alt="Logo" class="header-logo" border="0"></a>
       <h2>Maruti Suzuki Arena</h2>
-      <img src="Logo.jpeg" alt="Maruti Suzuki Arena Logo" class="header-logo">
     </div>
     <div class="btn-group">
       <button class="btn btn-download" onclick="downloadAsPNG()"><i class="fa-solid fa-download"></i> Download Photo</button>
@@ -486,9 +503,12 @@
     <div class="quotation-card" id="quotationCard">
       <div>
         <div class="brand-header">
-          <div>
-            <div class="logo-text">MARUTI SUZUKI</div>
-            <div style="font-size: 8px; letter-spacing: 1px; color: #555;">ARENA - WAY OF LIFE</div>
+          <div class="brand-left">
+            <a href="https://imgbb.com/"><img src="https://i.ibb.co/60JgyVBC/Logo.jpg" alt="Logo" class="brand-logo-img" border="0"></a>
+            <div>
+              <div class="logo-text">MARUTI SUZUKI</div>
+              <div style="font-size: 8px; letter-spacing: 1px; color: #555;">ARENA - WAY OF LIFE</div>
+            </div>
           </div>
           <div>
             <div class="arena-title">ARENA</div>
@@ -624,7 +644,7 @@
           </div>
           <div style="text-align: right;">
             <div style="font-weight: 800; font-size: 9.5px;" id="displayDealership">GORAKHPUR / UP</div>
-            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 11px; color: var(--primary);">MARUTI SUZUKI ARENA</div>
+            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 11px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
             <div style="font-size: 8.5px; color: #777;">AUTHORIZED DEALERSHIP</div>
           </div>
         </div>
@@ -847,4 +867,3 @@
   </script>
 </body>
 </html>
-```<FollowUp>Kya aapko logo ka layout, size ya font styling me koi aur badlav karna hai?</FollowUp>
