@@ -338,38 +338,72 @@
       color: var(--primary);
     }
 
-    /* Column Width Adjustments */
+    /* Price Table - fixed, screenshot-safe column sizing */
     .price-table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
     }
 
+    /* Predictable widths for browser + html2canvas image sharing */
+    .price-table col.col-sno { width: 34px; }
+    .price-table col.col-desc { width: auto; }
+    .price-table col.col-amount { width: 178px; }
+
     .price-table th {
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 4px;
+      padding: 4px 6px;
       font-size: 8.5px;
       text-transform: uppercase;
+      vertical-align: middle;
     }
 
     .price-table td {
-      padding: 3px 4px;
+      padding: 3px 6px;
       border-bottom: 1px solid #e0e0e0;
       font-size: 9.5px;
       vertical-align: middle;
-      word-wrap: break-word;
+      overflow: visible;
     }
 
-    .td-sno { width: 30px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
-    .td-desc { width: auto; }
-    
-    .td-amount { 
-      text-align: right; 
-      font-weight: 700; 
-      font-size: 10px; 
-      width: 140px; 
+    .td-sno {
+      width: 34px;
+      text-align: center;
+      color: #777;
+      font-weight: 600;
+      font-size: 8.5px;
+      white-space: nowrap;
+    }
+
+    .td-desc {
+      width: auto;
+      text-align: left;
+      overflow: visible;
+    }
+
+    .td-amount {
+      width: 178px;
+      min-width: 178px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 10px;
+      white-space: nowrap;
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+
+    /* Enough room for complete editable values such as 1,23,456 */
+    .td-amount .input-edit {
+      width: 108px;
+      max-width: 108px;
+      min-width: 108px;
+      display: inline-block;
+      text-align: right;
+      padding: 2px 5px;
+      margin: 0;
+      vertical-align: middle;
       white-space: nowrap;
     }
 
@@ -578,6 +612,11 @@
         </div>
 
         <table class="price-table">
+          <colgroup>
+            <col class="col-sno">
+            <col class="col-desc">
+            <col class="col-amount">
+          </colgroup>
           <thead>
             <tr>
               <th class="td-sno">#</th>
@@ -902,7 +941,7 @@
     function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
       card.classList.add('export-mode');
-      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+      html2canvas(card, { scale: 2.5, useCORS: true, backgroundColor: '#ffffff', logging: false }).then(canvas => {
         card.classList.remove('export-mode');
         const link = document.createElement('a');
         link.download = 'Quotation.png';
@@ -916,7 +955,7 @@
       card.classList.add('export-mode');
       
       try {
-        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
+        const canvas = await html2canvas(card, { scale: 2.5, useCORS: true, backgroundColor: '#ffffff', logging: false });
         card.classList.remove('export-mode');
         
         canvas.toBlob(async (blob) => {
