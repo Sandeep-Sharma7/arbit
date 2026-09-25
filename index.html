@@ -115,7 +115,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       margin-bottom: 10px;
       width: 100%;
-      max-width: 680px;
+      max-width: 650px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -182,17 +182,18 @@
       justify-content: center;
     }
 
-    /* 1 Page Fixed Box Dimension */
+    /* Strict 1 Page Fixed Box Dimension */
     .quotation-card {
-      width: 680px;
+      width: 650px;
+      max-width: 100%;
       background: #ffffff;
-      padding: 14px 16px;
+      padding: 12px 14px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       border-radius: 8px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      page-break-inside: avoid;
+      box-sizing: border-box;
     }
 
     .brand-header {
@@ -210,7 +211,7 @@
     }
 
     .brand-logo-img {
-      height: 28px;
+      height: 26px;
       width: auto;
       object-fit: contain;
     }
@@ -218,7 +219,7 @@
     .logo-text {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--dark-blue);
       line-height: 1.1;
     }
@@ -226,7 +227,7 @@
     .arena-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--dark-blue);
       text-align: right;
     }
@@ -235,14 +236,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      margin: 6px 0 4px;
+      gap: 8px;
+      margin: 4px 0;
     }
 
     .car-info-selects { flex: 1; }
 
     .car-info-selects label {
-      font-size: 8.5px;
+      font-size: 8px;
       font-weight: 700;
       color: #666;
       display: block;
@@ -251,20 +252,20 @@
 
     .car-info-selects select {
       width: 100%;
-      padding: 4px 6px;
-      margin-bottom: 4px;
+      padding: 3px 5px;
+      margin-bottom: 3px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 10.5px;
+      font-size: 10px;
       color: var(--primary);
       background: #fdfdfd;
     }
 
     .model-title-display {
       font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       color: #000;
       line-height: 1.1;
@@ -272,7 +273,7 @@
     }
 
     .variant-subtitle-display {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 600;
       color: #555;
     }
@@ -284,8 +285,8 @@
     }
 
     .car-preview-wrapper {
-      width: 180px;
-      height: 95px;
+      width: 150px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -303,7 +304,7 @@
     }
 
     .upload-btn-label {
-      font-size: 9px;
+      font-size: 8px;
       color: var(--primary);
       text-decoration: underline;
       cursor: pointer;
@@ -316,13 +317,13 @@
       justify-content: space-between;
       border-top: 1px solid #e0e0e0;
       border-bottom: 2px solid var(--primary);
-      padding: 3px 0;
-      margin-bottom: 6px;
+      padding: 2px 0;
+      margin-bottom: 4px;
       gap: 4px;
     }
 
     .feature-item {
-      font-size: 7.5px;
+      font-size: 7px;
       font-weight: 700;
       text-transform: uppercase;
       color: #333;
@@ -344,23 +345,23 @@
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 4px;
-      font-size: 9px;
+      padding: 3px;
+      font-size: 8.5px;
       text-transform: uppercase;
     }
 
     .price-table td {
-      padding: 3px 3px;
+      padding: 2px 3px;
       border-bottom: 1px solid #e0e0e0;
-      font-size: 10px;
+      font-size: 9.5px;
       vertical-align: middle;
       word-wrap: break-word;
     }
 
-    .td-sno { width: 18px; text-align: center; color: #777; font-weight: 600; font-size: 9px; }
-    .td-amount { text-align: right; font-weight: 700; font-size: 10px; width: 85px; }
-    .item-desc { font-weight: 700; color: #111; font-size: 10px; line-height: 1.1; }
-    .item-subtext { font-size: 7.5px; color: #777; font-weight: 400; }
+    .td-sno { width: 16px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-amount { text-align: right; font-weight: 700; font-size: 9.5px; width: 80px; }
+    .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1; }
+    .item-subtext { font-size: 7px; color: #777; font-weight: 400; }
 
     .toggle-group {
       display: inline-flex;
@@ -370,8 +371,8 @@
     }
 
     .toggle-btn {
-      padding: 1px 4px;
-      font-size: 7.5px;
+      padding: 1px 3px;
+      font-size: 7px;
       font-weight: 700;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -387,9 +388,9 @@
 
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 1px 3px;
-      font-size: 10px;
-      width: 65px;
+      padding: 1px 2px;
+      font-size: 9.5px;
+      width: 60px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
@@ -404,56 +405,55 @@
     .grand-total-box {
       background: var(--primary);
       color: white;
-      padding: 5px 8px;
+      padding: 4px 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 5px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .grand-total-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
     }
 
     .grand-total-amount {
       font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
     }
 
     .footer-section {
-      margin-top: 6px;
+      margin-top: 4px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       border-top: 1px solid #ccc;
-      padding-top: 4px;
+      padding-top: 3px;
       gap: 5px;
     }
 
     .bottom-tagline {
       text-align: center;
-      font-size: 6.5px;
-      letter-spacing: 1.2px;
+      font-size: 6px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       color: #888;
-      margin-top: 4px;
+      margin-top: 2px;
       padding-top: 2px;
       border-top: 1px solid #eee;
     }
 
     /* Print settings for strictly 1 Page */
-    @page {
-      size: A4 portrait;
-      margin: 0;
-    }
-
     @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
       html, body {
-        height: 100%;
+        height: 100vh;
         overflow: hidden;
         background: white;
         padding: 0;
@@ -513,12 +513,12 @@
             <a href="https://imgbb.com/"><img src="https://i.ibb.co/60JgyVBC/Logo.jpg" alt="Logo" class="brand-logo-img" border="0"></a>
             <div>
               <div class="logo-text">MARUTI SUZUKI</div>
-              <div style="font-size: 7.5px; letter-spacing: 1px; color: #555;">ARENA - WAY OF LIFE</div>
+              <div style="font-size: 7px; letter-spacing: 1px; color: #555;">ARENA - WAY OF LIFE</div>
             </div>
           </div>
           <div>
             <div class="arena-title">ARENA</div>
-            <div style="font-size: 7.5px; color: #666; text-align: right;">PRICE LIST - 2026</div>
+            <div style="font-size: 7px; color: #666; text-align: right;">PRICE LIST - 2026</div>
           </div>
         </div>
 
@@ -644,14 +644,14 @@
       <div>
         <div class="footer-section">
           <div>
-            <div style="font-weight: 700; font-size: 9px;" id="displayRmName">Rahul Sharma</div>
-            <div style="color: #666; font-size: 7.5px;">Relationship Manager</div>
-            <div style="color: #333; font-weight: 600; font-size: 7.5px;" id="displayRmMobile">Mob: +91 98765 43210</div>
+            <div style="font-weight: 700; font-size: 8.5px;" id="displayRmName">Rahul Sharma</div>
+            <div style="color: #666; font-size: 7px;">Relationship Manager</div>
+            <div style="color: #333; font-weight: 600; font-size: 7px;" id="displayRmMobile">Mob: +91 98765 43210</div>
           </div>
           <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 8.5px;" id="displayDealership">GORAKHPUR / UP</div>
-            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 9.5px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
-            <div style="font-size: 7.5px; color: #777;">AUTHORIZED DEALERSHIP</div>
+            <div style="font-weight: 800; font-size: 8px;" id="displayDealership">GORAKHPUR / UP</div>
+            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 9px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
+            <div style="font-size: 7px; color: #777;">AUTHORIZED DEALERSHIP</div>
           </div>
         </div>
         <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
@@ -838,8 +838,7 @@
       html2canvas(card, { 
         scale: 2, 
         useCORS: true, 
-        allowTaint: true,
-        windowWidth: 1024
+        allowTaint: true
       }).then(canvas => {
         const link = document.createElement('a');
         const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
@@ -847,7 +846,7 @@
         link.href = canvas.toDataURL('image/png');
         link.click();
       }).catch(err => {
-        alert("Image generate hone me error aaya. Kripya 'Upload Custom Photo' karke try karein.");
+        alert("Image generate hone me error aaya.");
       });
     }
 
@@ -856,8 +855,7 @@
       html2canvas(card, { 
         scale: 2, 
         useCORS: true, 
-        allowTaint: true,
-        windowWidth: 1024 
+        allowTaint: true
       }).then(canvas => {
         canvas.toBlob(blob => {
           const file = new File([blob], 'Quotation.png', { type: 'image/png' });
@@ -867,15 +865,18 @@
               title: 'Maruti Suzuki Quotation',
               text: 'Here is the Maruti Suzuki Arena Quotation.'
             }).catch(e => console.log(e));
-          } else if (navigator.clipboard && navigator.clipboard.write) {
-            const item = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard.write([item]).then(() => {
-              alert("Quotation Image Clipboard me COPY ho gayi hai! Ab WhatsApp me PASTE (Ctrl+V) karke bhej do.");
-              window.open("https://web.whatsapp.com/", "_blank");
-            });
           } else {
-            downloadAsPNG();
-            alert("Image Download ho gayi hai! Isko WhatsApp par attach karke bhej dein.");
+            // Direct share unsupported hone par image download karein aur WhatsApp open karein
+            const link = document.createElement('a');
+            const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
+            link.download = `Arena_Quotation_${modelName}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            setTimeout(() => {
+              alert("Quotation Image Download ho gayi hai! WhatsApp open ho raha hai, wahan attach karke bhej dein.");
+              window.open("https://api.whatsapp.com/", "_blank");
+            }, 500);
           }
         }, 'image/png');
       });
