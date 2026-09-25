@@ -720,7 +720,6 @@
       const mobile = document.getElementById('loginMobile').value.trim();
       const dealership = document.getElementById('loginDealership').value.trim();
 
-      // Validation Checks
       if (custName === "") {
         alert("Kripya Customer Name bharein!");
         document.getElementById('loginCustomerName').focus();
@@ -757,14 +756,12 @@
         return;
       }
 
-      // Display Customer & RM details on quotation
       document.getElementById('displayCustomerName').innerText = "Customer: " + custName;
       document.getElementById('displayCustomerMobile').innerText = "Mob: " + custMobile;
       document.getElementById('displayRmName').innerText = "RM: " + rmName;
       document.getElementById('displayRmMobile').innerText = "Mob: " + mobile;
       document.getElementById('displayDealership').innerText = dealership || '';
 
-      // Hide login screen
       document.getElementById('loginOverlay').classList.add('hidden');
     }
 
@@ -913,12 +910,50 @@
       });
     }
 
-    function shareToWhatsApp() {
-      downloadAsPNG();
-      setTimeout(() => {
-        alert("Image download ho gayi hai. Ab WhatsApp par ise attach karke share karein.");
-        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Maruti Suzuki Arena Quotation Details Attached'), '_blank');
-      }, 1000);
+    async function shareToWhatsApp() {
+      const card = document.getElementById('quotationCard');
+      card.classList.add('export-mode');
+      
+      try {
+        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
+        card.classList.remove('export-mode');
+        
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            alert("Image generate nahi ho saki.");
+            return;
+          }
+          const file = new File([blob], "Quotation.png", { type: "image/png" });
+
+          // Web Share API support Check (For Direct WhatsApp Share with Attachment)
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: 'Maruti Suzuki Arena Quotation',
+                text: 'Maruti Suzuki Arena Quotation Details Attached'
+              });
+            } catch (error) {
+              if (error.name !== 'AbortError') {
+                console.error('Sharing failed:', error);
+              }
+            }
+          } else {
+            // Fallback Method for browsers that don't support Direct File Sharing
+            const link = document.createElement('a');
+            link.download = 'Quotation.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            setTimeout(() => {
+              alert("Image download ho gayi hai. Ab WhatsApp par ise attach karke share karein.");
+              window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Maruti Suzuki Arena Quotation Details Attached'), '_blank');
+            }, 1000);
+          }
+        }, 'image/png');
+      } catch (err) {
+        card.classList.remove('export-mode');
+        alert("Image share karne me koi dikkat aayi.");
+      }
     }
 
     function resetForm() {
@@ -929,7 +964,3 @@
   </script>
 </body>
 </html>
-```<FollowUp>
-<suggest>Customer ke details ko print/export karte samaye hide karne ka option add karein?</suggest>
-<suggest>Kya aap login details ko browser me save (LocalStorage) karwana chahte hain?</suggest>
-</FollowUp>
