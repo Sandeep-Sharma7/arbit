@@ -608,7 +608,7 @@
             <tr>
               <td class="td-sno">4</td>
               <td class="td-desc">
-                <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic MSGA Kit.</div>
+                <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic Accessory Kit</div>
               </td>
               <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
             </tr>
@@ -861,4 +861,72 @@
     }
 
     async function generateCanvasImage() {
-      const
+      const card = document.getElementById('quotationCard');
+
+      const inputs = card.querySelectorAll('.input-edit');
+      const replacements = [];
+
+      inputs.forEach(input => {
+        const span = document.createElement('span');
+        span.innerText = input.value;
+        span.style.fontWeight = '700';
+        span.style.fontSize = '9.5px';
+        span.style.display = 'inline-block';
+        span.style.textAlign = 'right';
+        span.style.minWidth = '60px';
+        
+        input.style.display = 'none';
+        input.parentNode.appendChild(span);
+        replacements.push({ input, span });
+      });
+
+      const canvas = await html2canvas(card, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+
+      replacements.forEach(item => {
+        item.span.remove();
+        item.input.style.display = 'inline-block';
+      });
+
+      return canvas;
+    }
+
+    async function downloadAsPNG() {
+      const canvas = await generateCanvasImage();
+      const link = document.createElement('a');
+      link.download = `Quotation_${document.getElementById('displayModelName').innerText}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    async function shareToWhatsApp() {
+      try {
+        const canvas = await generateCanvasImage();
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], 'Maruti_Quotation.png', { type: 'image/png' });
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'Maruti Suzuki Arena Price Quote',
+              text: `Maruti Suzuki Price Quote for ${document.getElementById('displayVariantName').innerText}`,
+              files: [file]
+            });
+          } else {
+            downloadAsPNG();
+            alert("Aapka quotation image download ho gaya hai! Aap isse WhatsApp par share kar sakte hain.");
+          }
+        }, 'image/png');
+      } catch (err) {
+        console.error("Share failed", err);
+        downloadAsPNG();
+      }
+    }
+  </script>
+</body>
+</html>
+```<FollowUp>
+Is updated code ko apply karke test kijiye, dropdowns mein Model Category aur Variant ka text ab bilkul properly center aur clearly display hoga. Agar koi aur modification ki zarurat ho toh batayein!</FollowUp>
