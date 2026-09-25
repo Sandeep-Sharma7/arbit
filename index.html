@@ -1,283 +1,930 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maruti Suzuki Arena Quotation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MARUTI SUZUKI ARENA - PRICE LIST & QUOTATION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    :root {
+      --primary: #0A2540;
+      --secondary: #1A365D;
+      --accent: #25D366;
+      --bg: #EAEFF2;
+      --card-bg: #FFFFFF;
+      --border: #CFD8DC;
+      --text: #263238;
+      --text-muted: #607D8B;
+      --dark-blue: #0A2540;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text);
+    }
+
     body {
-      background-color: #eef2f5;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 10px;
+    }
+
+    .login-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 37, 64, 0.92);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
       padding: 20px;
     }
-    .action-buttons {
-      margin-bottom: 20px;
-      display: flex;
-      gap: 12px;
+
+    .login-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
-    .btn {
-      padding: 10px 20px;
+
+    .login-card h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-blue);
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .login-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Open Sans', sans-serif;
+      outline: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
       border: none;
       border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      color: white;
-      font-size: 14px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      transition: background 0.3s;
-    }
-    .btn-download { background-color: #0056b3; }
-    .btn-download:hover { background-color: #004085; }
-    .btn-share { background-color: #25d366; }
-    .btn-share:hover { background-color: #1eb253; }
-
-    /* Quotation Card Styling */
-    .quotation-card {
-      width: 480px;
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      border: 1px solid #ddd;
-    }
-    .header {
-      text-align: center;
-      border-bottom: 2px solid #002c6c;
-      padding-bottom: 12px;
-      margin-bottom: 18px;
-    }
-    .header h2 {
-      font-size: 20px;
-      color: #002c6c;
-      letter-spacing: 0.5px;
-    }
-    .header p {
-      font-size: 12px;
-      color: #666;
-      margin-top: 2px;
-    }
-    .section-title {
+      font-weight: 700;
       font-size: 13px;
-      font-weight: bold;
-      color: #333;
-      margin-top: 15px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 4px;
+      cursor: pointer;
+      margin-top: 10px;
     }
-    .row {
+
+    .hidden { display: none !important; }
+
+    .no-print-controls {
+      background: #ffffff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .no-print-controls {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .header-logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo-title h2 {
+      color: var(--dark-blue);
+      font-size: 16px;
+    }
+
+    .header-logo {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    @media (min-width: 600px) { .btn-group { width: auto; } }
+
+    .btn {
+      flex: 1;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-download { background: #0288D1; color: white; }
+    .btn-secondary { background: #ECEFF1; color: var(--text); }
+    .btn-danger { background: #D32F2F; color: white; }
+
+    .quotation-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .quotation-card {
+      width: 650px;
+      max-width: 100%;
+      background: #ffffff;
+      padding: 12px 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    .brand-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-    }
-    .row label {
-      font-size: 13px;
-      font-weight: 500;
-      color: #444;
-    }
-    .input-edit {
-      width: 130px;
-      text-align: right;
-      padding: 5px 8px;
-      font-size: 13px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      outline: none;
-    }
-    .input-edit:focus {
-      border-color: #0056b3;
-    }
-    .text-input {
-      width: 180px;
-      text-align: right;
-    }
-    .total-row {
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 2px solid #002c6c;
-      font-size: 15px;
-      font-weight: bold;
-      color: #002c6c;
+      border-bottom: 2px solid #000;
+      padding-bottom: 4px;
     }
 
-    /* Export Mode Styles (Used during Canvas Generation) */
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-img {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--dark-blue);
+      line-height: 1.1;
+    }
+
+    .arena-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--dark-blue);
+      text-align: right;
+    }
+
+    .model-hero-sec {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .car-info-selects { flex: 1; }
+
+    .car-info-selects label {
+      font-size: 8px;
+      font-weight: 700;
+      color: #666;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .car-info-selects select {
+      width: 100%;
+      height: 28px;
+      padding: 3px 6px;
+      margin-bottom: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 10.5px;
+      color: var(--primary);
+      background: #fdfdfd;
+      line-height: 1.2;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .model-title-display {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: #000;
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+
+    .variant-subtitle-display {
+      font-size: 9px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .car-preview-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .car-preview-wrapper {
+      width: 150px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      padding: 2px;
+    }
+
+    .car-preview-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .upload-btn-label {
+      font-size: 8px;
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 2px;
+      font-weight: 700;
+    }
+
+    .feature-highlights {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 2px solid var(--primary);
+      padding: 2px 0;
+      margin-bottom: 4px;
+      gap: 4px;
+    }
+
+    .feature-item {
+      font-size: 7px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    .feature-item::before {
+      content: '◇ ';
+      color: var(--primary);
+    }
+
+    /* Column Width Adjustments */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .price-table th {
+      background: var(--primary);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      padding: 4px;
+      font-size: 8.5px;
+      text-transform: uppercase;
+    }
+
+    .price-table td {
+      padding: 3px 4px;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 9.5px;
+      vertical-align: middle;
+      word-wrap: break-word;
+    }
+
+    .td-sno { width: 30px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-desc { width: auto; }
+    
+    .td-amount { 
+      text-align: right; 
+      font-weight: 700; 
+      font-size: 10px; 
+      width: 140px; 
+      white-space: nowrap;
+    }
+
+    .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1.1; }
+    .item-subtext { font-size: 7px; color: #777; font-weight: 400; }
+
+    .toggle-group {
+      display: inline-flex;
+      gap: 2px;
+      margin-top: 1px;
+      flex-wrap: wrap;
+    }
+
+    .toggle-btn {
+      padding: 1px 3px;
+      font-size: 7px;
+      font-weight: 700;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+      background: #f5f5f5;
+    }
+
+    .toggle-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .input-edit {
+      border: 1px dashed #bbb;
+      padding: 2px 4px;
+      font-size: 9.5px;
+      width: 80px;
+      text-align: right;
+      font-weight: 700;
+      border-radius: 3px;
+      box-sizing: border-box;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .discount-row td {
+      background-color: #E8F5E9 !important;
+      color: #2E7D32;
+      font-weight: 700;
+    }
+
+    .grand-total-box {
+      background: var(--primary);
+      color: white;
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .grand-total-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .grand-total-amount {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .footer-section {
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid #ccc;
+      padding-top: 4px;
+      gap: 5px;
+    }
+
+    .bottom-tagline {
+      text-align: center;
+      font-size: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+      padding-top: 2px;
+      border-top: 1px solid #eee;
+    }
+
     .export-mode .input-edit {
       border: none !important;
       background: transparent !important;
       padding: 0 !important;
-      box-shadow: none !important;
-      text-align: right !important;
     }
-    .export-mode input[type="checkbox"],
-    .export-mode .toggle-group,
-    .export-mode .upload-btn-label {
-      display: none !important;
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      html, body {
+        height: 100vh;
+        overflow: hidden;
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+      .no-print-controls, .login-overlay, .upload-btn-label { display: none !important; }
+      .quotation-wrapper { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+      .quotation-card { box-shadow: none; border: none; padding: 10px; width: 100%; height: auto; max-height: 100vh; page-break-inside: avoid; }
+      .input-edit { border: none; }
+      select { border: none; appearance: none; font-weight: 700; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Action Buttons -->
-  <div class="action-buttons">
-    <button class="btn btn-download" onclick="downloadAsPNG()">Download Photo</button>
-    <button class="btn btn-share" onclick="shareToWhatsApp()">Share Image</button>
+  <!-- Login Screen -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <h2>MARUTI SUZUKI ARENA</h2>
+      <p>Enter details to generate price quote</p>
+      <div class="form-group">
+        <label>Customer Name *</label>
+        <input type="text" id="loginCustomerName" placeholder="Enter Customer Name">
+      </div>
+      <div class="form-group">
+        <label>Customer Mobile Number *</label>
+        <input type="tel" id="loginCustomerMobile" placeholder="Enter Customer Mobile Number" maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>RM Name *</label>
+        <input type="text" id="loginRmName" value="" placeholder="Enter RM Name">
+      </div>
+      <div class="form-group">
+        <label>RM Mobile Number *</label>
+        <input type="tel" id="loginMobile" value="" placeholder="Enter RM Mobile Number" maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>Dealership Location</label>
+        <input type="text" id="loginDealership" value="" placeholder="Enter Dealership Location">
+      </div>
+      <button class="login-btn" onclick="handleLogin()">Login & Open Generator</button>
+    </div>
+  </div>
+
+  <!-- Top Controls -->
+  <div class="no-print-controls">
+    <div class="header-logo-title">
+      <a href="https://imgbb.com/"><img src="https://i.ibb.co/60JgyVBC/Logo.jpg" alt="Logo" class="header-logo" border="0"></a>
+      <h2>Maruti Suzuki Arena</h2>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-download" onclick="downloadAsPNG()"><i class="fa-solid fa-download"></i> Download Photo</button>
+      <button class="btn btn-whatsapp" onclick="shareToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Share Image</button>
+      <button class="btn btn-secondary" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+      <button class="btn btn-danger" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
   </div>
 
   <!-- Quotation Card -->
-  <div class="quotation-card" id="quotationCard">
-    <div class="header">
-      <h2>MARUTI SUZUKI ARENA</h2>
-      <p>Vehicle On-Road Quotation Details</p>
-    </div>
+  <div class="quotation-wrapper">
+    <div class="quotation-card" id="quotationCard">
+      <div>
+        <div class="brand-header">
+          <div class="brand-left">
+            <a href="https://imgbb.com/"><img src="https://i.ibb.co/60JgyVBC/Logo.jpg" alt="Logo" class="brand-logo-img" border="0"></a>
+            <div>
+              <div class="logo-text">MARUTI SUZUKI</div>
+              <div style="font-size: 7px; letter-spacing: 1px; color: #555;">ARENA - WAY OF LIFE</div>
+            </div>
+          </div>
+          <div>
+            <div class="arena-title">ARENA</div>
+            <div style="font-size: 7px; color: #666; text-align: right;">PRICE LIST - 2026</div>
+          </div>
+        </div>
 
-    <!-- Customer & Car Details -->
-    <div class="row">
-      <label>Customer Name:</label>
-      <input type="text" class="input-edit text-input" value="John Doe">
-    </div>
-    <div class="row">
-      <label>Car Model & Variant:</label>
-      <input type="text" class="input-edit text-input" value="Swift ZXi">
-    </div>
+        <div class="model-hero-sec">
+          <div class="car-info-selects">
+            <label>MODEL CATEGORY:</label>
+            <select id="categorySelect" onchange="onCategoryChange()"></select>
 
-    <div class="section-title">Price Breakdown</div>
+            <label>VARIANT:</label>
+            <select id="variantSelect" onchange="onVariantChange()"></select>
 
-    <!-- Price Inputs -->
-    <div class="row">
-      <label>Ex-Showroom Price (₹):</label>
-      <input type="number" class="input-edit calc-input" id="exShowroom" value="750000" oninput="calculateTotal()">
-    </div>
-    <div class="row">
-      <label>RTO / Registration (₹):</label>
-      <input type="number" class="input-edit calc-input" id="rto" value="65000" oninput="calculateTotal()">
-    </div>
-    <div class="row">
-      <label>Insurance Amount (₹):</label>
-      <input type="number" class="input-edit calc-input" id="insurance" value="32000" oninput="calculateTotal()">
-    </div>
-    <div class="row">
-      <label>Accessories / Kit (₹):</label>
-      <input type="number" class="input-edit calc-input" id="accessories" value="15000" oninput="calculateTotal()">
-    </div>
-    <div class="row">
-      <label>Extended Warranty (₹):</label>
-      <input type="number" class="input-edit calc-input" id="warranty" value="12000" oninput="calculateTotal()">
-    </div>
-    <div class="row">
-      <label style="color: #d9534f;">Discount / Benefits (₹):</label>
-      <input type="number" class="input-edit calc-input" id="discount" value="20000" oninput="calculateTotal()" style="color: #d9534f;">
-    </div>
+            <div class="model-title-display" id="displayModelName">EPIC NEW SWIFT</div>
+            <div class="variant-subtitle-display" id="displayVariantName">MARUTI SWIFT LXI 1.2L 5MT</div>
+          </div>
+          <div class="car-preview-container">
+            <div class="car-preview-wrapper" id="carPreviewBox">
+              <img id="realCarPhoto" src="" alt="Maruti Suzuki Car">
+            </div>
+            <label for="carImgUpload" class="upload-btn-label"><i class="fa-solid fa-upload"></i> Upload Custom Photo</label>
+            <input type="file" id="carImgUpload" accept="image/*" class="hidden" onchange="uploadLocalCarImage(event)">
+          </div>
+        </div>
 
-    <!-- Grand Total -->
-    <div class="row total-row">
-      <label style="font-size: 15px; color: #002c6c;">Grand Total (On-Road):</label>
-      <span id="grandTotal" style="font-size: 16px;">₹ 8,54,000</span>
+        <div class="feature-highlights">
+          <div class="feature-item">K-SERIES ENGINE</div>
+          <div class="feature-item">CABIN COMFORT</div>
+          <div class="feature-item">6 AIRBAGS SAFETY</div>
+          <div class="feature-item">FACTORY S-CNG</div>
+        </div>
+
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th class="td-sno">#</th>
+              <th class="td-desc" style="text-align: left;">Particulars</th>
+              <th class="td-amount" style="text-align: right;">Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-sno">1</td>
+              <td class="td-desc">
+                <div class="item-desc">Ex-Showroom Price</div>
+                <div class="item-subtext">Base Price</div>
+              </td>
+              <td class="td-amount" id="exShowroomVal">₹0</td>
+            </tr>
+            <tr>
+              <td class="td-sno">2</td>
+              <td class="td-desc">
+                <div class="item-desc"><input type="checkbox" id="chkInsurance" checked onchange="calculatePrices()"> Zero Dep Insurance</div>
+                <div class="item-subtext">1+3 Year Comprehensive</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="insuranceVal" class="input-edit" value="28500" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">3</td>
+              <td class="td-desc">
+                <div class="item-desc">Registration Charges</div>
+                <div class="toggle-group">
+                  <button class="toggle-btn active" id="btnRtoUP" onclick="setRto('UP53')">UP53</button>
+                  <button class="toggle-btn" id="btnRtoOther" onclick="setRto('OTHER')">Other</button>
+                </div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="registrationVal" class="input-edit" value="45000" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">4</td>
+              <td class="td-desc">
+                <div class="item-desc"><input type="checkbox" id="chkKit" checked onchange="calculatePrices()"> Basic MSGA Kit</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="kitVal" class="input-edit" value="10500" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">5</td>
+              <td class="td-desc">
+                <div class="item-desc"><input type="checkbox" id="chkFastag" checked onchange="calculatePrices()"> FASTag</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="fastagVal" class="input-edit" value="600" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">6</td>
+              <td class="td-desc">
+                <div class="item-desc"><input type="checkbox" id="chkRewards" checked onchange="calculatePrices()"> Maruti Suzuki Rewards</div>
+              </td>
+              <td class="td-amount">₹<input type="number" id="rewardsVal" class="input-edit" value="885" oninput="calculatePrices()"></td>
+            </tr>
+            <tr>
+              <td class="td-sno">7</td>
+              <td class="td-desc">
+                <div class="item-desc">Extended Warranty</div>
+                <div class="toggle-group">
+                  <button class="toggle-btn active" id="btnW6" onclick="setWarranty('6')">6Y</button>
+                  <button class="toggle-btn" id="btnW5" onclick="setWarranty('5')">5Y</button>
+                  <button class="toggle-btn" id="btnW4" onclick="setWarranty('4')">4Y</button>
+                  <button class="toggle-btn" id="btnW0" onclick="setWarranty('0')">0Y</button>
+                </div>
+              </td>
+              <td class="td-amount" id="warrantyVal">₹0</td>
+            </tr>
+            <tr>
+              <td class="td-sno">8</td>
+              <td class="td-desc">
+                <div class="item-desc">TCS @ 1%</div>
+                <div class="item-subtext">If Ex-Showroom > 10 Lakhs</div>
+              </td>
+              <td class="td-amount" id="tcsVal">₹0</td>
+            </tr>
+            <tr class="discount-row">
+              <td class="td-sno">-</td>
+              <td class="td-desc"><div class="item-desc" style="color: #2E7D32;">DISCOUNT / OFFERS</div></td>
+              <td class="td-amount" style="color: #2E7D32;">- ₹<input type="number" id="discountVal" class="input-edit" value="0" style="color: #2E7D32;" oninput="calculatePrices()"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="grand-total-box">
+          <div class="grand-total-label">TOTAL ON-ROAD PRICE</div>
+          <div class="grand-total-amount" id="grandTotalVal">₹0</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-section">
+          <div>
+            <div style="font-weight: 700; font-size: 8.5px;" id="displayCustomerName"></div>
+            <div style="color: #333; font-weight: 600; font-size: 7px; margin-bottom: 3px;" id="displayCustomerMobile"></div>
+            <div style="font-weight: 700; font-size: 8.5px;" id="displayRmName"></div>
+            <div style="color: #666; font-size: 7px;">Relationship Manager</div>
+            <div style="color: #333; font-weight: 600; font-size: 7px;" id="displayRmMobile"></div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: 800; font-size: 8px;" id="displayDealership"></div>
+            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 9px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
+            <div style="font-size: 7px; color: #777;">AUTHORIZED DEALERSHIP</div>
+          </div>
+        </div>
+        <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
+      </div>
     </div>
   </div>
 
   <script>
-    // Total Calculate karne ka function
-    function calculateTotal() {
-      const exShowroom = parseFloat(document.getElementById('exShowroom').value) || 0;
-      const rto = parseFloat(document.getElementById('rto').value) || 0;
-      const insurance = parseFloat(document.getElementById('insurance').value) || 0;
-      const accessories = parseFloat(document.getElementById('accessories').value) || 0;
-      const warranty = parseFloat(document.getElementById('warranty').value) || 0;
-      const discount = parseFloat(document.getElementById('discount').value) || 0;
+    const realCarCDNImages = {
+      "Dazzling New Dzire": "https://i.ibb.co/v7XF9Jc/Dazzling-New-Dzire.avif",
+      "EECO NEW": "https://i.ibb.co/MDSc0CQx/EECO.avif",
+      "EPIC NEW SWIFT": "https://i.ibb.co/5gTPnyPw/Epic-New-Swift.png",
+      "NEW ALTO K10": "https://i.ibb.co/jP4khN54/NEW-ALTO-K10.avif",
+      "NEW BREZZA": "https://i.ibb.co/G4MYZT9L/NEW-BREZZA.webp",
+      "NEW CELERIO": "https://i.ibb.co/5hk44Q8y/NEW-CELERIO.avif",
+      "NEW ERTIGA": "https://i.ibb.co/tTghNSPv/NEW-ERTIGA.avif",
+      "S-PRESSO": "https://i.ibb.co/3yFzvhxX/S-PRESSO.avif",
+      "VICTORIS": "https://i.ibb.co/p5cr695/VICTORIS.avif",
+      "WAGON -R": "https://i.ibb.co/ZRGQxSnF/Wagon-R.avif"
+    };
 
-      const total = (exShowroom + rto + insurance + accessories + warranty) - discount;
-      document.getElementById('grandTotal').innerText = '₹ ' + total.toLocaleString('en-IN');
+    const dataset = [{"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "reg": 35602.69, "ins": 26909.0, "kit": 5439.0, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI 1L 5MT", "ex": 400029.02, "reg": 38302.61, "ins": 29104.0, "kit": 5439.0, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L 5MT", "ex": 452529.58, "reg": 43027.66, "ins": 30974.0, "kit": 5439.0, "msp4": 5250.82, "msp5": 9144.82, "msp6": 10088.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L 5MT", "ex": 500029.3, "reg": 47302.64, "ins": 32045.0, "kit": 5439.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L AGS", "ex": 497530.06, "reg": 47077.71, "ins": 31838.0, "kit": 5439.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L AGS", "ex": 545029.78, "reg": 51352.68, "ins": 33910.0, "kit": 5439.0, "msp4": 6194.82, "msp5": 10796.82, "msp6": 11976.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI CNG 1L 5MT", "ex": 484530.0, "reg": 45907.7, "ins": 32708.0, "kit": 5439.0, "msp4": 5604.82, "msp5": 9734.82, "msp6": 10678.82}, {"category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI CNG 1L 5MT", "ex": 534528.96, "reg": 50407.61, "ins": 34572.0, "kit": 5439.0, "msp4": 6076.82, "msp5": 10560.82, "msp6": 11740.82}, {"category": "NEW ALTO K10", "name": "MARUTI TOUR H1 1L 5MT", "ex": 400029.02, "reg": 28000.0, "ins": 34500.0, "kit": 5439.0, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82}, {"category": "NEW ALTO K10", "name": "MARUTI TOUR H1 CNG 1L 5MT", "ex": 484530.0, "reg": 28000.0, "ins": 37500.0, "kit": 5439.0, "msp4": 5604.82, "msp5": 9734.82, "msp6": 10678.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.9, "reg": 44605.3, "ins": 29222.0, "kit": 6098.0, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS 5MT", "ex": 518559.26, "reg": 48970.33, "ins": 32707.0, "kit": 6098.0, "msp4": 5958.82, "msp5": 10324.82, "msp6": 11386.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO VXI CNG 1L 5MT", "ex": 598059.4, "reg": 56125.35, "ins": 37332.0, "kit": 6098.0, "msp4": 6784.82, "msp5": 11740.82, "msp6": 13038.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS AGS", "ex": 563558.56, "reg": 53020.27, "ins": 34628.0, "kit": 6098.0, "msp4": 6430.82, "msp5": 11150.82, "msp6": 12330.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI 1L ISS 5MT", "ex": 573559.06, "reg": 53920.32, "ins": 36983.0, "kit": 6098.0, "msp4": 6548.82, "msp5": 11386.82, "msp6": 12566.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI 1L ISS AGS", "ex": 618559.54, "reg": 57970.36, "ins": 36846.0, "kit": 6098.0, "msp4": 7020.82, "msp5": 12212.82, "msp6": 13510.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI+ 1L ISS 5MT", "ex": 630558.96, "reg": 59050.31, "ins": 38346.0, "kit": 6098.0, "msp4": 7138.82, "msp5": 12330.82, "msp6": 13746.82}, {"category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI+ 1L ISS AGS", "ex": 675559.44, "reg": 63100.35, "ins": 40206.0, "kit": 6098.0, "msp4": 7610.82, "msp5": 13274.82, "msp6": 14690.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 350030.06, "reg": 33802.71, "ins": 27900.0, "kit": 4888.0, "msp4": 4306.82, "msp5": 7138.82, "msp6": 7964.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO LXI 1L ISS 5MT", "ex": 382529.62, "reg": 36727.67, "ins": 28956.0, "kit": 4888.0, "msp4": 4542.82, "msp5": 7846.82, "msp6": 8554.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI 1L ISS 5MT", "ex": 432529.76, "reg": 41227.68, "ins": 29182.0, "kit": 4888.0, "msp4": 5132.82, "msp5": 8672.82, "msp6": 9616.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI+ 1L ISS 5MT", "ex": 482529.9, "reg": 45727.69, "ins": 31529.0, "kit": 4888.0, "msp4": 5604.82, "msp5": 9616.82, "msp6": 10678.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI 1L ISS AGS", "ex": 477529.06, "reg": 45277.62, "ins": 32572.0, "kit": 4888.0, "msp4": 5604.82, "msp5": 9498.82, "msp6": 10560.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI+ 1L ISS AGS", "ex": 527529.2, "reg": 49777.63, "ins": 33081.0, "kit": 4888.0, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11622.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO LXI CNG 1L 5MT", "ex": 464529.0, "reg": 44107.61, "ins": 32177.0, "kit": 4888.0, "msp4": 5368.82, "msp5": 9262.82, "msp6": 10324.82}, {"category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI CNG 1L 5MT", "ex": 514529.14, "reg": 48607.62, "ins": 34501.0, "kit": 4888.0, "msp4": 5958.82, "msp5": 10206.82, "msp6": 11386.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R LXI 1L ISS 5MT", "ex": 499059.41, "reg": 47215.35, "ins": 32003.0, "kit": 8809.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R VXI 1L ISS 5MT", "ex": 554559.51, "reg": 52210.36, "ins": 33198.0, "kit": 8809.0, "msp4": 6312.82, "msp5": 11032.82, "msp6": 12212.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI 1.2L ISS 5MT", "ex": 598559.35, "reg": 56170.34, "ins": 40898.0, "kit": 8809.0, "msp4": 6784.82, "msp5": 11740.82, "msp6": 13038.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI+ 1.2L ISS 5MT", "ex": 641558.55, "reg": 60040.27, "ins": 42722.0, "kit": 8809.0, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R VXI 1L ISS AGS", "ex": 599558.81, "reg": 56260.29, "ins": 36060.0, "kit": 8809.0, "msp4": 6784.82, "msp5": 11858.82, "msp6": 13038.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI 1.2L ISS AGS", "ex": 643558.65, "reg": 60220.28, "ins": 43808.0, "kit": 8809.0, "msp4": 7256.82, "msp5": 12684.82, "msp6": 13982.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI+ 1.2L ISS AGS", "ex": 686559.03, "reg": 64090.31, "ins": 44694.0, "kit": 8809.0, "msp4": 7728.82, "msp5": 13628.82, "msp6": 15162.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R LXI CNG 1L 5MT", "ex": 594058.85, "reg": 55765.3, "ins": 36944.0, "kit": 8809.0, "msp4": 6784.82, "msp5": 11740.82, "msp6": 12920.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R VXI CNG 1L 5MT", "ex": 649558.95, "reg": 60760.31, "ins": 38231.0, "kit": 8809.0, "msp4": 7256.82, "msp5": 12684.82, "msp6": 14100.82}, {"category": "WAGON -R", "name": "MARUTI TOUR H3 1L ISS 5MT", "ex": 499059.41, "reg": 28000.0, "ins": 37500.0, "kit": 8809.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82}, {"category": "WAGON -R", "name": "MARUTI TOUR H3 CNG 1L 5MT", "ex": 594058.85, "reg": 28000.0, "ins": 40500.0, "kit": 8809.0, "msp4": 6784.82, "msp5": 11740.82, "msp6": 12920.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI+ Dual Tone 1.2L ISS 5MT", "ex": 652558.51, "reg": 61030.27, "ins": 43196.0, "kit": 8809.0, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI+ Dual Tone 1.2L ISS AGS", "ex": 697558.99, "reg": 65080.31, "ins": 45179.0, "kit": 8809.0, "msp4": 7728.82, "msp5": 13628.82, "msp6": 15162.82}, {"category": "WAGON -R", "name": "MARUTI WAGON R ZXI+ BIOFLEX 1.2L 5MT", "ex": 724059.43, "reg": 67465.35, "ins": 45179.0, "kit": 8809.0, "msp4": 8082.82, "msp5": 14100.82, "msp6": 15634.82}, {"category": "EECO NEW", "name": "MARUTI EECO 5 STR AC 1.2L 5MT", "ex": 561369.97, "reg": 52823.3, "ins": 41072.0, "kit": 6953.0, "msp4": 6430.82, "msp5": 11150.82, "msp6": 12330.82}, {"category": "EECO NEW", "name": "MARUTI EECO 5 STR STD 1.2L 5MT", "ex": 528470.39, "reg": 49862.34, "ins": 39539.0, "kit": 6953.0, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11622.82}, {"category": "EECO NEW", "name": "MARUTI EECO 7 STR STD 1.2L 5MT", "ex": 554970.83, "reg": 52247.37, "ins": 40545.0, "kit": 6953.0, "msp4": 6312.82, "msp5": 11032.82, "msp6": 12212.82}, {"category": "EECO NEW", "name": "MARUTI EECO AMBULANCE 1.2L 5MT", "ex": 809070.85, "reg": 75116.38, "ins": 26500.0, "kit": 6953.0, "msp4": 8908.82, "msp5": 15752.82, "msp6": 17404.82}, {"category": "EECO NEW", "name": "MARUTI EECO AMBULANCE SHELL 1.2L 5MT", "ex": 644670.89, "reg": 60320.38, "ins": 24500.0, "kit": 6953.0, "msp4": 7256.82, "msp5": 12684.82, "msp6": 13982.82}, {"category": "EECO NEW", "name": "MARUTI EECO CARGO 1.2L 5MT", "ex": 551371.0, "reg": 51923.39, "ins": 40400.0, "kit": 6953.0, "msp4": 6194.82, "msp5": 10796.82, "msp6": 11976.82}, {"category": "EECO NEW", "name": "EECO K12N TOUR 5 STR AC 1.2L 5MT", "ex": 561171.0, "reg": 52805.39, "ins": 42629.0, "kit": 6953.0, "msp4": 6430.82, "msp5": 11032.82, "msp6": 12212.82}, {"category": "EECO NEW", "name": "EECO K12N TOUR 5 STR STD 1.2L 5MT", "ex": 528171.0, "reg": 49835.39, "ins": 40900.0, "kit": 6953.0, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82}, {"category": "EECO NEW", "name": "EECO K12N TOUR 7 STR STD 1.2L 5MT", "ex": 555670.0, "reg": 52310.3, "ins": 43500.0, "kit": 6953.0, "msp4": 6312.82, "msp5": 10914.82, "msp6": 12094.82}, {"category": "EECO NEW", "name": "MARUTI EECO 5 STR AC CNG 1.2L 5MT", "ex": 645870.95, "reg": 60428.39, "ins": 46229.0, "kit": 6953.0, "msp4": 7256.82, "msp5": 12684.82, "msp6": 14100.82}, {"category": "EECO NEW", "name": "MARUTI EECO CARGO AC CNG 1.2L 5MT", "ex": 675570.0, "reg": 63101.3, "ins": 48500.0, "kit": 6953.0, "msp4": 7492.82, "msp5": 13156.82, "msp6": 14572.82}, {"category": "EECO NEW", "name": "MARUTI EECO CARGO CNG 1.2L 5MT", "ex": 635870.0, "reg": 59528.3, "ins": 48200.0, "kit": 6953.0, "msp4": 7138.82, "msp5": 12448.82, "msp6": 13746.82}, {"category": "EECO NEW", "name": "EECO K12N TOUR 5S AC CNG 1.2L 5MT", "ex": 645670.0, "reg": 60410.3, "ins": 46700.0, "kit": 6953.0, "msp4": 7256.82, "msp5": 12566.82, "msp6": 13982.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT LXI 1.2L 5MT", "ex": 584088.2, "reg": 54867.94, "ins": 41760.0, "kit": 11659.0, "msp4": 7846.82, "msp5": 11858.82, "msp6": 13392.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT VXI 1.2L 5MT", "ex": 668088.86, "reg": 62428.0, "ins": 45093.0, "kit": 11659.0, "msp4": 8790.82, "msp5": 13510.82, "msp6": 15162.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT VXI (O) 1.2L 5MT", "ex": 694088.98, "reg": 64768.01, "ins": 47222.0, "kit": 11659.0, "msp4": 9144.82, "msp5": 13982.82, "msp6": 15752.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT ZXI 1.2L 5MT", "ex": 762088.84, "reg": 70888.0, "ins": 49271.0, "kit": 11659.0, "msp4": 9970.82, "msp5": 15280.82, "msp6": 17286.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT ZXI+ 1.2L 5MT", "ex": 829088.06, "reg": 76917.93, "ins": 52421.0, "kit": 11659.0, "msp4": 10914.82, "msp5": 16814.82, "msp6": 19056.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT ZXI+ Dual Tone 1.2L 5MT", "ex": 844088.22, "reg": 78267.94, "ins": 52600.0, "kit": 11659.0, "msp4": 10914.82, "msp5": 16814.82, "msp6": 19056.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT VXI 1.2L AGS", "ex": 713088.16, "reg": 66477.93, "ins": 47180.0, "kit": 11659.0, "msp4": 9380.82, "msp5": 14336.82, "msp6": 16224.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT VXI (O) 1.2L AGS", "ex": 739088.28, "reg": 68817.95, "ins": 48309.0, "kit": 11659.0, "msp4": 9734.82, "msp5": 14808.82, "msp6": 16696.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT ZXI 1.2L AGS", "ex": 807088.14, "reg": 74937.93, "ins": 52358.0, "kit": 11659.0, "msp4": 10560.82, "msp5": 16106.82, "msp6": 18230.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT ZXI+ 1.2L AGS", "ex": 874088.54, "reg": 80967.97, "ins": 53649.0, "kit": 11659.0, "msp4": 11504.82, "msp5": 17758.82, "msp6": 20000.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SUZUKI SWIFT ZXI+ Dual Tone 1.2L AGS", "ex": 889088.7, "reg": 82317.98, "ins": 53900.0, "kit": 11659.0, "msp4": 11504.82, "msp5": 17758.82, "msp6": 20000.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI CNG 1.2L 5MT", "ex": 757588.32, "reg": 70482.95, "ins": 52498.0, "kit": 11659.0, "msp4": 9970.82, "msp5": 15162.82, "msp6": 17168.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI (O) CNG 1.2L 5MT", "ex": 783588.44, "reg": 72822.96, "ins": 53630.0, "kit": 11659.0, "msp4": 10206.82, "msp5": 15634.82, "msp6": 17758.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI CNG 1.2L 5MT", "ex": 851588.3, "reg": 78942.95, "ins": 54219.0, "kit": 11659.0, "msp4": 11032.82, "msp5": 16932.82, "msp6": 19174.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI ISS CNG 1.2L AGS", "ex": 792588.3, "reg": 73632.95, "ins": 53894.0, "kit": 11659.0, "msp4": 9674.82, "msp5": 15220.82, "msp6": 17226.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI (O) ISS CNG 1.2L AGS", "ex": 818588.42, "reg": 75972.96, "ins": 54896.0, "kit": 11659.0, "msp4": 10028.82, "msp5": 15692.82, "msp6": 17816.82}, {"category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI ISS CNG 1.2L AGS", "ex": 886588.28, "reg": 82092.95, "ins": 56784.0, "kit": 11659.0, "msp4": 10854.82, "msp5": 16990.82, "msp6": 19350.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L ISS 5MT", "ex": 630788.71, "reg": 59070.98, "ins": 43986.0, "kit": 12919.0, "msp4": 8318.82, "msp5": 12802.82, "msp6": 14454.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI 1.2L ISS 5MT", "ex": 727288.36, "reg": 67755.95, "ins": 48160.0, "kit": 12919.0, "msp4": 9498.82, "msp5": 14572.82, "msp6": 16460.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI 1.2L ISS 5MT", "ex": 827888.42, "reg": 76809.96, "ins": 53752.0, "kit": 12919.0, "msp4": 10796.82, "msp5": 16578.82, "msp6": 18702.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI+ 1.2L ISS 5MT", "ex": 896488.9, "reg": 82984.0, "ins": 55590.0, "kit": 12919.0, "msp4": 11622.82, "msp5": 17876.82, "msp6": 20118.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI 1.2L ISS AGS", "ex": 772288.84, "reg": 71806.0, "ins": 49130.0, "kit": 12919.0, "msp4": 10088.82, "msp5": 15516.82, "msp6": 17522.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI 1.2L ISS AGS", "ex": 872888.9, "reg": 80860.0, "ins": 55633.0, "kit": 12919.0, "msp4": 11268.82, "msp5": 17404.82, "msp6": 19646.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI+ 1.2L ISS AGS", "ex": 941488.2, "reg": 87033.94, "ins": 57567.0, "kit": 12919.0, "msp4": 12094.82, "msp5": 18702.82, "msp6": 21180.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI CNG 1.2L 5MT", "ex": 818288.78, "reg": 75945.99, "ins": 54826.0, "kit": 12919.0, "msp4": 10678.82, "msp5": 16342.82, "msp6": 18466.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI CNG 1.2L 5MT", "ex": 918888.84, "reg": 85000.0, "ins": 57185.0, "kit": 12919.0, "msp4": 11858.82, "msp5": 18230.82, "msp6": 20708.82}, {"category": "Dazzling New Dzire", "name": "MARUTI TOUR S 1.2L ISS 5MT", "ex": 628988.03, "reg": 58908.92, "ins": 45500.0, "kit": 8335.0, "msp4": 8318.82, "msp5": 12684.82, "msp6": 14336.82}, {"category": "Dazzling New Dzire", "name": "MARUTI TOUR S CNG 1.2L 5MT", "ex": 724988.11, "reg": 67548.93, "ins": 51500.0, "kit": 8335.0, "msp4": 9498.82, "msp5": 14572.82, "msp6": 16460.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI ISS CNG 1.2L AGS", "ex": 853288.49, "reg": 79095.96, "ins": 56826.0, "kit": 12919.0, "msp4": 10382.82, "msp5": 16400.82, "msp6": 18524.82}, {"category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI ISS CNG 1.2L AGS", "ex": 953888.5, "reg": 88149.96, "ins": 59185.0, "kit": 12919.0, "msp4": 11680.82, "msp5": 18288.82, "msp6": 20766.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA LXI 1.5L 6MT", "ex": 835124.0, "reg": 77461.16, "ins": 39500.0, "kit": 21019.0, "msp4": 13982.82, "msp5": 17404.82, "msp6": 19410.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA VXI 1.5L 6MT", "ex": 931124.0, "reg": 86101.16, "ins": 42500.0, "kit": 21019.0, "msp4": 15516.82, "msp5": 19292.82, "msp6": 21534.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA VXI 1.5L 6AT", "ex": 1061123.09, "reg": 119023.54, "ins": 46200.0, "kit": 21019.0, "msp4": 17758.82, "msp5": 22006.82, "msp6": 24602.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI 1.5L 6MT", "ex": 1055124.0, "reg": 118363.64, "ins": 45800.0, "kit": 21019.0, "msp4": 17758.82, "msp5": 22124.82, "msp6": 24720.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI Dual Tone 1.5L 6MT", "ex": 1070724.0, "reg": 120079.64, "ins": 46300.0, "kit": 21019.0, "msp4": 17758.82, "msp5": 22124.82, "msp6": 24720.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI 1.5L 6AT", "ex": 1185123.8, "reg": 132663.62, "ins": 49700.0, "kit": 21019.0, "msp4": 20000.82, "msp5": 24838.82, "msp6": 27788.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI Dual Tone 1.5L 6AT", "ex": 1200724.0, "reg": 134379.64, "ins": 50500.0, "kit": 21019.0, "msp4": 20000.82, "msp5": 24838.82, "msp6": 27788.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ 1.5L 6AT", "ex": 1355123.0, "reg": 151363.53, "ins": 54700.0, "kit": 21019.0, "msp4": 22714.82, "msp5": 28142.82, "msp6": 31564.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ Dual Tone 1.5L 6AT", "ex": 1370723.2, "reg": 153079.55, "ins": 55200.0, "kit": 21019.0, "msp4": 22714.82, "msp5": 28142.82, "msp6": 31564.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA LXI TURBO 1.0L 6MT", "ex": 750088.0, "reg": 69807.92, "ins": 36900.0, "kit": 21019.0, "msp4": 12566.82, "msp5": 15516.82, "msp6": 17404.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA VXI TURBO 1.0L 6MT", "ex": 865088.0, "reg": 80157.92, "ins": 40200.0, "kit": 21019.0, "msp4": 14454.82, "msp5": 17876.82, "msp6": 20000.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI TURBO 1.0L 6MT", "ex": 995089.0, "reg": 91858.01, "ins": 43900.0, "kit": 21019.0, "msp4": 16696.82, "msp5": 20708.82, "msp6": 23186.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI TURBO Dual Tone 1.0L 6MT", "ex": 1009189.0, "reg": 113310.79, "ins": 44400.0, "kit": 21019.0, "msp4": 16696.82, "msp5": 20708.82, "msp6": 23186.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ TURBO 1.0L 6MT", "ex": 1126089.0, "reg": 126169.79, "ins": 47700.0, "kit": 21019.0, "msp4": 18820.82, "msp5": 23422.82, "msp6": 26254.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ TURBO Dual Tone 1.0L 6MT", "ex": 1141689.0, "reg": 127885.79, "ins": 48200.0, "kit": 21019.0, "msp4": 18820.82, "msp5": 23422.82, "msp6": 26254.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA LXI CNG 1.5L 6MT", "ex": 940124.0, "reg": 86911.16, "ins": 57200.0, "kit": 21019.0, "msp4": 15752.82, "msp5": 19410.82, "msp6": 21770.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA VXI CNG 1.5L 6MT", "ex": 999223.49, "reg": 92230.11, "ins": 60400.0, "kit": 21019.0, "msp4": 16696.82, "msp5": 20708.82, "msp6": 23186.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI CNG 1.5L 6MT", "ex": 1160124.0, "reg": 129913.64, "ins": 67200.0, "kit": 21019.0, "msp4": 19528.82, "msp5": 24130.82, "msp6": 27080.82}, {"category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI CNG Dual Tone 1.5L 6MT", "ex": 1175724.0, "reg": 131629.64, "ins": 67900.0, "kit": 21019.0, "msp4": 19528.82, "msp5": 24130.82, "msp6": 27080.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID LXI 1.5L 5MT", "ex": 890223.64, "reg": 82420.13, "ins": 52994.0, "kit": 20320.0, "msp4": 15044.82, "msp5": 18584.82, "msp6": 20708.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID VXI 1.5L 5MT", "ex": 995523.24, "reg": 91897.09, "ins": 57940.0, "kit": 20320.0, "msp4": 16696.82, "msp5": 20708.82, "msp6": 23186.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID ZXI 1.5L 5MT", "ex": 1101723.04, "reg": 123489.53, "ins": 63608.0, "kit": 20320.0, "msp4": 18348.82, "msp5": 22832.82, "msp6": 25546.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID ZXI+ 1.5L 5MT", "ex": 1179324.0, "reg": 132025.64, "ins": 66580.0, "kit": 20320.0, "msp4": 19410.82, "msp5": 24130.82, "msp6": 27080.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID VXI 1.5L 6AT", "ex": 1130523.84, "reg": 126657.62, "ins": 63872.0, "kit": 20320.0, "msp4": 18820.82, "msp5": 23422.82, "msp6": 26136.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID ZXI 1.5L 6AT", "ex": 1236723.64, "reg": 138339.6, "ins": 69541.0, "kit": 20320.0, "msp4": 20590.82, "msp5": 25546.82, "msp6": 28614.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA SMART HYBRID ZXI+ 1.5L 6AT", "ex": 1314324.0, "reg": 146875.64, "ins": 72512.0, "kit": 20320.0, "msp4": 21652.82, "msp5": 26844.82, "msp6": 30148.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA VXI CNG 1.5L 5MT", "ex": 1094023.04, "reg": 122642.53, "ins": 65075.0, "kit": 20320.0, "msp4": 18230.82, "msp5": 22596.82, "msp6": 25310.82}, {"category": "NEW ERTIGA", "name": "MARUTI ERTIGA ZXI CNG 1.5L 5MT", "ex": 1200224.24, "reg": 134324.67, "ins": 69934.0, "kit": 20320.0, "msp4": 20000.82, "msp5": 24720.82, "msp6": 27788.82}, {"category": "NEW ERTIGA", "name": "MARUTI TOUR M 1.5L 5MT", "ex": 995124.0, "reg": 36000.0, "ins": 64500.0, "kit": 20320.0, "msp4": 16578.82, "msp5": 20590.82, "msp6": 23068.82}, {"category": "NEW ERTIGA", "name": "MARUTI TOUR M CNG 1.5L 5MT", "ex": 1093624.0, "reg": 36000.0, "ins": 70500.0, "kit": 20320.0, "msp4": 18230.82, "msp5": 22596.82, "msp6": 25310.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS LXI 1.5L 5MT", "ex": 1050124.18, "reg": 117813.66, "ins": 62833.0, "kit": 27500.0, "msp4": 17522.82, "msp5": 21770.82, "msp6": 24366.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS VXI 1.5L 5MT", "ex": 1185123.89, "reg": 132663.63, "ins": 68664.0, "kit": 27500.0, "msp4": 19764.82, "msp5": 24484.82, "msp6": 27434.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI 1.5L 5MT", "ex": 1362123.0, "reg": 152133.53, "ins": 76600.0, "kit": 27500.0, "msp4": 22832.82, "msp5": 28378.82, "msp6": 31800.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI Dual Tone 1.5L 5MT", "ex": 1377523.0, "reg": 153827.53, "ins": 76900.0, "kit": 27500.0, "msp4": 22832.82, "msp5": 28378.82, "msp6": 31800.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI(O) 1.5L 5MT", "ex": 1369223.8, "reg": 152914.62, "ins": 78900.0, "kit": 27500.0, "msp4": 22950.82, "msp5": 28496.82, "msp6": 31918.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI(O) Dual Tone 1.5L 5MT", "ex": 1384623.8, "reg": 154608.62, "ins": 79200.0, "kit": 27500.0, "msp4": 22950.82, "msp5": 28496.82, "msp6": 31918.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ 1.5L 5MT", "ex": 1539124.0, "reg": 171603.64, "ins": 83500.0, "kit": 27500.0, "msp4": 25546.82, "msp5": 31682.82, "msp6": 35458.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ Dual Tone 1.5L 5MT", "ex": 1554524.0, "reg": 173297.64, "ins": 83800.0, "kit": 27500.0, "msp4": 25546.82, "msp5": 31682.82, "msp6": 35458.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) 1.5L 5MT", "ex": 1548223.6, "reg": 172604.6, "ins": 86500.0, "kit": 27500.0, "msp4": 25782.82, "msp5": 32036.82, "msp6": 35930.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) Dual Tone 1.5L 5MT", "ex": 1563623.6, "reg": 174298.6, "ins": 86800.0, "kit": 27500.0, "msp4": 25782.82, "msp5": 32036.82, "msp6": 35930.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS VXI 1.5L 6AT", "ex": 1341123.09, "reg": 149823.54, "ins": 75600.0, "kit": 27500.0, "msp4": 22242.82, "msp5": 27552.82, "msp6": 30974.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI 1.5L 6AT", "ex": 1518123.6, "reg": 169293.6, "ins": 83500.0, "kit": 27500.0, "msp4": 25310.82, "msp5": 31446.82, "msp6": 35222.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI Dual Tone 1.5L 6AT", "ex": 1533523.6, "reg": 170987.6, "ins": 83800.0, "kit": 27500.0, "msp4": 25310.82, "msp5": 31446.82, "msp6": 35222.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI(O) 1.5L 6AT", "ex": 1525223.0, "reg": 170074.53, "ins": 85000.0, "kit": 27500.0, "msp4": 25428.82, "msp5": 31564.82, "msp6": 35458.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI(O) Dual Tone 1.5L 6AT", "ex": 1540623.0, "reg": 171768.53, "ins": 85400.0, "kit": 27500.0, "msp4": 25428.82, "msp5": 31564.82, "msp6": 35458.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ 1.5L 6AT", "ex": 1734124.0, "reg": 193053.64, "ins": 92500.0, "kit": 27500.0, "msp4": 28614.82, "msp5": 35576.82, "msp6": 39942.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ Dual Tone 1.5L 6AT", "ex": 1749524.0, "reg": 194747.64, "ins": 92800.0, "kit": 27500.0, "msp4": 28614.82, "msp5": 35576.82, "msp6": 39942.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) 1.5L 6AT", "ex": 1743224.0, "reg": 194054.64, "ins": 95500.0, "kit": 27500.0, "msp4": 28968.82, "msp5": 35930.82, "msp6": 40296.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) Dual Tone 1.5L 6AT", "ex": 1758624.0, "reg": 195748.64, "ins": 95700.0, "kit": 27500.0, "msp4": 28968.82, "msp5": 35930.82, "msp6": 40296.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ 4WD 1.5L 6AT", "ex": 1869123.2, "reg": 207903.55, "ins": 99500.0, "kit": 27500.0, "msp4": 30974.82, "msp5": 38526.82, "msp6": 43128.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ 4WD Dual Tone 1.5L 6AT", "ex": 1884523.2, "reg": 209597.55, "ins": 99700.0, "kit": 27500.0, "msp4": 30974.82, "msp5": 38526.82, "msp6": 43128.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) 4WD 1.5L 6AT", "ex": 1927123.8, "reg": 214283.62, "ins": 100900.0, "kit": 27500.0, "msp4": 31918.82, "msp5": 39706.82, "msp6": 44426.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) 4WD Dual Tone 1.5L 6AT", "ex": 1942523.8, "reg": 215977.62, "ins": 101000.0, "kit": 27500.0, "msp4": 31918.82, "msp5": 39706.82, "msp6": 44426.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS VXI STRONG HYBRID 1.5L ECVT", "ex": 1643124.09, "reg": 183043.65, "ins": 90100.0, "kit": 27500.0, "msp4": 27080.82, "msp5": 33688.82, "msp6": 37700.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI STRONG HYBRID 1.5L ECVT", "ex": 1785123.2, "reg": 198663.55, "ins": 95500.0, "kit": 27500.0, "msp4": 29558.82, "msp5": 36874.82, "msp6": 41240.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI STRONG HYBRID Dual Tone 1.5L ECVT", "ex": 1800523.2, "reg": 200357.55, "ins": 95800.0, "kit": 27500.0, "msp4": 29558.82, "msp5": 36874.82, "msp6": 41240.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI(O) STRONG HYBRID 1.5L ECVT", "ex": 1844123.4, "reg": 205153.57, "ins": 99500.0, "kit": 27500.0, "msp4": 30502.82, "msp5": 38054.82, "msp6": 42656.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI(O) STRONG HYBRID Dual Tone 1.5L ECVT", "ex": 1859523.4, "reg": 206847.57, "ins": 99800.0, "kit": 27500.0, "msp4": 30502.82, "msp5": 38054.82, "msp6": 42656.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ STRONG HYBRID 1.5L ECVT", "ex": 1952123.6, "reg": 217033.6, "ins": 104400.0, "kit": 27500.0, "msp4": 32272.82, "msp5": 40178.82, "msp6": 45016.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+ STRONG HYBRID Dual Tone 1.5L ECVT", "ex": 1967523.6, "reg": 218727.6, "ins": 104600.0, "kit": 27500.0, "msp4": 32272.82, "msp5": 40178.82, "msp6": 45016.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) STRONG HYBRID 1.5L ECVT", "ex": 1999123.0, "reg": 222203.53, "ins": 106500.0, "kit": 27500.0, "msp4": 32744.82, "msp5": 40768.82, "msp6": 45724.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI+(O) STRONG HYBRID Dual Tone 1.5L ECVT", "ex": 1999123.0, "reg": 222203.53, "ins": 106500.0, "kit": 27500.0, "msp4": 32744.82, "msp5": 40768.82, "msp6": 45724.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS LXI CNG 1.5L 5MT", "ex": 1155124.18, "reg": 129363.66, "ins": 69500.0, "kit": 27500.0, "msp4": 19292.82, "msp5": 23894.82, "msp6": 26726.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS VXI CNG 1.5L 5MT", "ex": 1290123.89, "reg": 144213.63, "ins": 76500.0, "kit": 27500.0, "msp4": 21416.82, "msp5": 26608.82, "msp6": 29794.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI CNG 1.5L 5MT", "ex": 1467123.0, "reg": 163683.53, "ins": 84500.0, "kit": 27500.0, "msp4": 24484.82, "msp5": 30384.82, "msp6": 34160.82}, {"category": "VICTORIS", "name": "MARUTI VICTORIS ZXI CNG Dual Tone 1.5L 5MT", "ex": 1482523.0, "reg": 165377.53, "ins": 84800.0, "kit": 27500.0, "msp4": 24484.82, "msp5": 30384.82, "msp6": 34160.82}];
+
+    let selectedWarranty = '6';
+    let selectedRto = 'UP53';
+    let currentCarData = null;
+
+    window.onload = function() {
+      populateCategories();
+      onCategoryChange();
+    };
+
+    function handleLogin() {
+      const custName = document.getElementById('loginCustomerName').value.trim();
+      const custMobile = document.getElementById('loginCustomerMobile').value.trim();
+      const rmName = document.getElementById('loginRmName').value.trim();
+      const mobile = document.getElementById('loginMobile').value.trim();
+      const dealership = document.getElementById('loginDealership').value.trim();
+
+      if (custName === "") {
+        alert("Kripya Customer Name bharein!");
+        document.getElementById('loginCustomerName').focus();
+        return;
+      }
+
+      if (custMobile === "") {
+        alert("Kripya Customer Mobile Number bharein!");
+        document.getElementById('loginCustomerMobile').focus();
+        return;
+      }
+
+      if (!/^\d{10}$/.test(custMobile)) {
+        alert("Kripya Customer ka sahi 10-digit Mobile Number bharein!");
+        document.getElementById('loginCustomerMobile').focus();
+        return;
+      }
+
+      if (rmName === "") {
+        alert("Kripya RM Name bharein!");
+        document.getElementById('loginRmName').focus();
+        return;
+      }
+
+      if (mobile === "") {
+        alert("Kripya RM Mobile Number bharein!");
+        document.getElementById('loginMobile').focus();
+        return;
+      }
+
+      if (!/^\d{10}$/.test(mobile)) {
+        alert("Kripya RM ka sahi 10-digit Mobile Number bharein!");
+        document.getElementById('loginMobile').focus();
+        return;
+      }
+
+      document.getElementById('displayCustomerName').innerText = "Customer: " + custName;
+      document.getElementById('displayCustomerMobile').innerText = "Mob: " + custMobile;
+      document.getElementById('displayRmName').innerText = "RM: " + rmName;
+      document.getElementById('displayRmMobile').innerText = "Mob: " + mobile;
+      document.getElementById('displayDealership').innerText = dealership || '';
+
+      document.getElementById('loginOverlay').classList.add('hidden');
     }
 
-    // Export hone se pehle inputs ko plain text me badalna
-    function prepareForExport() {
-      const card = document.getElementById('quotationCard');
-      card.classList.add('export-mode');
+    function handleLogout() {
+      document.getElementById('loginOverlay').classList.remove('hidden');
+    }
 
-      // Numeric inputs
-      const numInputs = card.querySelectorAll('input[type="number"]');
-      numInputs.forEach(input => {
-        const span = document.createElement('span');
-        span.className = 'temp-export-val';
-        span.innerText = parseFloat(input.value || 0).toLocaleString('en-IN');
-        span.style.fontWeight = '600';
-        span.style.fontSize = '13px';
-        input.style.display = 'none';
-        input.parentNode.insertBefore(span, input);
-      });
-
-      // Text inputs
-      const textInputs = card.querySelectorAll('input[type="text"]');
-      textInputs.forEach(input => {
-        const span = document.createElement('span');
-        span.className = 'temp-export-val';
-        span.innerText = input.value || '';
-        span.style.fontWeight = '600';
-        span.style.fontSize = '13px';
-        input.style.display = 'none';
-        input.parentNode.insertBefore(span, input);
+    function populateCategories() {
+      const catSelect = document.getElementById('categorySelect');
+      catSelect.innerHTML = '';
+      const categories = [...new Set(dataset.map(item => item.category))];
+      categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.innerText = cat;
+        catSelect.appendChild(opt);
       });
     }
 
-    // Export hone ke baad layout dobara normal karna
-    function restoreAfterExport() {
-      const card = document.getElementById('quotationCard');
-      card.classList.remove('export-mode');
+    function onCategoryChange() {
+      const catSelect = document.getElementById('categorySelect');
+      const selectedCat = catSelect.value;
+      const varSelect = document.getElementById('variantSelect');
+      varSelect.innerHTML = '';
 
-      const tempSpans = card.querySelectorAll('.temp-export-val');
-      tempSpans.forEach(span => span.remove());
-
-      const allInputs = card.querySelectorAll('input');
-      allInputs.forEach(input => {
-        input.style.display = 'inline-block';
+      const filtered = dataset.filter(item => item.category === selectedCat);
+      filtered.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.name;
+        opt.innerText = item.name;
+        varSelect.appendChild(opt);
       });
+
+      onVariantChange();
     }
 
-    // PNG Download Function
-    async function downloadAsPNG() {
-      prepareForExport();
-      const card = document.getElementById('quotationCard');
+    function onVariantChange() {
+      const catSelect = document.getElementById('categorySelect').value;
+      const varSelect = document.getElementById('variantSelect').value;
 
-      try {
-        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
-        restoreAfterExport();
+      currentCarData = dataset.find(item => item.category === catSelect && item.name === varSelect);
 
-        const link = document.createElement('a');
-        link.download = 'Maruti_Quotation.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      } catch (err) {
-        restoreAfterExport();
-        alert("Image generate hone me dikkat aayi.");
+      if (currentCarData) {
+        document.getElementById('displayModelName').innerText = currentCarData.category;
+        document.getElementById('displayVariantName').innerText = currentCarData.name;
+
+        const carImg = document.getElementById('realCarPhoto');
+        if (realCarCDNImages[currentCarData.category]) {
+          carImg.src = realCarCDNImages[currentCarData.category];
+        } else {
+          carImg.src = "https://i.ibb.co/5gTPnyPw/Epic-New-Swift.png";
+        }
+
+        document.getElementById('insuranceVal').value = Math.round(currentCarData.ins);
+        document.getElementById('registrationVal').value = Math.round(currentCarData.reg);
+        document.getElementById('kitVal').value = Math.round(currentCarData.kit);
+
+        calculatePrices();
       }
     }
 
-    // WhatsApp Share Function
-    async function shareToWhatsApp() {
-      prepareForExport();
+    function setWarranty(years) {
+      selectedWarranty = years;
+      ['btnW6', 'btnW5', 'btnW4', 'btnW0'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+      });
+      document.getElementById('btnW' + years).classList.add('active');
+      calculatePrices();
+    }
+
+    function setRto(type) {
+      selectedRto = type;
+      if (type === 'UP53') {
+        document.getElementById('btnRtoUP').classList.add('active');
+        document.getElementById('btnRtoOther').classList.remove('active');
+        if (currentCarData) {
+          document.getElementById('registrationVal').value = Math.round(currentCarData.reg);
+        }
+      } else {
+        document.getElementById('btnRtoOther').classList.add('active');
+        document.getElementById('btnRtoUP').classList.remove('active');
+      }
+      calculatePrices();
+    }
+
+    function calculatePrices() {
+      if (!currentCarData) return;
+
+      const exShowroom = Math.round(currentCarData.ex);
+      document.getElementById('exShowroomVal').innerText = "₹" + exShowroom.toLocaleString('en-IN');
+
+      const isIns = document.getElementById('chkInsurance').checked;
+      const insVal = isIns ? (parseFloat(document.getElementById('insuranceVal').value) || 0) : 0;
+
+      const regVal = parseFloat(document.getElementById('registrationVal').value) || 0;
+
+      const isKit = document.getElementById('chkKit').checked;
+      const kitVal = isKit ? (parseFloat(document.getElementById('kitVal').value) || 0) : 0;
+
+      const isFastag = document.getElementById('chkFastag').checked;
+      const fastagVal = isFastag ? (parseFloat(document.getElementById('fastagVal').value) || 0) : 0;
+
+      const isRewards = document.getElementById('chkRewards').checked;
+      const rewardsVal = isRewards ? (parseFloat(document.getElementById('rewardsVal').value) || 0) : 0;
+
+      let warrantyCost = 0;
+      if (selectedWarranty === '6') warrantyCost = Math.round(currentCarData.msp6);
+      else if (selectedWarranty === '5') warrantyCost = Math.round(currentCarData.msp5);
+      else if (selectedWarranty === '4') warrantyCost = Math.round(currentCarData.msp4);
+      else warrantyCost = 0;
+
+      document.getElementById('warrantyVal').innerText = "₹" + warrantyCost.toLocaleString('en-IN');
+
+      let tcsCost = 0;
+      if (exShowroom > 1000000) {
+        tcsCost = Math.round(exShowroom * 0.01);
+      }
+      document.getElementById('tcsVal').innerText = "₹" + tcsCost.toLocaleString('en-IN');
+
+      const discountVal = parseFloat(document.getElementById('discountVal').value) || 0;
+
+      const grandTotal = exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcsCost - discountVal;
+      document.getElementById('grandTotalVal').innerText = "₹" + Math.round(grandTotal).toLocaleString('en-IN');
+    }
+
+    function uploadLocalCarImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('realCarPhoto').src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
+      card.classList.add('export-mode');
+      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+        card.classList.remove('export-mode');
+        const link = document.createElement('a');
+        link.download = 'Quotation.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    async function shareToWhatsApp() {
+      const card = document.getElementById('quotationCard');
+      card.classList.add('export-mode');
       
       try {
         const canvas = await html2canvas(card, { scale: 2, useCORS: true });
-        restoreAfterExport();
+        card.classList.remove('export-mode');
         
         canvas.toBlob(async (blob) => {
           if (!blob) {
             alert("Image generate nahi ho saki.");
             return;
           }
-          const file = new File([blob], "Maruti_Quotation.png", { type: "image/png" });
+          const file = new File([blob], "Quotation.png", { type: "image/png" });
 
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             try {
@@ -293,7 +940,7 @@
             }
           } else {
             const link = document.createElement('a');
-            link.download = 'Maruti_Quotation.png';
+            link.download = 'Quotation.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
             setTimeout(() => {
@@ -303,14 +950,16 @@
           }
         }, 'image/png');
       } catch (err) {
-        restoreAfterExport();
+        card.classList.remove('export-mode');
         alert("Image share karne me koi dikkat aayi.");
       }
     }
 
-    // Page Load par initial total calculate karna
-    window.onload = calculateTotal;
+    function resetForm() {
+      onVariantChange();
+      document.getElementById('discountVal').value = 0;
+      calculatePrices();
+    }
   </script>
 </body>
 </html>
-```<FollowUp>Kya aapko kisi extra input field (jaise TCS ya Fastag) ko add karna hai?</FollowUp>
