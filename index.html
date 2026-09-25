@@ -338,7 +338,7 @@
       color: var(--primary);
     }
 
-    /* Fixed Table Layout to ensure amounts fit perfectly */
+    /* Column Width Adjustments */
     .price-table {
       width: 100%;
       border-collapse: collapse;
@@ -362,14 +362,14 @@
       word-wrap: break-word;
     }
 
-    .td-sno { width: 25px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
+    .td-sno { width: 30px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
     .td-desc { width: auto; }
     
     .td-amount { 
       text-align: right; 
       font-weight: 700; 
-      font-size: 9.5px; 
-      width: 130px; 
+      font-size: 10px; 
+      width: 140px; 
       white-space: nowrap;
     }
 
@@ -401,15 +401,14 @@
 
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 1px 3px;
+      padding: 2px 4px;
       font-size: 9.5px;
-      width: 85px;
+      width: 80px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
       box-sizing: border-box;
       font-family: 'Open Sans', sans-serif;
-      outline: none;
     }
 
     .discount-row td {
@@ -462,17 +461,10 @@
       border-top: 1px solid #eee;
     }
 
-    /* WhatsApp & Image Export Mode Fixes */
     .export-mode .input-edit {
       border: none !important;
       background: transparent !important;
       padding: 0 !important;
-      width: auto !important;
-      text-align: right !important;
-    }
-
-    .export-mode .toggle-group, .export-mode .upload-btn-label {
-      display: none !important;
     }
 
     @media print {
@@ -893,76 +885,80 @@
       const discountVal = parseFloat(document.getElementById('discountVal').value) || 0;
 
       const grandTotal = exShowroom + insVal + regVal + kitVal + fastagVal + rewardsVal + warrantyCost + tcsCost - discountVal;
-
-      document.getElementById('grandTotalVal').innerText = "₹" + grandTotal.toLocaleString('en-IN');
+      document.getElementById('grandTotalVal').innerText = "₹" + Math.round(grandTotal).toLocaleString('en-IN');
     }
 
-    function resetForm() {
-      if (confirm("Reset current inputs?")) {
-        setWarranty('6');
-        setRto('UP53');
-        document.getElementById('chkInsurance').checked = true;
-        document.getElementById('chkKit').checked = true;
-        document.getElementById('chkFastag').checked = true;
-        document.getElementById('chkRewards').checked = true;
-        document.getElementById('discountVal').value = 0;
-        onVariantChange();
-      }
-    }
-
-    function uploadLocalCarImage(event) {
-      const file = event.target.files[0];
+    function uploadLocalCarImage(e) {
+      const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('realCarPhoto').src = e.target.result;
+        reader.onload = function(evt) {
+          document.getElementById('realCarPhoto').src = evt.target.result;
         };
         reader.readAsDataURL(file);
       }
     }
 
-    function generateCanvasImage(callback) {
-      const card = document.getElementById('quotationCard');
-      
-      // Temporarily add export mode for clean image rendering
-      card.classList.add('export-mode');
-
-      html2canvas(card, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff'
-      }).then(canvas => {
-        card.classList.remove('export-mode');
-        callback(canvas);
-      });
-    }
-
     function downloadAsPNG() {
-      generateCanvasImage(canvas => {
+      const card = document.getElementById('quotationCard');
+      card.classList.add('export-mode');
+      html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+        card.classList.remove('export-mode');
         const link = document.createElement('a');
-        link.download = 'Maruti_Price_Quote.png';
+        link.download = 'Quotation.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
       });
     }
 
-    function shareToWhatsApp() {
-      generateCanvasImage(canvas => {
-        canvas.toBlob(blob => {
-          const file = new File([blob], 'Maruti_Price_Quote.png', { type: 'image/png' });
+    async function shareToWhatsApp() {
+      const card = document.getElementById('quotationCard');
+      card.classList.add('export-mode');
+      
+      try {
+        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
+        card.classList.remove('export-mode');
+        
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            alert("Image generate nahi ho saki.");
+            return;
+          }
+          const file = new File([blob], "Quotation.png", { type: "image/png" });
+
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({
-              files: [file],
-              title: 'Maruti Suzuki Quotation',
-              text: 'Here is the price quotation for Maruti Suzuki Arena.'
-            }).catch(err => console.log('Share canceled', err));
+            try {
+              await navigator.share({
+                files: [file],
+                title: 'Maruti Suzuki Arena Quotation',
+                text: 'Maruti Suzuki Arena Quotation Details Attached'
+              });
+            } catch (error) {
+              if (error.name !== 'AbortError') {
+                console.error('Sharing failed:', error);
+              }
+            }
           } else {
-            downloadAsPNG();
-            alert("Aapki photo download ho gayi hai. Aap ise manually WhatsApp par share kar sakte hain.");
+            const link = document.createElement('a');
+            link.download = 'Quotation.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            setTimeout(() => {
+              alert("Image download ho gayi hai. Ab WhatsApp par ise attach karke share karein.");
+              window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Maruti Suzuki Arena Quotation Details Attached'), '_blank');
+            }, 1000);
           }
         }, 'image/png');
-      });
+      } catch (err) {
+        card.classList.remove('export-mode');
+        alert("Image share karne me koi dikkat aayi.");
+      }
+    }
+
+    function resetForm() {
+      onVariantChange();
+      document.getElementById('discountVal').value = 0;
+      calculatePrices();
     }
   </script>
 </body>
