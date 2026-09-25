@@ -18,15 +18,13 @@
       --border: #CFD8DC;
       --text: #263238;
       --text-muted: #607D8B;
-      --dark-blue: #0A2540; /* Dark Blue Color */
+      --dark-blue: #0A2540;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
       background: var(--bg);
       font-family: 'Open Sans', sans-serif;
       color: var(--text);
@@ -116,7 +114,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       margin-bottom: 12px;
       width: 100%;
-      max-width: 750px;
+      max-width: 680px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -138,10 +136,11 @@
 
     .header-logo-title h2 {
       color: var(--dark-blue);
+      font-size: 16px;
     }
 
     .header-logo {
-      height: 38px;
+      height: 32px;
       width: auto;
       object-fit: contain;
     }
@@ -157,7 +156,7 @@
 
     .btn {
       flex: 1;
-      padding: 9px 10px;
+      padding: 8px 10px;
       border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
@@ -166,7 +165,7 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      font-size: 12px;
+      font-size: 11px;
       white-space: nowrap;
     }
 
@@ -178,15 +177,14 @@
 
     .quotation-wrapper {
       width: 100%;
-      max-width: 750px;
       display: flex;
       justify-content: center;
     }
 
     .quotation-card {
-      width: 100%;
+      width: 680px;
       background: #ffffff;
-      padding: 15px;
+      padding: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       border-radius: 8px;
       display: flex;
@@ -209,7 +207,7 @@
     }
 
     .brand-logo-img {
-      height: 35px;
+      height: 32px;
       width: auto;
       object-fit: contain;
     }
@@ -217,7 +215,7 @@
     .logo-text {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--dark-blue);
       line-height: 1.1;
     }
@@ -225,24 +223,17 @@
     .arena-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--dark-blue);
       text-align: right;
     }
 
     .model-hero-sec {
       display: flex;
-      flex-direction: column-reverse;
+      justify-content: space-between;
+      align-items: center;
       gap: 12px;
-      margin: 12px 0 8px;
-    }
-
-    @media(min-width: 500px) {
-      .model-hero-sec {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
+      margin: 10px 0 6px;
     }
 
     .car-info-selects { flex: 1; }
@@ -257,28 +248,28 @@
 
     .car-info-selects select {
       width: 100%;
-      padding: 6px 8px;
-      margin-bottom: 6px;
+      padding: 5px 8px;
+      margin-bottom: 5px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--primary);
       background: #fdfdfd;
     }
 
     .model-title-display {
       font-family: 'Montserrat', sans-serif;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 800;
       color: #000;
       line-height: 1.1;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .variant-subtitle-display {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
       color: #555;
     }
@@ -290,8 +281,8 @@
     }
 
     .car-preview-wrapper {
-      width: 230px;
-      height: 125px;
+      width: 200px;
+      height: 110px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -309,11 +300,11 @@
     }
 
     .upload-btn-label {
-      font-size: 10px;
+      font-size: 9.5px;
       color: var(--primary);
       text-decoration: underline;
       cursor: pointer;
-      margin-top: 5px;
+      margin-top: 3px;
       font-weight: 700;
     }
 
@@ -322,8 +313,8 @@
       justify-content: space-between;
       border-top: 1px solid #e0e0e0;
       border-bottom: 2px solid var(--primary);
-      padding: 5px 0;
-      margin-bottom: 10px;
+      padding: 4px 0;
+      margin-bottom: 8px;
       gap: 4px;
     }
 
@@ -350,34 +341,34 @@
       background: var(--primary);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      padding: 6px 4px;
-      font-size: 10px;
+      padding: 5px 4px;
+      font-size: 9.5px;
       text-transform: uppercase;
     }
 
     .price-table td {
-      padding: 6px 3px;
+      padding: 4px 3px;
       border-bottom: 1px solid #e0e0e0;
-      font-size: 11px;
+      font-size: 10.5px;
       vertical-align: middle;
       word-wrap: break-word;
     }
 
-    .td-sno { width: 20px; text-align: center; color: #777; font-weight: 600; font-size: 10px; }
-    .td-amount { text-align: right; font-weight: 700; font-size: 11px; width: 85px; }
-    .item-desc { font-weight: 700; color: #111; font-size: 11px; line-height: 1.2; }
-    .item-subtext { font-size: 8.5px; color: #777; font-weight: 400; }
+    .td-sno { width: 20px; text-align: center; color: #777; font-weight: 600; font-size: 9.5px; }
+    .td-amount { text-align: right; font-weight: 700; font-size: 10.5px; width: 85px; }
+    .item-desc { font-weight: 700; color: #111; font-size: 10.5px; line-height: 1.1; }
+    .item-subtext { font-size: 8px; color: #777; font-weight: 400; }
 
     .toggle-group {
       display: inline-flex;
       gap: 3px;
-      margin-top: 3px;
+      margin-top: 2px;
       flex-wrap: wrap;
     }
 
     .toggle-btn {
-      padding: 2px 5px;
-      font-size: 8.5px;
+      padding: 1px 4px;
+      font-size: 8px;
       font-weight: 700;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -393,8 +384,8 @@
 
     .input-edit {
       border: 1px dashed #bbb;
-      padding: 2px 3px;
-      font-size: 11px;
+      padding: 1px 3px;
+      font-size: 10.5px;
       width: 70px;
       text-align: right;
       font-weight: 700;
@@ -410,52 +401,52 @@
     .grand-total-box {
       background: var(--primary);
       color: white;
-      padding: 8px 12px;
+      padding: 6px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 5px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .grand-total-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
     }
 
     .grand-total-amount {
       font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
     }
 
     .footer-section {
-      margin-top: 12px;
+      margin-top: 10px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       border-top: 1px solid #ccc;
-      padding-top: 8px;
+      padding-top: 6px;
       gap: 5px;
     }
 
     .bottom-tagline {
       text-align: center;
-      font-size: 7.5px;
+      font-size: 7px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       color: #888;
-      margin-top: 8px;
-      padding-top: 4px;
+      margin-top: 6px;
+      padding-top: 3px;
       border-top: 1px solid #eee;
     }
 
     @media print {
       body { background: white; padding: 0; }
       .no-print-controls, .login-overlay, .upload-btn-label { display: none !important; }
-      .quotation-wrapper { max-width: 100%; }
-      .quotation-card { box-shadow: none; border: none; padding: 0; }
+      .quotation-wrapper { width: 100%; }
+      .quotation-card { box-shadow: none; border: none; padding: 0; width: 100%; }
       .input-edit { border: none; }
       select { border: none; appearance: none; font-weight: 700; }
     }
@@ -638,14 +629,14 @@
       <div>
         <div class="footer-section">
           <div>
-            <div style="font-weight: 700; font-size: 10px;" id="displayRmName">Rahul Sharma</div>
-            <div style="color: #666; font-size: 8.5px;">Relationship Manager</div>
-            <div style="color: #333; font-weight: 600; font-size: 8.5px;" id="displayRmMobile">Mob: +91 98765 43210</div>
+            <div style="font-weight: 700; font-size: 9.5px;" id="displayRmName">Rahul Sharma</div>
+            <div style="color: #666; font-size: 8px;">Relationship Manager</div>
+            <div style="color: #333; font-weight: 600; font-size: 8px;" id="displayRmMobile">Mob: +91 98765 43210</div>
           </div>
           <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 9.5px;" id="displayDealership">GORAKHPUR / UP</div>
-            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 11px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
-            <div style="font-size: 8.5px; color: #777;">AUTHORIZED DEALERSHIP</div>
+            <div style="font-weight: 800; font-size: 9px;" id="displayDealership">GORAKHPUR / UP</div>
+            <div style="font-family: 'Montserrat'; font-weight: 800; font-size: 10px; color: var(--dark-blue);">MARUTI SUZUKI ARENA</div>
+            <div style="font-size: 8px; color: #777;">AUTHORIZED DEALERSHIP</div>
           </div>
         </div>
         <div class="bottom-tagline">EXPERIENCE A BETTER DRIVE • ARENA</div>
@@ -829,20 +820,30 @@
 
     function downloadAsPNG() {
       const card = document.getElementById('quotationCard');
-      html2canvas(card, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+      html2canvas(card, { 
+        scale: 2, 
+        useCORS: true, 
+        allowTaint: true,
+        windowWidth: 1024
+      }).then(canvas => {
         const link = document.createElement('a');
         const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
         link.download = `Arena_Quotation_${modelName}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       }).catch(err => {
-        alert("Image generate hone me error aaya. Kripya 'Upload Custom Photo' karke try karein.");
+        alert("Image generate hone me error आया. Kripya 'Upload Custom Photo' karke try karein.");
       });
     }
 
     function shareToWhatsApp() {
       const card = document.getElementById('quotationCard');
-      html2canvas(card, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+      html2canvas(card, { 
+        scale: 2, 
+        useCORS: true, 
+        allowTaint: true,
+        windowWidth: 1024 
+      }).then(canvas => {
         canvas.toBlob(blob => {
           const file = new File([blob], 'Quotation.png', { type: 'image/png' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
