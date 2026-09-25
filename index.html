@@ -359,7 +359,16 @@
     }
 
     .td-sno { width: 16px; text-align: center; color: #777; font-weight: 600; font-size: 8.5px; }
-    .td-amount { text-align: right; font-weight: 700; font-size: 9.5px; width: 80px; }
+    
+    /* FIX: Width badhai gayi hai taaki 6-digit values fit ho sakein */
+    .td-amount { 
+      text-align: right; 
+      font-weight: 700; 
+      font-size: 9.5px; 
+      width: 110px; 
+      white-space: nowrap;
+    }
+
     .item-desc { font-weight: 700; color: #111; font-size: 9.5px; line-height: 1; }
     .item-subtext { font-size: 7px; color: #777; font-weight: 400; }
 
@@ -386,14 +395,16 @@
       border-color: var(--primary);
     }
 
+    /* FIX: Input width and dynamic fit */
     .input-edit {
       border: 1px dashed #bbb;
       padding: 1px 2px;
       font-size: 9.5px;
-      width: 60px;
+      width: 80px;
       text-align: right;
       font-weight: 700;
       border-radius: 3px;
+      box-sizing: border-box;
     }
 
     .discount-row td {
@@ -866,7 +877,6 @@
               text: 'Here is the Maruti Suzuki Arena Quotation.'
             }).catch(e => console.log(e));
           } else {
-            // Direct share unsupported hone par image download karein aur WhatsApp open karein
             const link = document.createElement('a');
             const modelName = document.getElementById('displayModelName').innerText.replace(/\s+/g, '_');
             link.download = `Arena_Quotation_${modelName}.png`;
