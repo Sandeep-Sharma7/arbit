@@ -515,6 +515,45 @@
       border-top: 1px solid #eee;
     }
 
+    /* Image export: do not capture the editable Model/Variant dropdowns.
+       The selected values are already rendered by displayModelName/displayVariantName.
+       This prevents the shared image from showing the same selection three times. */
+    .export-mode .car-info-selects > label,
+    .export-mode .car-info-selects > select {
+      display: none !important;
+    }
+
+    .export-mode .model-title-display {
+      margin-top: 0 !important;
+      font-size: 13px !important;
+      line-height: 1.15 !important;
+      color: #000 !important;
+    }
+
+    .export-mode .model-title-display::before {
+      content: 'MODEL CATEGORY: ';
+      color: #666;
+      font-size: 9px;
+      font-weight: 800;
+      margin-right: 3px;
+    }
+
+    .export-mode .variant-subtitle-display {
+      margin-top: 2px !important;
+      font-size: 9px !important;
+      line-height: 1.15 !important;
+      color: #555 !important;
+      font-weight: 600 !important;
+    }
+
+    .export-mode .variant-subtitle-display::before {
+      content: 'VARIANT: ';
+      color: #666;
+      font-size: 8px;
+      font-weight: 800;
+      margin-right: 3px;
+    }
+
     .export-mode .input-edit {
       border: none !important;
       background: transparent !important;
