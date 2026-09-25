@@ -494,12 +494,12 @@
       <h2>MARUTI SUZUKI ARENA</h2>
       <p>Enter details to generate price quote</p>
       <div class="form-group">
-        <label>RM Name</label>
+        <label>RM Name *</label>
         <input type="text" id="loginRmName" value="" placeholder="Enter RM Name">
       </div>
       <div class="form-group">
-        <label>Mobile Number</label>
-        <input type="text" id="loginMobile" value="" placeholder="Enter Mobile Number">
+        <label>Mobile Number *</label>
+        <input type="tel" id="loginMobile" value="" placeholder="Enter Mobile Number" maxlength="10">
       </div>
       <div class="form-group">
         <label>Dealership Location</label>
@@ -708,10 +708,31 @@
       const mobile = document.getElementById('loginMobile').value.trim();
       const dealership = document.getElementById('loginDealership').value.trim();
 
-      document.getElementById('displayRmName').innerText = rmName || '';
-      document.getElementById('displayRmMobile').innerText = mobile ? "Mob: " + mobile : '';
+      // Validation Check: Name and Mobile Number required
+      if (rmName === "") {
+        alert("Kripya RM Name bharein!");
+        document.getElementById('loginRmName').focus();
+        return;
+      }
+
+      if (mobile === "") {
+        alert("Kripya Mobile Number bharein!");
+        document.getElementById('loginMobile').focus();
+        return;
+      }
+
+      if (!/^\d{10}$/.test(mobile)) {
+        alert("Kripya sahi 10-digit Mobile Number bharein!");
+        document.getElementById('loginMobile').focus();
+        return;
+      }
+
+      // Display details on quotation
+      document.getElementById('displayRmName').innerText = rmName;
+      document.getElementById('displayRmMobile').innerText = "Mob: " + mobile;
       document.getElementById('displayDealership').innerText = dealership || '';
 
+      // Hide login screen
       document.getElementById('loginOverlay').classList.add('hidden');
     }
 
